@@ -15,6 +15,6 @@ function countPositivesSumNegatives(input) {
     return [positive, negative]
 }
 
-function stringToNumber (str){
+function stringToNumber (str) {
     return Number(str)
 }
