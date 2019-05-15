@@ -5,3 +5,4 @@ function easyLine(n) {
     }
     return Math.round(Math.log(sum));
 }
+
