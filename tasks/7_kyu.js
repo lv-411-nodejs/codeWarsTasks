@@ -5,3 +5,5 @@ function lockerRun(lockers){
     }
     return open;
 }
+
+lockerRun(9);
