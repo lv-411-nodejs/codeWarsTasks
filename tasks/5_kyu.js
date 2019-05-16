@@ -1,4 +1,6 @@
-function gap(g,m,n){
+define(function () {
+    return {
+        gap: function(g,m,n){
 let unswer=[];
 let primeNumbers=[];
 primeNumbers.length=n+1;
@@ -10,7 +12,6 @@ for (let i=2; i*i<n+1; i++){
     }
   }  
 }
-  // let interimGap=0, interimNumber=m;
   while(m<=n+1-g){ 
    if ((primeNumbers[m]==0) && (primeNumbers[m+g]==0)) {
        let isPrimeBetween=false;
@@ -32,5 +33,7 @@ for (let i=2; i*i<n+1; i++){
   }
   return null;
 }
+    };
+});
 
-gap(10,250,30);
+
