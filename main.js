@@ -1,3 +1,3 @@
 require("amd-loader");
 var msg = require('./tasks/template');
-msg.print("run!");
+console.log(msg.print("run!"));
