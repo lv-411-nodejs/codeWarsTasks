@@ -9,3 +9,4 @@ const bouncingBall = (h,  bounce,  window) => {
   }
   return -1;
 }
+bouncingBall(50,0.6,5);

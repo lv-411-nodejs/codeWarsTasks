@@ -8,3 +8,4 @@ const tripleShiftian = (base,n) => {
     return base[n];
   }
 }
+tripleShiftian(3, 5);

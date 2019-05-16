@@ -8,3 +8,4 @@ const productFib = (prod) => {
   }
   return [a, b, true]
 }
+productFib(5);
