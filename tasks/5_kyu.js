@@ -14,3 +14,5 @@ function fibonacci(n) {
     }
     return res - 1;
 }
+
+perimeter(10);
