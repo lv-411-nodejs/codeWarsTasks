@@ -48,3 +48,5 @@ function artificialRain(garden) {
   return Math.max(...answers)
 }
 
+artificialRain([4,5,6,10]);
+

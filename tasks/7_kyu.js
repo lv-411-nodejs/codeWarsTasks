@@ -13,3 +13,5 @@ const sequenceSum = (begin, end, step) => {
   }
 }
 
+sequenceSum(1,5,1);
+
