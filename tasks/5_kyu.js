@@ -50,3 +50,5 @@ function demovingShift(arr, shift) {
     }).join('');
 }
 
+demovingShift(v, 1);
+movingShift(u, 1);

@@ -15,3 +15,5 @@ function interp(f, l, u, n) {
 
 }
 
+
+interp(x => x, 0, 9.0, 4);
