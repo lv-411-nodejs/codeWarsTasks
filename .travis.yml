@@ -1,3 +1,5 @@
+language: node_js
+
 install:
   - nvm install stable
   - npm install -g eslint-cli
