@@ -1,8 +1,8 @@
 
 
 
-// var abcLowerCase ='abcdefghijklmnopqrstuvwxyz'.split('');
-// var abcUpperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+var abcLowerCase ='abcdefghijklmnopqrstuvwxyz'.split('');
+var abcUpperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 define(function () {
     return {
