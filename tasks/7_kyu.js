@@ -1,17 +1,22 @@
-const sequenceSum = (begin, end, step) => {
-  
-  if(begin > end){
-    return 0
+define(function () {    
+  return {
+    sequenceSum: function sequenceSum( begin, end, step ){
+      if(begin > end){
+        return 0
+      }
+      
+      else if(begin === end){ 
+        return begin
+      }
+    
+      else{
+        return begin + sequenceSum(begin += step, end, step)
+      } 
   }
-  
-  else if(begin === end){ 
-    return begin
-  }
+  };
+})
 
-  else{
-    return begin + sequenceSum(begin += step, end, step)
-  }
-}
 
-sequenceSum(1,5,1);
+
+
 

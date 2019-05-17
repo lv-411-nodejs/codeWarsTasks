@@ -1,6 +1,7 @@
-function artificialRain(garden) {
-  
-  const answers = [];
+define(function () {
+  return {
+    artificialRain: function(garden){
+      const answers = [];
   
   const checkLeft = (position) => {
     if(position > 0) {
@@ -46,7 +47,7 @@ function artificialRain(garden) {
   }
 
   return Math.max(...answers)
-}
-
-artificialRain([4,5,6,10]);
+    }
+  };
+})
 
