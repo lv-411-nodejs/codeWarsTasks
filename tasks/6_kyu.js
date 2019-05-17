@@ -5,5 +5,3 @@ define(function () {
     }
   };
 })
-
-
