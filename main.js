@@ -2,9 +2,7 @@ require("amd-loader");
 
 var kyu8_1=require('./tasks/8_kyu');
 console.log(kyu8_1.litres(3));
-
-var kyu8_2=require('./tasks/8_kyu');
-console.log(kyu8_2.startingMark(1.52));
+console.log(kyu8_1.startingMark(1.52));
 
 var kyu7=require('./tasks/7_kyu');
 console.log(kyu7.sequenceSum(1, 5, 1));
