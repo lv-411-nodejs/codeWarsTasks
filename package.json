@@ -1,0 +1,27 @@
+{
+  "name": "codewarstasks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "amd-loader": "0.0.8",
+    "requirejs": "^2.3.6"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --config .eslintrc.js tasks/;exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lv-411-nodejs/codeWarsTasks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lv-411-nodejs/codeWarsTasks/issues"
+  },
+  "homepage": "https://github.com/lv-411-nodejs/codeWarsTasks#readme"
+}

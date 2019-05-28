@@ -1,0 +1,7 @@
+install:
+  - nvm install stable
+  - npm install -g eslint-cli
+  - npm install
+
+script:
+  - eslint --config .eslintrc.js tasks/
