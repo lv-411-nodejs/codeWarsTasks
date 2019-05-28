@@ -18,6 +18,20 @@ app.get('/kyu/:level', function (req, res) {
         res.send(`sorry level ${level} not found`);
 });
 
+app.get('/kyu/:level/:name', function (req, res) {
+  const {level, name} = req.params;
+
+  if(level > 4 && level < 9){
+    res.send(data[level][name].info);
+  }
+
+  else
+      res.send(`sorry level ${level} not found`);
+ 
+      
+
+});
+
 app.listen(port, function () {
   console.log(`server started on server on port ${port}`);
 });
