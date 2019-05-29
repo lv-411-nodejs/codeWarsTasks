@@ -1,39 +1,116 @@
 {
     "5": {
        "nadiia": {
-
+            "info": "Write a program that will calculate the number of trailing"
        },
        "ruslan": {
-
+            "info": "Product of consecutive Fib numbers"
        },
        "aleks": {
-
+            "info": "Find the smallest"
        },
        "max": {
-
+            "info": "Perimeter of squares in a rectangle"
        },
        "ostap": {
-
+            "info": "First Variation on Caesar Cipher"
        },
        "stanislav": {
-
+            "info": "Artificial Rain"
        },
        "bohdan": {
-
+            "info": "Which x for that sum?"
        },
        "oleh": {
-           
+            "info": "Gap in Primes"
        }
-
-
     },
     "6": {
+        "nadiia": {
+            "info": "Ranking NBA teams"
+        },
+        "ruslan": {
+            "info": "Bouncing Balls"
+        },
+        "aleks": {
+            "info": "Easy Balance Checking"
+        },
+        "max": {
+            "info": "Help the bookseller !"
+        },
+        "ostap": {
+            "info": "Floating-point Approximation (II)"
+        },
+        "stanislav": {
+            "info": "Floating-point Approximation (I)"
+        },
+        "bohdan": {
+            "info": "Build a pile of Cubes"
+        },
+        "oleh": {
+            "info": "Rainfall"          
+        }
 
     },
     "7": {
-
+        "nadiia": {
+            "info": "Recursive Replication"
+        },
+        "ruslan": {
+            "info": "Triple Shiftian Numbers"
+        },
+        "aleks": {
+            "info": "Looking for a benefactor"
+        },
+        "max": {
+            "info": "Slamming Lockers"         
+        },
+        "ostap": {
+            "info": "Easy Line"
+        },
+        "stanislav": {
+            "info": "Sum of a sequence"
+        },
+        "bohdan": {
+            "info": "Sum of the first nth term of Series"
+        },
+        "oleh": {
+            "info": "Where is Vasya?"           
+        }
     }, 
     "8": {
-
+        "nadiia": {
+            "info": "To square(root) or not to square(root)?",
+            "src": " ",
+            "in": "[4,3,9,7,2,1]",
+            "out": "[2,9,3,49,4,1]" 
+        },
+        "ruslan": {
+            "info": "Short Long Short?",
+            "src": " ",
+            "in": "'1', '22'",
+            "out": "'22','1'"  
+        },
+        "aleks": {
+            "info": "Formatting decimal places #0",
+            "src": " ",
+            "in": "5.5589",
+            "out": "5.56" 
+        },
+        "max": {
+            "info": "Convert a String to a Number!" 
+        },
+        "ostap": {
+            "info": "Simple validation of a username with regex" 
+        },
+        "stanislav": {
+            "info": "Pole Vault Starting Marks" 
+        },
+        "bohdan": {
+            "info": "Geometry Basics: Circle Area in 2D" 
+        },
+        "oleh": {
+            "info": "Miles per gallon to kilometers per liter"   
+        }
     }
 }

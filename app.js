@@ -40,6 +40,20 @@ app.post('/kyu/:name/:level', (req, res) => {
   res.json(response);
 });
 
+app.get('/kyu/:level/:name', function (req, res) {
+  const {level, name} = req.params;
+
+  if(level > 4 && level < 9){
+    res.send(data[level][name].info);
+  }
+
+  else
+      res.send(`sorry level ${level} not found`);
+ 
+      
+
+});
+
 app.listen(port, function () {
   console.log(`started on port ${port}`);
 });
