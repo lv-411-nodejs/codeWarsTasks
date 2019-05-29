@@ -31,6 +31,6 @@ app.get('/kyu/:level/:name', function (req, res) {
 });
 
 app.listen(port, function () {
-  console.log(`server started on server on port ${port}`);
+  console.log(`server started on port ${port}`);
 });
 
