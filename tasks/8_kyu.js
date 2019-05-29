@@ -1,12 +1,12 @@
 // -------------- 1 ----------------
 
-define(function() {
-	return {
-		fixTheMeerkat: function(arr) {
-			return arr.reverse();
-		}
-	}
-});
+// define(function() {
+// 	return {
+// 		fixTheMeerkat: function(arr) {
+// 			return arr.reverse();
+// 		}
+// 	}
+// });
 
 // -------------- 2 ----------------
 
