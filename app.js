@@ -5,11 +5,11 @@ const port = 3000;
 
 const data = require('./public/data.json');
 
-app.get('/', function (req, res) {
+app.get('/kuy', function (req, res) {
   res.json(data);
 });
 
-app.get('/kyu/:level', function (req, res) {
+app.get('/kuy/:level', function (req, res) {
     const {level} = req.params;
 
     if(level > 4 && level < 9)
@@ -28,8 +28,6 @@ app.get('/kyu/:level/:name', function (req, res) {
   else
       res.send(`sorry level ${level} not found`);
  
-      
-
 });
 
 app.listen(port, function () {
