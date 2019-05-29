@@ -1,15 +1,3 @@
-// -------------- 1 ----------------
-
-// define(function() {
-// 	return {
-// 		fixTheMeerkat: function(arr) {
-// 			return arr.reverse();
-// 		}
-// 	}
-// });
-
-// -------------- 2 ----------------
-
 define(function() {
 	return {
 		squareOrSquareRoot: function(arr) {
@@ -18,7 +6,7 @@ define(function() {
 			})
 		},
 		fixTheMeerkat: function(arr) {
- 			return arr.reverse();
+			return arr.reverse();
 		}
 	}
 });
