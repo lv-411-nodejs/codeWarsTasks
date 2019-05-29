@@ -2,7 +2,7 @@
   "name": "codewarstasks",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "index.js",
   "dependencies": {
     "amd-loader": "0.0.8",
     "requirejs": "^2.3.6"
