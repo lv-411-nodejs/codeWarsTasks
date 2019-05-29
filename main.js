@@ -3,7 +3,7 @@ require("amd-loader");
 //msg.print("run!");
 
 var kyu8 = require('./tasks/8_kyu');
-//console.log(kyu8.fixTheMeerkat(['tail', 'body', 'head']));
+console.log(kyu8.fixTheMeerkat(['tail', 'body', 'head']));
 console.log(kyu8.squareOrSquareRoot([4, 3, 9, 7, 2, 1]));
 
 var kyu7 = require('./tasks/7_kyu');
