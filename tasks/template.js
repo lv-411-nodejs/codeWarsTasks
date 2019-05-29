@@ -1,7 +1,7 @@
-define(function () {
-    return {
-        print: function(msg) {
-           // console.log(msg);
-        }
-    };
+define(function() {
+	return {
+		print: function(msg) {
+			// console.log(msg);
+		}
+	};
 });
