@@ -6,7 +6,6 @@ define(function() {
 			var l = 0;
 			var score = 0;
 			var conceded = 0;
-			var points = 0;
 			let reg = new RegExp('\\b' + teamName + '\\b', 'ig');
 			let games = report.split(',').filter((item) => {
 				return item.match(reg);
@@ -14,7 +13,7 @@ define(function() {
 				return item.trim().split(/\s*(\d+\.?\d*\b)\s*/).slice(0, -1);
 			});
 			if (games.length < 1) {
-				return `${team}:This team didn't play!`
+				return `${teamName}:This team didn't play!`
 			}
 			let sortgames = games.map((arr) => {
 				return arr.indexOf(teamName) == 0 ? arr : arr = [arr[2], arr[3], arr[0], arr[1]];
