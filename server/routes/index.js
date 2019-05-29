@@ -11,18 +11,18 @@ module.exports = app => {
 
     //pidluzhnyy
     app.get(`${prefix.k8}/divisibleby`, kyu8.divisibleByInfo);
-    app.get(`${prefix.k8}/divisibleby`, kyu8.divisibleByRun);
+    app.post(`${prefix.k8}/divisibleby`, kyu8.divisibleByRun);
 
     app.get(`${prefix.k8}/circlearea`, kyu8.circleAreaInfo);
-    app.get(`${prefix.k8}/circlearea`, kyu8.circleAreaRun);
+    app.post(`${prefix.k8}/circlearea`, kyu8.circleAreaRun);
 
     app.get(`${prefix.k7}/seriessum`, kyu7.seriesSumInfo);
-    app.get(`${prefix.k7}/seriessum`, kyu7.seriesSumRun);
+    app.post(`${prefix.k7}/seriessum`, kyu7.seriesSumRun);
 
     app.get(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesInfo);
-    app.get(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesRun);
+    app.post(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesRun);
 
     app.get(`${prefix.k5}/circlearea`, kyu5.whichXInfo);
-    app.get(`${prefix.k5}/circlearea`, kyu5.whichXRun);
+    app.post(`${prefix.k5}/circlearea`, kyu5.whichXRun);
 
 }
