@@ -17,12 +17,12 @@ app.get('/', function (req, res) {
 });
 
 app.get('/kyu/:level', function (req, res) {
-    const {level} = req.params;
+  const {level} = req.params;
 
-    if(level > 4 && level < 9)
-      res.json(data[level]);
-    else
-      res.send(`sorry level ${level} not found`);
+  if(level > 4 && level < 9)
+    res.json(data[level]);
+  else
+    res.send(`sorry level ${level} not found`);
 });
 
 app.post('/kyu/:name/:level', (req, res) => {
@@ -46,15 +46,10 @@ app.get('/kyu/:level/:name', function (req, res) {
   if(level > 4 && level < 9){
     res.send(data[level][name].info);
   }
-
   else
-      res.send(`sorry level ${level} not found`);
- 
-      
-
+    res.send(`sorry level ${level} not found`);
 });
 
 app.listen(port, function () {
   console.log(`started on port ${port}`);
 });
-
