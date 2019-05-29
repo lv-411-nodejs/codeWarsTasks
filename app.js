@@ -8,7 +8,7 @@ const port = 3000;
 const users = ['fedyna', 'dutkevych', 'ners', 'mushora', 'chorna', 'domianych', 'voloskiy', 'pidluzhnyy']
 
 // middlewares
-app.use(bodyParser({extended: true}));
+app.use(bodyParser.urlencoded({extended: true}));
 
 const data = require('./public/data.json');
 
