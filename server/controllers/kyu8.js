@@ -1,4 +1,5 @@
-const errorHandler = require('../utils/errorHandlers')
+
+const errorHandler = require('../helpers/errorHandlers')
 
 module.exports = {
     showAllTasks(req, res) {
@@ -97,6 +98,7 @@ module.exports = {
             });
     },
 
+
     animalsInfo(req, res) {
         res.status(200)
             .json({
@@ -111,8 +113,8 @@ module.exports = {
             const chickens = heads - cows;
             if (cows > heads || (cows ^ 0) !== cows || chickens > heads || (chickens ^ 0) !== chickens) return "No solutions";
             else return [chickens, cows];
-        }
 
+        }
         res.status(201)
             .json({
                 result: animals(heads, legs)
@@ -134,6 +136,88 @@ module.exports = {
             .json({
                 result: solution(a, b)
             });
+
+    },
+    volume_of_a_cuboidInfo(req, res) {
+        res.status(200).send(
+            'https://www.codewars.com/kata/volume-of-a-cuboid'
+        )
+    },
+    miles_per_gallon_to_kilometers_per_literInfo(req, res) {
+        res.status(200).send(
+            'https://www.codewars.com/kata/miles-per-gallon-to-kilometers-per-liter'
+        )
+    },
+    volume_of_a_cuboidRun(req, res) {
+        try {
+            const { mpg } = req.body;
+            let result = (mpg) => { return +(mpg * 1.609344 / 4.54609188).toFixed(2) }
+            res.status(200).send(
+                `${result(mpg)}`
+            )
+        } catch (e) {
+            errorHandler(res, e)
+        }
+    },
+    miles_per_gallon_to_kilometers_per_literRun(req, res) {
+        try {
+            const { length, width, height } = req.body;
+            var Kata;
+            Kata = (function () {
+                function Kata() { }
+                Kata.getVolumeOfCuboid = function (length, width, height) { return length * width * height };
+                return Kata;
+            })();
+
+            let result = Kata.getVolumeOfCuboid(length, width, height)
+            res.status(200).send(
+                `${result}`
+            )
+        } catch (e) {
+            errorHandler(res, e)
+        }
+    },
+
+    amIWilsonInfo(req, res) {
+        res.status(200)
+            .json({
+                body: "Wilson primes"
+            });
+    },
+
+    amIWilsonRun(req, res) {
+        const { p } = req.body;
+        const amIWilson = p => {
+            function fact(x) {
+                return x <= 1 ? 1 : x * fact(x - 1);
+            }
+
+            return (fact(p - 1) + 1) / (p * p) % 1 === 0;
+        };
+        res.status(201)
+            .json({
+                result: amIWilson(p)
+            });
+
+
+    },
+
+    twoDecimalPlacesInfo(req, res) {
+        res.status(200)
+            .json({
+                body: "Formatting decimal places"
+            });
+    },
+
+    twoDecimalPlacesRun(req, res) {
+        const { n } = req.body;
+        const twoDecimalPlaces = n => +n.toFixed(2);
+
+        res.status(201)
+            .json({
+                result: twoDecimalPlaces(n)
+            });
+
+
     }
 }
-

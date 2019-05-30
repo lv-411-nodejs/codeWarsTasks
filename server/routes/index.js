@@ -11,12 +11,9 @@ module.exports = app => {
     app.get('/api/task/kyu8/Pole_Vault_Starting_Marks', kyu8.Pole_Vault_Starting_MarksInfo);
     app.get('/api/task/kyu8/Keep_Hydrated!', kyu8.Keep_HydratedInfo);
     app.post('/api/task/kyu8/Pole_Vault_Starting_Marks', kyu8.Pole_Vault_Starting_MarksRun);
-    // app.post('/api/task/kyu8/Keep_Hydrated!', kyu8.Keep_HydratedRun);
 
-    // to get list of all katas
     app.get('/api/tasks', kyu8.showAllTasks);
 
-    //pidluzhnyy
     app.get(`${prefix.k8}/divisibleby`, kyu8.divisibleByInfo);
     app.post(`${prefix.k8}/divisibleby`, kyu8.divisibleByRun);
 
@@ -31,11 +28,30 @@ module.exports = app => {
 
     app.get(`${prefix.k5}/circlearea`, kyu5.whichXInfo);
     app.post(`${prefix.k5}/circlearea`, kyu5.whichXRun);
-
-    // ners
     
     app.get(`${prefix.k8}/headlegs`, kyu8.animalsInfo);
     app.post(`${prefix.k8}/headlegs`, kyu8.animalsRun);
+
+    app.get(`${prefix.k8}/amiwilson`, kyu8.amIWilsonInfo);
+    app.post(`${prefix.k8}/amiwilson`, kyu8.amIWilsonRun);
+
+    app.get(`${prefix.k8}/volume_of_a_cuboid`, kyu8.volume_of_a_cuboidInfo);
+    app.post(`${prefix.k8}/volume_of_a_cuboid`, kyu8.volume_of_a_cuboidRun);
+
+    app.get(`${prefix.k8}/miles_per_gallon_to_kilometers_per_liter`, kyu8.miles_per_gallon_to_kilometers_per_literInfo);
+    app.post(`${prefix.k8}/miles_per_gallon_to_kilometers_per_liter`, kyu8.miles_per_gallon_to_kilometers_per_literRun);
+
+    app.get(`${prefix.k8}/twodecimalplaces`, kyu8.twoDecimalPlacesInfo);
+    app.post(`${prefix.k8}/twodecimalplaces`, kyu8.twoDecimalPlacesRun);
+
+    app.get(`${prefix.k7}/newavg`, kyu7.newAvgInfo);
+    app.post(`${prefix.k7}/newavg`, kyu7.newAvgRun);
+
+    app.get(`${prefix.k6}/balance`, kyu6.balanceInfo);
+    app.post(`${prefix.k6}/balance`, kyu6.balanceRun);
+
+    app.get(`${prefix.k5}/smallest`, kyu5.smallestInfo);
+    app.post(`${prefix.k5}/smallest`, kyu5.smallestRun);
 
     app.get(`${prefix.k8}/shortlong`, kyu8.solutionInfo);
     app.post(`${prefix.k8}/shortlong`, kyu8.solutionRun);
