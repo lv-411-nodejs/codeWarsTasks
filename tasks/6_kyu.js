@@ -1,7 +1,15 @@
 define(function () {
     return {
         balance: function (book) {
-            let arrBook = bookToArray(book);
+            const numberFormat = function(str, cur = 2) {
+                str = str.replace(/[^\d+.]/g, '');
+                str = (+str).toFixed(cur);
+                return str;
+            }
+
+            let arrBook = book.split('\n')
+                              .map(e => e.split(' '))
+                              .filter(e => e.toString() !== '');;
 
             arrBook[0][0] = numberFormat(arrBook[0][0], 2); //lead to a numeric format with 2 digits after comma
             let balance = parseFloat(arrBook[0][0]);
@@ -20,23 +28,7 @@ define(function () {
             );
             arrBook[0][0] = 'Original Balance: ' + arrBook[0][0];
 
-            return bookToString(arrBook);
-
-            function bookToString(array) {
-                return array.map(e => e.join(' ')).join('\r\n');
-            }
-
-            function bookToArray(book) {
-                return book.split('\n')
-                    .map(e => e.split(' '))
-                    .filter(e => e.toString() !== '');
-            }
-
-            function numberFormat(str, cur = 2) {
-                str = str.replace(/[^\d+.]/g, '');
-                str = (+str).toFixed(cur);
-                return str;
-            }
+            return arrBook.map(e => e.join(' ')).join('\r\n');
         }
     };
 });
