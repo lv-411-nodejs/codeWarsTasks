@@ -95,6 +95,69 @@ module.exports = {
             .json({
                 result: circleArea(circle)
             });
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //mushora
+    volume_of_a_cuboidInfo(req, res) {
+        res.status(200).send(
+           'https://www.codewars.com/kata/volume-of-a-cuboid'
+        )
+    },
+    miles_per_gallon_to_kilometers_per_literInfo(req ,res){
+        res.status(200).send(
+            'https://www.codewars.com/kata/miles-per-gallon-to-kilometers-per-liter'
+        )
+    },
+    volume_of_a_cuboidRun(req, res) {
+        try {
+            const {mpg}=req.body;
+            let result= (mpg)=>{return +(mpg*1.609344/4.54609188).toFixed(2)}
+            res.status(200).send(
+                `${result(mpg)}`
+                )
+        } catch(e) {
+            errorHandler(res,e)
+        }
+    },
+    miles_per_gallon_to_kilometers_per_literRun(req, res) {
+        try {
+            const {length, width, height}=req.body;
+            var Kata;
+            Kata = (function() {
+                   function Kata() {}
+                  Kata.getVolumeOfCuboid = function(length, width, height){return length * width * height};
+             return Kata;
+            })();   
+                     
+            let result= Kata.getVolumeOfCuboid(length, width, height)
+            res.status(200).send(
+                `${result}`
+                )
+        } catch(e) {
+            errorHandler(res,e)
+        }
     }
 }
 

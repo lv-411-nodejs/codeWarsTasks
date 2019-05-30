@@ -33,4 +33,25 @@ module.exports = app => {
     app.post(`${prefix.k5}/circlearea`, kyu5.whichXRun);
 
 
+
+
+
+
+
+    app.get(`${prefix.k8}/volume_of_a_cuboid`, kyu8.volume_of_a_cuboidInfo);
+    app.post(`${prefix.k8}/volume_of_a_cuboid`, kyu8.volume_of_a_cuboidRun);
+
+    app.get(`${prefix.k8}/miles_per_gallon_to_kilometers_per_liter`, kyu8.miles_per_gallon_to_kilometers_per_literInfo);
+    app.post(`${prefix.k8}/miles_per_gallon_to_kilometers_per_liter`, kyu8.miles_per_gallon_to_kilometers_per_literRun);
+
+    // app.get(`${prefix.k7}/seriessum`, kyu7.seriesSumInfo);
+    // app.post(`${prefix.k7}/seriessum`, kyu7.seriesSumRun);
+
+    // app.get(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesInfo);
+    // app.post(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesRun);
+
+    // app.get(`${prefix.k5}/circlearea`, kyu5.whichXInfo);
+    // app.post(`${prefix.k5}/circlearea`, kyu5.whichXRun);
+
+
 }
