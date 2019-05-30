@@ -49,25 +49,6 @@ module.exports = {
         } catch(e) {
             errorHandler(res,e)
         }
-    }
-
-}
-
-
-                kyu8: [
-                    'Circle Area',
-                    'Divisible By'
-                ],
-                kyu7: [
-                    'Series Sum'
-                ],
-                kyu6: [
-                    'Pile Of Cubes'
-                ],
-                kyu5: [
-                    'Which x for that sum'
-                ]
-            });
     },
 
     divisibleByInfo(req, res) {
