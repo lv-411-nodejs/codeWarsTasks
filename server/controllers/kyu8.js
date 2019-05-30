@@ -1,4 +1,4 @@
-const errorHandler=require('../utils/errorHandlers')
+const errorHandler = require('../utils/errorHandlers')
 
 module.exports = {
     showAllTasks(req, res) {
@@ -6,16 +6,16 @@ module.exports = {
             .json({
 
                 "stas": ["Pole Vault Starting Marks", "Keep Hydrated!"],
-                "maks": ["Count of positives / sum of negatives","Convert a String to a Number!"],
-                "oleh": ["Volume of a Cuboid","Miles per gallon to kilometers per liter"],
-                "oleksiy": ["Wilson primes","Formatting decimal places #0"],
-                "ostap": ["Holiday VIII - Duty Free","Simple validation of a username with regex"],
-                "nadiia": ["My head is at the wrong end!","To square(root) or not to square(root)"],
+                "maks": ["Count of positives / sum of negatives", "Convert a String to a Number!"],
+                "oleh": ["Volume of a Cuboid", "Miles per gallon to kilometers per liter"],
+                "oleksiy": ["Wilson primes", "Formatting decimal places #0"],
+                "ostap": ["Holiday VIII - Duty Free", "Simple validation of a username with regex"],
+                "nadiia": ["My head is at the wrong end!", "To square(root) or not to square(root)"],
                 "bohdan": ["Find numbers which are divisible by given number", "Geometry Basics: Circle Area in 2D"],
-                "ruslan": ["Heads and Legs","Short Long Short"]           
+                "ruslan": ["Heads and Legs", "Short Long Short"]
             });
     },
-   
+
     Pole_Vault_Starting_MarksInfo(req, res) {
         res.status(200).send(
             `<p style="color:red">For a pole vaulter, it is very important to begin the approach run at the best possible starting mark. This is affected by numerous factors and requires fine-tuning in practice. But there is a guideline that will help a beginning vaulter start at approximately the right location for the so-called "three-step approach," based on the vaulter's body height.
@@ -25,7 +25,7 @@ module.exports = {
             Hint: Based on the two guidelines given above, you will want to account for the change in starting mark per change in body height. This involves a linear relationship. But there is also a constant offset involved. If you can determine the rate of change described above, you should be able to determine that constant offset </p>`
         )
     },
-    Keep_HydratedInfo(req ,res){
+    Keep_HydratedInfo(req, res) {
         res.status(200).send(
             `<p style="color:red">Nathan loves cycling.
             Because Nathan knows it is important to stay hydrated, he drinks 0.5 litres of water per hour of cycling.
@@ -38,16 +38,16 @@ module.exports = {
     },
     Pole_Vault_Starting_MarksRun(req, res) {
         try {
-            const {num}=req.body;
-            
-            if (typeof(num)!=='number'){throw new Error('please enter a number!')}
+            const { num } = req.body;
+
+            if (typeof (num) !== 'number') { throw new Error('please enter a number!') }
             const diff = (10.67 - 9.45) / (1.83 - 1.52);
-            let result= Math.round((10.67 + diff * num - diff * 1.83) * 100) / 100;
+            let result = Math.round((10.67 + diff * num - diff * 1.83) * 100) / 100;
             res.status(200).send(
                 `<h1>${result}</h1> `
-                )
-        } catch(e) {
-            errorHandler(res,e)
+            )
+        } catch (e) {
+            errorHandler(res, e)
         }
     },
 
@@ -94,6 +94,45 @@ module.exports = {
         res.status(201)
             .json({
                 result: circleArea(circle)
+            });
+    },
+
+    animalsInfo(req, res) {
+        res.status(200)
+            .json({
+                body: "Heads and Legs"
+            });
+    },
+
+    animalsRun(req, res) {
+        const { heads, legs } = req.body;
+        const animals = (heads, legs) => {
+            const cows = (legs - heads * 2) / 2;
+            const chickens = heads - cows;
+            if (cows > heads || (cows ^ 0) !== cows || chickens > heads || (chickens ^ 0) !== chickens) return "No solutions";
+            else return [chickens, cows];
+        }
+
+        res.status(201)
+            .json({
+                result: animals(heads, legs)
+            });
+    },
+
+    solutionInfo(req, res) {
+        res.status(200)
+            .json({
+                body: "Short Long Short"
+            });
+    },
+
+    solutionRun(req, res) {
+        const { a, b } = req.body;
+        const solution = (a, b) => a.length > b.length ? b + a + b : a + b + a;
+
+        res.status(201)
+            .json({
+                result: solution(a, b)
             });
     }
 }

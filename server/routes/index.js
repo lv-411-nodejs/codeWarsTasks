@@ -32,5 +32,11 @@ module.exports = app => {
     app.get(`${prefix.k5}/circlearea`, kyu5.whichXInfo);
     app.post(`${prefix.k5}/circlearea`, kyu5.whichXRun);
 
+    // ners
+    
+    app.get(`${prefix.k8}/headlegs`, kyu8.animalsInfo);
+    app.post(`${prefix.k8}/headlegs`, kyu8.animalsRun);
 
+    app.get(`${prefix.k8}/shortlong`, kyu8.solutionInfo);
+    app.post(`${prefix.k8}/shortlong`, kyu8.solutionRun);
 }
