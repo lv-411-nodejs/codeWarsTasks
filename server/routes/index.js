@@ -32,5 +32,19 @@ module.exports = app => {
     app.get(`${prefix.k5}/circlearea`, kyu5.whichXInfo);
     app.post(`${prefix.k5}/circlearea`, kyu5.whichXRun);
 
+    //domianych
+    app.get(`${prefix.k8}/amiwilson`, kyu8.amIWilsonInfo);
+    app.post(`${prefix.k8}/amiwilson`, kyu8.amIWilsonRun);
 
+    app.get(`${prefix.k8}/twodecimalplaces`, kyu8.twoDecimalPlacesInfo);
+    app.post(`${prefix.k8}/twodecimalplaces`, kyu8.twoDecimalPlacesRun);
+
+    app.get(`${prefix.k7}/newavg`, kyu7.newAvgInfo);
+    app.post(`${prefix.k7}/newavg`, kyu7.newAvgRun);
+
+    app.get(`${prefix.k6}/balance`, kyu6.balanceInfo);
+    app.post(`${prefix.k6}/balance`, kyu6.balanceRun);
+
+    app.get(`${prefix.k5}/smallest`, kyu5.smallestInfo);
+    app.post(`${prefix.k5}/smallest`, kyu5.smallestRun);
 }
