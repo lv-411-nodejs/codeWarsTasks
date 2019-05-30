@@ -1,4 +1,4 @@
-const errorHandler=require('../utils/errorHandlers')
+const errorHandler=require('../helpers/errorHandlers')
 
 module.exports = {
     showAllTasks(req, res) {
