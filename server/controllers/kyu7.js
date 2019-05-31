@@ -1,4 +1,17 @@
 module.exports = {
+  showAllTasks(req, res) {
+    res.status(200)
+        .json({
+          'stas': ['Sum of a sequence'],
+          'maks': ['Slamming Lockers'],
+          'oleh': ['Where is Vasya?'],
+          'oleksiy': ['Looking for a benefactor'],
+          'ostap': ['Easy Line'],
+          'nadiia': ['Recursive Replication'],
+          'bohdan': ['Sum of the first nth term of Series'],
+          'ruslan': ['Triple Shiftian Numbers'],
+        });
+  },
 
   newAvgInfo(req, res) {
     res.status(200)
@@ -18,7 +31,7 @@ module.exports = {
       return Math.ceil(result);
     };
 
-    res.status(201)
+    res.status(200)
         .json({
           result: newAvg(arr, newavg),
         });

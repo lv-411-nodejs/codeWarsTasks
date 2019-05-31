@@ -1,4 +1,17 @@
 module.exports = {
+  showAllTasks(req, res) {
+    res.status(200)
+        .json({
+          'stas': ['Artificial Rain'],
+          'maks': ['Perimeter of squares in a rectangle'],
+          'oleh': ['Gap in Primes'],
+          'oleksiy': ['Find the smallest'],
+          'ostap': ['First Variation on Caesar Cipher'],
+          'nadiia': ['Number of trailing zeros of N!'],
+          'bohdan': ['Which x for that sum?'],
+          'ruslan': ['Product of consecutive Fib numbers'],
+        });
+  },
 
   smallestInfo(req, res) {
     res.status(200)
@@ -28,7 +41,7 @@ module.exports = {
       return min;
     };
 
-    res.status(201)
+    res.status(200)
         .json({
           result: smallest(n),
         });
