@@ -33,11 +33,11 @@ module.exports = (app) => {
   app.get(`${prefix.k8}/amiwilson`, kyu8.amIWilsonInfo);
   app.post(`${prefix.k8}/amiwilson`, kyu8.amIWilsonRun);
 
-  app.get(`${prefix.k8}/volume_of_a_cuboid`, kyu8.volume_of_a_cuboidInfo);
-  app.post(`${prefix.k8}/volume_of_a_cuboid`, kyu8.volume_of_a_cuboidRun);
+  app.get(`${prefix.k8}/getVolumeOfCuboid`, kyu8.getVolumeOfCuboidInfo);
+  app.post(`${prefix.k8}/getVolumeOfCuboid`, kyu8.getVolumeOfCuboidRun);
 
-  app.get(`${prefix.k8}/miles_per_gallon_to_kilometers_per_liter`, kyu8.miles_per_gallon_to_kilometers_per_literInfo);
-  app.post(`${prefix.k8}/miles_per_gallon_to_kilometers_per_liter`, kyu8.miles_per_gallon_to_kilometers_per_literRun);
+  app.get(`${prefix.k8}/converter`, kyu8.converterInfo);
+  app.post(`${prefix.k8}/converter`, kyu8.converterRun);
 
   app.get(`${prefix.k8}/twodecimalplaces`, kyu8.twoDecimalPlacesInfo);
   app.post(`${prefix.k8}/twodecimalplaces`, kyu8.twoDecimalPlacesRun);

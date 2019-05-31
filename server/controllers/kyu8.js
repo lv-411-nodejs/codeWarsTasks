@@ -139,17 +139,17 @@ module.exports = {
           result: solution(a, b),
         });
   },
-  volume_of_a_cuboidInfo(req, res) {
-    res.status(200).send(
-        'https://www.codewars.com/kata/volume-of-a-cuboid'
-    );
+  getVolumeOfCuboidInfo(req, res) {
+    res.status(200).json({
+        info: "Volume of a Cuboid"
+    });
   },
-  miles_per_gallon_to_kilometers_per_literInfo(req, res) {
-    res.status(200).send(
-        'https://www.codewars.com/kata/miles-per-gallon-to-kilometers-per-liter'
-    );
+  converterInfo(req, res) {
+    res.status(200).json({
+        info: "Miles per gallon to kilometers per liter"
+    });
   },
-  volume_of_a_cuboidRun(req, res) {
+  getVolumeOfCuboidRun(req, res) {
     try {
       const {mpg} = req.body;
       const result = (mpg) => +(mpg * 1.609344 / 4.54609188).toFixed(2);
@@ -160,22 +160,16 @@ module.exports = {
       errorHandler(res, e);
     }
   },
-  miles_per_gallon_to_kilometers_per_literRun(req, res) {
+  converterRun(req, res) {
     try {
       const {length, width, height} = req.body;
-      let Kata;
-      Kata = (function() {
-        function Kata() { }
-        Kata.getVolumeOfCuboid = function(length, width, height) {
-          return length * width * height;
-        };
-        return Kata;
-      })();
-
-      const result = Kata.getVolumeOfCuboid(length, width, height);
-      res.status(200).send(
-          `${result}`
-      );
+      let getVolumeOfCuboid=function (length, width, height){
+        return length* width * height;
+      };
+      const result=getVolumeOfCuboid(length, width, height)
+      res.status(200).join({
+         result: result
+      });
     } catch (e) {
       errorHandler(res, e);
     }
