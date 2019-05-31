@@ -52,4 +52,29 @@ module.exports = {
           result: newAvg(arr, newavg),
         });
   },
+
+  tripleShiftianInfo(req, res) {
+    res.status(200)
+        .json({
+          info: 'Looking for a benefactor',
+        });
+  },
+
+  tripleShiftianRun(req, res) {
+    const {base, n} = req.body;
+    const tripleShiftian = (base, n) => {
+      if (n < 3) return base[n];
+      else {
+        for (let i = 3; i <= n; i++) {
+          base.push(4 * base[i - 1] - 5 * base[i - 2] + 3 * base[i - 3]);
+        }
+        return base[n];
+      }
+    };
+
+    res.status(200)
+        .json({
+          result: tripleShiftian(base, n),
+        });
+  },
 };

@@ -209,7 +209,7 @@ module.exports = {
 
     const twoDecimalPlaces = (n) => +n.toFixed(2);
 
-    res.status(201)
+    res.status(200)
         .json({
           result: twoDecimalPlaces(n),
         });

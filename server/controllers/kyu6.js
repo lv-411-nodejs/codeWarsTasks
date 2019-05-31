@@ -74,9 +74,37 @@ module.exports = {
       return bookToString(arrBook);
     };
 
-    res.status(201)
+    res.status(200)
         .json({
           result: balance(book),
+        });
+  },
+
+  bouncingBallsRun(req, res) {
+    const {h, bounce, window} = req.body;
+
+    const bouncingBall = (h, bounce, window) => {
+      if (h > 0 && bounce > 0 && bounce < 1) {
+        let count = 0;
+        while (h > window) {
+          h *= bounce;
+          count += 2;
+        }
+        return count - 1;
+      }
+      return -1;
+    };
+
+    res.status(200)
+        .json({
+          result: bouncingBall(h, bounce, window),
+        });
+  },
+
+  bouncingBallsInfo(req, res) {
+    res.status(200)
+        .json({
+          body: 'Bouncing Balls',
         });
   },
 };
