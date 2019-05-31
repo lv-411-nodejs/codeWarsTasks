@@ -6,9 +6,11 @@ const kyu5 = require('../controllers/kyu5');
 const prefix = require('../helpers/prefix');
 
 module.exports = (app) => {
-  app.get('/api/task/kyu8/Pole_Vault_Starting_Marks', kyu8.Pole_Vault_Starting_MarksInfo);
+  app.get('/api/task/kyu8/Pole_Vault_Starting_Marks',
+      kyu8.Pole_Vault_Starting_MarksInfo);
   app.get('/api/task/kyu8/Keep_Hydrated!', kyu8.Keep_HydratedInfo);
-  app.post('/api/task/kyu8/Pole_Vault_Starting_Marks', kyu8.Pole_Vault_Starting_MarksRun);
+  app.post('/api/task/kyu8/Pole_Vault_Starting_Marks',
+      kyu8.Pole_Vault_Starting_MarksRun);
 
   app.get('/api/tasks', kyu8.showAllTasks);
 
@@ -36,8 +38,10 @@ module.exports = (app) => {
   app.get(`${prefix.k8}/volume_of_a_cuboid`, kyu8.volume_of_a_cuboidInfo);
   app.post(`${prefix.k8}/volume_of_a_cuboid`, kyu8.volume_of_a_cuboidRun);
 
-  app.get(`${prefix.k8}/miles_per_gallon_to_kilometers_per_liter`, kyu8.miles_per_gallon_to_kilometers_per_literInfo);
-  app.post(`${prefix.k8}/miles_per_gallon_to_kilometers_per_liter`, kyu8.miles_per_gallon_to_kilometers_per_literRun);
+  app.get(`${prefix.k8}/miles_per_gallon_to_kilometers_per_liter`,
+      kyu8.miles_per_gallon_to_kilometers_per_literInfo);
+  app.post(`${prefix.k8}/miles_per_gallon_to_kilometers_per_liter`,
+      kyu8.miles_per_gallon_to_kilometers_per_literRun);
 
   app.get(`${prefix.k8}/twodecimalplaces`, kyu8.twoDecimalPlacesInfo);
   app.post(`${prefix.k8}/twodecimalplaces`, kyu8.twoDecimalPlacesRun);
