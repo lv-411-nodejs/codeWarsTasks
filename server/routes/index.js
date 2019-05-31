@@ -26,6 +26,4 @@ module.exports = (app) => {
   app.get(`${prefix.k5}/smallest`, kyu5.smallestInfo);
   app.post(`${prefix.k5}/smallest`, kyu5.smallestRun);
 
-  app.get(`${prefix.k8}/shortlong`, kyu8.solutionInfo);
-  app.post(`${prefix.k8}/shortlong`, kyu8.solutionRun);
 };
