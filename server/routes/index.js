@@ -8,6 +8,8 @@ const prefix = require('../helpers/prefix');
 module.exports = (app) => {
   app.get('/api/tasks/8', kyu8.showAllTasks);
   app.get('/api/tasks/7', kyu7.showAllTasks);
+  app.get('/api/tasks/6', kyu6.showAllTasks);
+  app.get('/api/tasks/5', kyu5.showAllTasks);
 
   app.get(`${prefix.k8}/amiwilson`, kyu8.amIWilsonInfo);
   app.post(`${prefix.k8}/amiwilson`, kyu8.amIWilsonRun);
