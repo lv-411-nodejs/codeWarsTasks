@@ -33,11 +33,11 @@ module.exports = (app) => {
   app.get(`${prefix.k8}/amiwilson`, kyu8.amIWilsonInfo);
   app.post(`${prefix.k8}/amiwilson`, kyu8.amIWilsonRun);
 
-  app.get(`${prefix.k8}/getVolumeOfCuboid`, kyu8.getVolumeOfCuboidInfo);
-  app.post(`${prefix.k8}/getVolumeOfCuboid`, kyu8.getVolumeOfCuboidRun);
+  app.get(`${prefix.k8}/getVolumeOfCuboid`, kyu8.getVolumeOfCuboidGetController);
+  app.post(`${prefix.k8}/getVolumeOfCuboid`, kyu8.getVolumeOfCuboidPostController);
 
-  app.get(`${prefix.k8}/converter`, kyu8.converterInfo);
-  app.post(`${prefix.k8}/converter`, kyu8.converterRun);
+  app.get(`${prefix.k8}/converter`, kyu8.converterGetController);
+  app.post(`${prefix.k8}/converter`, kyu8.converterPostController);
 
   app.get(`${prefix.k8}/twodecimalplaces`, kyu8.twoDecimalPlacesInfo);
   app.post(`${prefix.k8}/twodecimalplaces`, kyu8.twoDecimalPlacesRun);
