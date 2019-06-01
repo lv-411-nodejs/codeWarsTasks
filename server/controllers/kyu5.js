@@ -53,4 +53,36 @@ module.exports = {
           result: smallest(n),
         });
   },
+
+  perimeterGetController(req, res) {
+    res.status(200)
+        .json({
+          body: 'Perimeter of squares in a rectangle',
+        });
+  },
+
+  perimeterPostController(req, res) {
+    const n = req.body;
+
+    const perimeter = (n) => {
+      const fibonacci = (n) => {
+        let init = 1;
+        let res = 1;
+
+        for (let i = 0; i <= n; i++) {
+          const temp = res;
+          res += init;
+          init = temp;
+        }
+        return res - 1;
+      };
+
+      return 4 * fibonacci(n);
+    };
+
+    res.status(200)
+        .json({
+          result: perimeter(n),
+        });
+  },
 };

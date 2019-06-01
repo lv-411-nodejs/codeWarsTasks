@@ -52,4 +52,28 @@ module.exports = {
           result: newAvg(arr, newavg),
         });
   },
+
+  lockerRunGetController(req, res) {
+    res.status(200)
+        .json({
+          body: 'Slamming Lockers',
+        });
+  },
+
+  lockerRunPostController(req, res) {
+    const lockers = req.body;
+
+    const lockerRun = (lockers) => {
+      const open = [];
+      for (let i = 1; i * i <= lockers; i++) {
+        open.push(i * i);
+      }
+      return open;
+    };
+
+    res.status(200)
+        .json({
+          result: lockerRun(lockers),
+        });
+  },
 };

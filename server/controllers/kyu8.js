@@ -1,13 +1,12 @@
-
+/* eslint-disable no-trailing-spaces */
 const errorHandler = require('../helpers/errorHandlers');
 
 module.exports = {
   showAllTasks(req, res) {
     res.status(200)
         .json({
-
           'stas': ['Pole Vault Starting Marks', 'Keep Hydrated!'],
-          'maks': ['Count of positives / sum of negatives', 'Convert a String to a Number!'],
+          'max': ['Count of positives / sum of negatives', 'Convert a String to a Number!'],
           'oleh': ['Volume of a Cuboid', 'Miles per gallon to kilometers per liter'],
           'oleksiy': ['Wilson primes', 'Formatting decimal places #0'],
           'ostap': ['Holiday VIII - Duty Free', 'Simple validation of a username with regex'],
@@ -217,6 +216,54 @@ module.exports = {
     res.status(201)
         .json({
           result: twoDecimalPlaces(n),
+        });
+  },
+
+  countPositivesSumNegativesGetController(req, res) {
+    res.status(200).json({
+      body: 'Count of positives / sum of negatives',
+    });
+  },
+
+  countPositivesSumNegativesPostController(req, res) {
+    const {input} = req.body;
+    const countPositivesSumNegatives = (input) => {
+      let positive = 0;
+      let negative = 0;
+
+      if (input === [] || input === null || input < 1) {
+        return [];
+      }
+
+      for (let i=0; i<input.length; i++) {
+        if (input[i] > 0) {
+          positive += 1;
+        } else {
+          negative += input[i];
+        }
+      }
+      return [positive, negative];
+    };
+    res.status(200)
+        .json({
+          result: countPositivesSumNegatives(input),
+        });
+  },
+
+  stringToNumberGetController(req, res) {
+    res.status(200).json({
+      body: 'Convert a String to a Number!',
+    });
+  },
+
+  stringToNumberPostController(req, res) {
+    const {n} = req.body;
+    const stringToNumber = (n) => {
+      return Number(n);
+    };
+    res.status(200)
+        .json({
+          result: stringToNumber(n),
         });
   },
 };

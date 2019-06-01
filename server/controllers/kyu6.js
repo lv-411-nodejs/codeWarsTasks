@@ -78,4 +78,42 @@ module.exports = {
           result: balance(book),
         });
   },
+
+  stockListGetController(req, res) {
+    res.status(200)
+        .json({
+          body: 'Help the bookseller !',
+        });
+  },
+
+  stockListPostController(req, res) {
+    const {listOfArt, listOfCat} = req.body;
+
+    const stockList = (listOfArt, listOfCat) => {
+      if (!listOfArt.length || !listOfCat.length) {
+        return '';
+      }
+
+      const books = {};
+      const result = [];
+
+      listOfArt.forEach((book) => {
+        const [title, num] = book.split(' ');
+        books[title[0]] = books[title[0]] ? (books[title[0]] += Number(num)) : Number(num);
+      });
+
+      listOfCat.forEach((letter) => {
+        const num = books[letter] || 0;
+        result.push(`(${letter} : ${num})`);
+      });
+
+      return result.join` - `;
+    };
+
+    res.status(200)
+        .json({
+          result: stockList(listOfArt, listOfCat),
+        });
+  },
+
 };
