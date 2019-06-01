@@ -52,4 +52,22 @@ module.exports = {
           result: newAvg(arr, newavg),
         });
   },
+
+  replicateInfo(req, res) {
+    res.status(200)
+      .json({
+        body: 'Recursive Replication'
+    });
+  },
+
+  replicateRun(req, res) {
+    const {times, number} = req.body;
+    const replicate = (times, number) => {
+      return times > 0 ? [number].concat(replicate(times - 1, number)) : [];
+    };
+    res.status(200)
+      .json({
+        result: replicate(times, number)
+    });
+  }
 };

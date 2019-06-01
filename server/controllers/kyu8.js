@@ -214,4 +214,41 @@ module.exports = {
           result: twoDecimalPlaces(n),
         });
   },
+
+  squareOrSquareRootInfo(req, res) {
+    res.status(200)
+        .json({
+          body: 'To square(root) or not to square(root)'
+        });
+  },
+
+  squareOrSquareRootRun(req, res) {
+    const {arr} = req.body;
+    console.log(arr);
+    const squareOrSquareRoot = (arr) => {
+      return arr.map((el)=>{
+        return Number.isInteger(Math.sqrt(el)) ? Math.sqrt(el) : Math.pow(el, 2);
+      });
+    };
+    res.status(200)
+      .json({
+        result: squareOrSquareRoot(arr)
+    });
+  },
+
+  fixTheMeerkatInfo(req, res) {
+    res.status(200)
+      .json({
+        body: 'My head is at the wrong end!'
+    });
+  },
+
+  fixTheMeerkatRun(req, res) {
+    const {arr} = req.body;
+    const fixTheMeerkat = (arr) => arr.reverse();
+    res.status(200)
+      .json({
+        result: fixTheMeerkat(arr)
+    });
+  }
 };
