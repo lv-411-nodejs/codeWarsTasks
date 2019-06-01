@@ -80,7 +80,7 @@ module.exports = {
         });
   },
 
-  bouncingBallsRun(req, res) {
+  bouncingBallPostController(req, res) {
     const {h, bounce, window} = req.body;
 
     const bouncingBall = (h, bounce, window) => {
@@ -101,7 +101,7 @@ module.exports = {
         });
   },
 
-  bouncingBallsInfo(req, res) {
+  bouncingBallGetController(req, res) {
     res.status(200)
         .json({
           body: 'Bouncing Balls',

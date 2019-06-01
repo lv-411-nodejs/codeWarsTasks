@@ -53,14 +53,14 @@ module.exports = {
         });
   },
 
-  tripleShiftianInfo(req, res) {
+  tripleShiftianGetController(req, res) {
     res.status(200)
         .json({
           info: 'Looking for a benefactor',
         });
   },
 
-  tripleShiftianRun(req, res) {
+  tripleShiftianPostController(req, res) {
     const {base, n} = req.body;
     const tripleShiftian = (base, n) => {
       if (n < 3) return base[n];

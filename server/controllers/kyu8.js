@@ -99,14 +99,14 @@ module.exports = {
   },
 
 
-  animalsInfo(req, res) {
+  animalGetController(req, res) {
     res.status(200)
         .json({
           body: 'Heads and Legs',
         });
   },
 
-  animalsRun(req, res) {
+  animalPostController(req, res) {
     const {heads, legs} = req.body;
     const animals = (heads, legs) => {
       const cows = (legs - heads * 2) / 2;
@@ -122,14 +122,14 @@ module.exports = {
         });
   },
 
-  solutionInfo(req, res) {
+  solutionGetController(req, res) {
     res.status(200)
         .json({
           body: 'Short Long Short',
         });
   },
 
-  solutionRun(req, res) {
+  solutionPostController(req, res) {
     const {a, b} = req.body;
     const solution = (a, b) => a.length > b.length ? b + a + b : a + b + a;
 

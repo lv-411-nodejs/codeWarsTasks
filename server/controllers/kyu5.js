@@ -55,7 +55,7 @@ module.exports = {
         });
   },
 
-  productFibonacciRun(req, res) {
+  productFibonacciPostController(req, res) {
     const {prod} = req.body;
 
     const productFibonacci = (prod) => {
@@ -74,7 +74,7 @@ module.exports = {
           result: productFibonacci(prod),
         });
   },
-  productFibonacciInfo(req, res) {
+  productFibonacciGetController(req, res) {
     res.status(200)
         .json({
           body: 'Product of consecutive Fib numbers',

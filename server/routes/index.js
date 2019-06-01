@@ -29,8 +29,8 @@ module.exports = (app) => {
   app.get(`${prefix.k5}/circlearea`, kyu5.whichXInfo);
   app.post(`${prefix.k5}/circlearea`, kyu5.whichXRun);
 
-  app.get(`${prefix.k8}/headlegs`, kyu8.animalsInfo);
-  app.post(`${prefix.k8}/headlegs`, kyu8.animalsRun);
+  app.get(`${prefix.k8}/headlegs`, kyu8.animalGetController);
+  app.post(`${prefix.k8}/headlegs`, kyu8.animalPostController);
 
   app.get(`${prefix.k8}/amiwilson`, kyu8.amIWilsonInfo);
   app.post(`${prefix.k8}/amiwilson`, kyu8.amIWilsonRun);
@@ -55,6 +55,15 @@ module.exports = (app) => {
   app.get(`${prefix.k5}/smallest`, kyu5.smallestInfo);
   app.post(`${prefix.k5}/smallest`, kyu5.smallestRun);
 
-  app.get(`${prefix.k8}/shortlong`, kyu8.solutionInfo);
-  app.post(`${prefix.k8}/shortlong`, kyu8.solutionRun);
+  app.get(`${prefix.k8}/shortlong`, kyu8.solutionGetController);
+  app.post(`${prefix.k8}/shortlong`, kyu8.solutionPostController);
+
+  app.get(`${prefix.k7}/shiftian`, kyu7.tripleShiftianGetController);
+  app.post(`${prefix.k7}/shiftian`, kyu7.tripleShiftianPostController);
+
+  app.get(`${prefix.k6}/bouncing`, kyu6.bouncingBallGetController);
+  app.post(`${prefix.k6}/bouncing`, kyu6.solutionPostController);
+
+  app.get(`${prefix.k5}/fibonacci`, kyu5.productFibonacciGetController);
+  app.post(`${prefix.k5}/fibonacci`, kyu5.productFibonacciPostController);
 };
