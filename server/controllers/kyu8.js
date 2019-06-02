@@ -54,20 +54,16 @@ module.exports = {
   },
 
   Keep_HydratedRun(req, res){
-    try {
-      const {num} = req.body;
+    const {time} = req.body;
 
-      if (typeof (num) !== 'number') {
-        throw new Error('please enter a number!');
-      }
-      const result = Math.floor(time * 0.5);
+    const litres = (time) => {
+      return Math.floor(time * 0.5)
+    };
 
-      res.status(200).send(
-          `<h1>${result}</h1> `
-      );
-    } catch (e) {
-      errorHandler(res, e);
-    }
+    res.status(201)
+      .json({
+        result: litres(time),
+    });
   },
 
   divisibleByInfo(req, res) {

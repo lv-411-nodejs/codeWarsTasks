@@ -6,11 +6,20 @@ const kyu5 = require('../controllers/kyu5');
 const prefix = require('../helpers/prefix');
 
 module.exports = (app) => {
-  app.get('/api/task/kyu8/Pole_Vault_Starting_Marks',
-      kyu8.Pole_Vault_Starting_MarksInfo);
-  app.get('/api/task/kyu8/Keep_Hydrated!', kyu8.Keep_HydratedInfo);
-  app.post('/api/task/kyu8/Pole_Vault_Starting_Marks',
-      kyu8.Pole_Vault_Starting_MarksRun);
+  app.get('/api/task/kyu8/Pole_Vault_Starting_Marks', kyu8.Pole_Vault_Starting_MarksInfo);
+  app.post('/api/task/kyu8/Pole_Vault_Starting_Marks', kyu8.Pole_Vault_Starting_MarksRun);
+
+  app.get('/api/task/kyu8/litres', kyu8.Keep_HydratedInfo);
+  app.post('/api/task/kyu8/litres', kyu8.Keep_HydratedRun);
+
+  app.get(`${prefix.k7}/sequenceSum`, kyu7.sequenceSumInfo);
+  app.post(`${prefix.k7}/sequenceSum`, kyu7.sequenceSumRun);
+    
+  app.get(`${prefix.k6}/approximationPoint`, kyu6.approximationPointInfo);
+  app.post(`${prefix.k6}/approximationPoint`, kyu6.approximationPointRun);
+    
+  app.get(`${prefix.k5}/artificialRainRun`, kyu5.artificialRainInfo);
+  app.post(`${prefix.k5}/artificialRainRun`, kyu5.artificialRainRun);
 
   app.get('/api/tasks', kyu8.showAllTasks);
 
