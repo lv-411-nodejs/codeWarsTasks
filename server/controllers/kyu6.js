@@ -118,5 +118,24 @@ module.exports = {
       .json({
           result: nbaCup(report, teamName)
     });
-  }
+  },
+
+  approximationPointInfo(req, res) {
+    res.status(200)
+        .json({body: "Floating-point Approximation (I)"});
+  },
+
+  approximationPointRun(req, res) {
+    const {value} = req.body;
+    
+    const approximationPoint = (value) => {
+          return value / (1 + Math.sqrt(1 + value));
+        };
+    
+    res.status(201)
+        .json({
+          result: approximationPoint(value),
+        });
+  },
+
 };

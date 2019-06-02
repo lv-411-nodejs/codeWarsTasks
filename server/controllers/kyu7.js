@@ -69,5 +69,31 @@ module.exports = {
       .json({
         result: replicate(times, number)
     });
+  },
+
+  sequenceSumInfo (req, res) {
+    res.status(200).json({
+      body: 'Sum of a sequence'
+    })
+  },
+
+  sequenceSumRun (req, res) {
+    const { begin, end, step } = req.body
+
+    const sequenceSum = (begin, end, step) => {
+      if (begin > end) {
+        return 0
+      } else if (begin === end) {
+        return begin
+      } else {
+        return begin + sequenceSum((begin += step), end, step)
+      }
+    }
+
+    res.status(200).json({
+      result: sequenceSum(begin, end, step)
+    })
   }
 };
+
+
