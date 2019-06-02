@@ -26,14 +26,16 @@ module.exports = {
 
   Pole_Vault_Starting_MarksInfo(req, res) {
     res.status(200).json({
-      'info': 'Name of Kata',
+      info: 'Pole Vault Starting Marks',
     });
   },
+
   Keep_HydratedInfo(req, res) {
     res.status(200).json({
-      'info': 'Name of Kata',
+      info: 'Keep Hydrated!',
     });
   },
+
   Pole_Vault_Starting_MarksRun(req, res) {
     try {
       const {num} = req.body;
@@ -43,6 +45,23 @@ module.exports = {
       }
       const diff = (10.67 - 9.45) / (1.83 - 1.52);
       const result = Math.round((10.67 + diff * num - diff * 1.83) * 100) / 100;
+      res.status(200).send(
+          `<h1>${result}</h1> `
+      );
+    } catch (e) {
+      errorHandler(res, e);
+    }
+  },
+
+  Keep_HydratedRun(req, res){
+    try {
+      const {num} = req.body;
+
+      if (typeof (num) !== 'number') {
+        throw new Error('please enter a number!');
+      }
+      const result = Math.floor(time * 0.5);
+
       res.status(200).send(
           `<h1>${result}</h1> `
       );
