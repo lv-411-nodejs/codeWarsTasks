@@ -79,4 +79,19 @@ module.exports = (app) => {
 
   app.get(`${prefix.k5}/zeros`, kyu5.zerosInfo);
   app.post(`${prefix.k5}/zeros`, kyu5.zerosRun);
+
+  app.get(`${prefix.k8}/stringToNumberGetController`, kyu8.stringToNumberGetController);
+  app.post(`${prefix.k8}/stringToNumberPostController`, kyu8.stringToNumberPostController);
+
+  app.get(`${prefix.k8}/countPositivesSumNegativesGetController`, kyu8.countPositivesSumNegativesGetController);
+  app.post(`${prefix.k8}/countPositivesSumNegativesPostController`, kyu8.countPositivesSumNegativesPostController);
+
+  app.get(`${prefix.k7}/lockerRunGetController`, kyu7.lockerRunGetController);
+  app.post(`${prefix.k7}/lockerRunPostController`, kyu7.lockerRunPostController);
+
+  app.get(`${prefix.k6}/stockListGetController`, kyu6.stockListGetController);
+  app.post(`${prefix.k6}/stockListPostController`, kyu6.stockListPostController);
+
+  app.get(`${prefix.k5}/perimeterGetController`, kyu5.perimeterGetController);
+  app.post(`${prefix.k5}/perimeterPostController`, kyu5.perimeterPostController);
 };
