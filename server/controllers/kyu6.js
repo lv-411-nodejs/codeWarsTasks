@@ -1,5 +1,6 @@
 const errorHandler = require('../helpers/errorHandlers');
 const Validator = require('../helpers/validator');
+const validator = require('../helpers/validator');
 
 module.exports = {
   showAllTasks(req, res) {
@@ -16,14 +17,15 @@ module.exports = {
       });
   },
 
-  pileOfCubesInfo(req, res) {
+  pileOfCubesGetController(req, res) {
     res.status(200)
       .json({
         body: 'Build a pile of Cubes (JavaScript)',
+        link: 'https://www.codewars.com/kata/build-a-pile-of-cubes'
       });
   },
 
-  pileOfCubesRun(req, res) {
+  pileOfCubesPostController(req, res) {
     const {
       m
     } = req.body;
@@ -38,10 +40,20 @@ module.exports = {
       return m ? -1 : x;
     };
 
-    res.status(201)
-      .json({
-        result: findNb(m),
+    try {
+      let v = new validator([len]);
+      v.checkArgumentsTypes(['number']);
+
+      res.status(200)
+        .json({
+          result: findNb(m),
+        });
+    }
+    catch (e) {
+      res.status(400).json({
+        error: e.message
       });
+    }
   },
 
   balanceGetController(req, res) {
@@ -85,10 +97,20 @@ module.exports = {
       return arrBook.map(e => e.join(' ')).join('\r\n');
     }
 
-    res.status(200)
+    try {
+      const validatorArg = new validator([book]);
+      validatorArg.checkArgumentsTypes(['string']);
+
+      res.status(200)
       .json({
         result: balance(book),
       });
+    }
+    catch(e) {
+      res.status(400).json({
+        error: e.message
+      });
+    }
   },
 
   bouncingBallPostController(req, res) {
