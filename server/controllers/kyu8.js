@@ -1,74 +1,77 @@
-
 const errorHandler = require('../helpers/errorHandlers');
 
 module.exports = {
   showAllTasks(req, res) {
-    res.status(200)
-        .json({
-          'stas': ['Pole Vault Starting Marks', 'Keep Hydrated!'],
-          'max': ['Count of positives / sum of negatives', 'Convert a String to a Number!'],
-          'oleh': ['Volume of a Cuboid', 'Miles per gallon to kilometers per liter'],
-          'oleksiy': ['Wilson primes', 'Formatting decimal places #0'],
-          'ostap': ['Holiday VIII - Duty Free', 'Simple validation of a username with regex'],
-          'nadiia': ['My head is at the wrong end!', 'To square(root) or not to square(root)'],
-          'bohdan': ['Find numbers which are divisible by given number', 'Geometry Basics: Circle Area in 2D'],
-          'ruslan': ['Heads and Legs', 'Short Long Short'],
-        });
+    res.status(200).json({
+      stas: ['Pole Vault Starting Marks', 'Keep Hydrated!'],
+      max: ['Count of positives / sum of negatives', 'Convert a String to a Number!'],
+      oleh: ['Volume of a Cuboid', 'Miles per gallon to kilometers per liter'],
+      oleksiy: ['Wilson primes', 'Formatting decimal places #0'],
+      ostap: ['Holiday VIII - Duty Free', 'Simple validation of a username with regex'],
+      nadiia: ['My head is at the wrong end!', 'To square(root) or not to square(root)'],
+      bohdan: ['Find numbers which are divisible by given number', 'Geometry Basics: Circle Area in 2D'],
+      ruslan: ['Heads and Legs', 'Short Long Short'],
+    });
   },
 
   Pole_Vault_Starting_MarksInfo(req, res) {
-    res.status(200).send(
-        `<p style="color:red">For a pole vaulter, it is very important to begin the approach run at the best possible starting mark. This is affected by numerous factors and requires fine-tuning in practice. But there is a guideline that will help a beginning vaulter start at approximately the right location for the so-called "three-step approach," based on the vaulter's body height.
-            This guideline was taught to me in feet and inches, but due to the international nature of Codewars, I am creating this kata to use metric units instead.
-            You are given the following two guidelines to begin with: (1) A vaulter with a height of 1.52 meters should start at 9.45 meters on the runway. (2) A vaulter with a height of 1.83 meters should start at 10.67 meters on the runway.
-            You will receive a vaulter's height in meters (which will always lie in a range between a minimum of 1.22 meters and a maximum of 2.13 meters). Your job is to return the best starting mark in meters, rounded to two decimal places.
-            Hint: Based on the two guidelines given above, you will want to account for the change in starting mark per change in body height. This involves a linear relationship. But there is also a constant offset involved. If you can determine the rate of change described above, you should be able to determine that constant offset </p>`
-    );
+    res.status(200).json({
+      info: 'Pole Vault Starting Marks',
+    });
   },
+
   Keep_HydratedInfo(req, res) {
-    res.status(200).send(
-        `<p style="color:red">Nathan loves cycling.
-            Because Nathan knows it is important to stay hydrated, he drinks 0.5 litres of water per hour of cycling.
-            You get given the time in hours and you need to return the number of litres Nathan will drink, rounded to the smallest value.</br>
-            For example: </br>            
-            time = 3 ----> litres = 1   </br>         
-            time = 6.7---> litres = 3        </br>    
-            time = 11.8--> litres = 5 </p>`
-    );
+    res.status(200).json({
+      info: 'Keep Hydrated!',
+    });
   },
+
   Pole_Vault_Starting_MarksRun(req, res) {
     try {
-      const {num} = req.body;
-
-      if (typeof (num) !== 'number') {
+      const {
+        num
+      } = req.body;
+      if (typeof num !== 'number') {
         throw new Error('please enter a number!');
       }
       const diff = (10.67 - 9.45) / (1.83 - 1.52);
       const result = Math.round((10.67 + diff * num - diff * 1.83) * 100) / 100;
-      res.status(200).send(
-          `<h1>${result}</h1> `
-      );
+      res.status(200).send(`<h1>${result}</h1> `);
     } catch (e) {
       errorHandler(res, e);
     }
   },
 
+  Keep_HydratedRun(req, res) {
+    const {
+      time
+    } = req.body;
+    const litres = time => {
+      return Math.floor(time * 0.5);
+    };
+    res.status(201).json({
+      result: litres(time),
+    });
+  },
+
   divisibleByInfo(req, res) {
-    res.status(200)
-        .json({
-          body: 'Find numbers which are divisible by given number (JavaScript)',
-        });
+    res.status(200).json({
+      body: 'Find numbers which are divisible by given number (JavaScript)',
+    });
   },
 
   divisibleByRun(req, res) {
-    const {numbers, divisor} = req.body;
+    const {
+      numbers,
+      divisor
+    } = req.body;
 
     const divisibleBy = (numbers, divisor) => {
       numbers = numbers || [0];
       divisor = divisor || 1;
 
       const divisible = [];
-      numbers.map((value) => {
+      numbers.map(value => {
         if (value % divisor === 0) {
           divisible.push(value);
         }
@@ -77,91 +80,113 @@ module.exports = {
       return divisible;
     };
 
-    res.status(201)
-        .json({
-          result: divisibleBy(numbers, divisor),
-        });
+    res.status(201).json({
+      result: divisibleBy(numbers, divisor),
+    });
   },
 
   circleAreaInfo(req, res) {
-    res.status(200)
-        .json({
-          body: 'Geometry Basics: Circle Area in 2D (JavaScript)',
-        });
+    res.status(200).json({
+      body: 'Geometry Basics: Circle Area in 2D (JavaScript)',
+    });
   },
 
   circleAreaRun(req, res) {
-    const {circle} = req.body;
-    const circleArea = (circle) => circle.radius ** 2 * Math.PI;
+    const {
+      circle
+    } = req.body;
+    const circleArea = circle => circle.radius ** 2 * Math.PI;
 
-    res.status(201)
-        .json({
-          result: circleArea(circle),
-        });
+    res.status(201).json({
+      result: circleArea(circle),
+    });
   },
 
-
   animalGetController(req, res) {
-    res.status(200)
-        .json({
-          body: 'Heads and Legs',
-          link: 'https://www.codewars.com/kata/heads-and-legs',
-        });
+    res.status(200).json({
+      body: 'Heads and Legs',
+      link: 'https://www.codewars.com/kata/heads-and-legs',
+    });
   },
 
   animalPostController(req, res) {
-    const {heads, legs} = req.body;
+    const {
+      heads,
+      legs
+    } = req.body;
     const animals = (heads, legs) => {
       const cows = (legs - heads * 2) / 2;
       const chickens = heads - cows;
-      if (cows > heads || (cows ^ 0) !== cows || chickens > heads || (chickens ^ 0) !== chickens) return 'No solutions';
+      if (cows > heads || (cows ^ 0) !== cows || chickens > heads || (chickens ^ 0) !== chickens)
+        return 'No solutions';
       else return [chickens, cows];
     };
-    res.status(201)
-        .json({
-          result: animals(heads, legs),
-        });
+    res.status(201).json({
+      result: animals(heads, legs),
+    });
   },
 
   solutionGetController(req, res) {
-    res.status(200)
-        .json({
-          body: 'Short Long Short',
-          link: 'https://www.codewars.com/kata/short-long-short',
-        });
+    res.status(200).json({
+      body: 'Short Long Short',
+      link: 'https://www.codewars.com/kata/short-long-short',
+    });
   },
 
   solutionPostController(req, res) {
-    const {a, b} = req.body;
-    const solution = (a, b) => a.length > b.length ? b + a + b : a + b + a;
+    const {
+      a,
+      b
+    } = req.body;
+    const solution = (a, b) => (a.length > b.length ? b + a + b : a + b + a);
 
-    res.status(201)
-        .json({
-          result: solution(a, b),
-        });
+    res.status(201).json({
+      result: solution(a, b),
+    });
   },
   getVolumeOfCuboidGetController(req, res) {
     res.status(200).json({
-        info: 'Volume of a Cuboid',
-        link: 'https://www.codewars.com/kata/volume-of-a-cuboid',
-        in: [{"length": 1, "width": 2, "height":2}, {"length": 6.3, "width": 2, "height":5}],
-        out: [4, 63]
+      info: 'Volume of a Cuboid',
+      link: 'https://www.codewars.com/kata/volume-of-a-cuboid',
+      in: [{
+          length: 1,
+          width: 2,
+          height: 2,
+        },
+        {
+          length: 6.3,
+          width: 2,
+          height: 5,
+        },
+      ],
+      out: [4, 63],
     });
   },
   converterGetController(req, res) {
     res.status(200).json({
-        info: 'Miles per gallon to kilometers per liter',
-        link: 'https://www.codewars.com/kata/miles-per-gallon-to-kilometers-per-liter',
-        in: [{"mpg": 10}, {"mpg": 20}, {"mpg": 30}],
-        out: [3.54,7.08,10.62]
+      info: 'Miles per gallon to kilometers per liter',
+      link: 'https://www.codewars.com/kata/miles-per-gallon-to-kilometers-per-liter',
+      in: [{
+          mpg: 10,
+        },
+        {
+          mpg: 20,
+        },
+        {
+          mpg: 30,
+        },
+      ],
+      out: [3.54, 7.08, 10.62],
     });
   },
   converterPostController(req, res) {
     try {
-      const {mpg} = req.body;
-      const result = ((mpg) => (mpg * 1.609344 / 4.54609188).toFixed(2))(mpg);
+      const {
+        mpg
+      } = req.body;
+      const result = (mpg => ((mpg * 1.609344) / 4.54609188).toFixed(2))(mpg);
       res.status(200).json({
-          result
+        result,
       });
     } catch (e) {
       errorHandler(res, e);
@@ -169,36 +194,40 @@ module.exports = {
   },
   getVolumeOfCuboidPostController(req, res) {
     try {
-      const {length, width, height} = req.body;
-      const result=((length, width, height)=>length* width * height)(length, width, height)
+      const {
+        length,
+        width,
+        height
+      } = req.body;
+      const result = ((length, width, height) => length * width * height)(length, width, height);
       res.status(200).json({
-         result
-      })
-    } catch(e) {
+        result,
+      });
+    } catch (e) {
       errorHandler(res, e);
     }
   },
 
   amIWilsonInfo(req, res) {
-    res.status(200)
-        .json({
-          body: 'Wilson primes',
-        });
+    res.status(200).json({
+      body: 'Wilson primes',
+    });
   },
 
   amIWilsonRun(req, res) {
-    const {p} = req.body;
-    const amIWilson = (p) => {
+    const {
+      p
+    } = req.body;
+    const amIWilson = p => {
       function fact(x) {
         return x <= 1 ? 1 : x * fact(x - 1);
       }
 
-      return (fact(p - 1) + 1) / (p * p) % 1 === 0;
+      return ((fact(p - 1) + 1) / (p * p)) % 1 === 0;
     };
-    res.status(201)
-        .json({
-          result: amIWilson(p),
-        });
+    res.status(201).json({
+      result: amIWilson(p),
+    });
   },
 
   twoDecimalPlacesInfo(req, res) {
@@ -208,14 +237,15 @@ module.exports = {
   },
 
   twoDecimalPlacesRun(req, res) {
-    const {n} = req.body;
+    const {
+      n
+    } = req.body;
 
-    const twoDecimalPlaces = (n) => +n.toFixed(2);
+    const twoDecimalPlaces = n => +n.toFixed(2);
 
-    res.status(200)
-        .json({
-          result: twoDecimalPlaces(n),
-        });
+    res.status(200).json({
+      result: twoDecimalPlaces(n),
+    });
   },
 
   countPositivesSumNegativesGetController(req, res) {
@@ -225,8 +255,10 @@ module.exports = {
   },
 
   countPositivesSumNegativesPostController(req, res) {
-    const {input} = req.body;
-    const countPositivesSumNegatives = (input) => {
+    const {
+      input
+    } = req.body;
+    const countPositivesSumNegatives = input => {
       let positive = 0;
       let negative = 0;
 
@@ -234,7 +266,7 @@ module.exports = {
         return [];
       }
 
-      for (let i=0; i<input.length; i++) {
+      for (let i = 0; i < input.length; i++) {
         if (input[i] > 0) {
           positive += 1;
         } else {
@@ -243,10 +275,9 @@ module.exports = {
       }
       return [positive, negative];
     };
-    res.status(200)
-        .json({
-          result: countPositivesSumNegatives(input),
-        });
+    res.status(200).json({
+      result: countPositivesSumNegatives(input),
+    });
   },
 
   stringToNumberGetController(req, res) {
@@ -256,51 +287,52 @@ module.exports = {
   },
 
   stringToNumberPostController(req, res) {
-    const {n} = req.body;
-    const stringToNumber = (n) => {
+    const {
+      n
+    } = req.body;
+    const stringToNumber = n => {
       return Number(n);
     };
-    res.status(200)
-        .json({
-          result: stringToNumber(n),
-        });
+    res.status(200).json({
+      result: stringToNumber(n),
+    });
   },
 
   squareOrSquareRootInfo(req, res) {
-    res.status(200)
-        .json({
-          body: 'To square(root) or not to square(root)',
-        });
+    res.status(200).json({
+      body: 'To square(root) or not to square(root)',
+    });
   },
 
   squareOrSquareRootRun(req, res) {
-    const {arr} = req.body;
+    const {
+      arr
+    } = req.body;
     console.log(arr);
-    const squareOrSquareRoot = (arr) => {
-      return arr.map((el)=>{
+    const squareOrSquareRoot = arr => {
+      return arr.map(el => {
         return Number.isInteger(Math.sqrt(el)) ? Math.sqrt(el) : Math.pow(el, 2);
       });
     };
-    res.status(200)
-        .json({
-          result: squareOrSquareRoot(arr),
-        });
+    res.status(200).json({
+      result: squareOrSquareRoot(arr),
+    });
   },
 
   fixTheMeerkatInfo(req, res) {
-    res.status(200)
-        .json({
-          body: 'My head is at the wrong end!',
-        });
+    res.status(200).json({
+      body: 'My head is at the wrong end!',
+    });
   },
 
   fixTheMeerkatRun(req, res) {
-    const {arr} = req.body;
-    const fixTheMeerkat = (arr) => arr.reverse();
-    res.status(200)
-        .json({
-          result: fixTheMeerkat(arr),
-        });
+    const {
+      arr
+    } = req.body;
+    const fixTheMeerkat = arr => arr.reverse();
+    res.status(200).json({
+      result: fixTheMeerkat(arr),
+    });
   },
   Holiday_VIII_Duty_FreeInfo(req, res) {
     res.status(200).json({
@@ -308,10 +340,14 @@ module.exports = {
     });
   },
   Holiday_VIII_Duty_FreeRun(req, res) {
-    const {normPrice, discount, hol} = req.body;
+    const {
+      normPrice,
+      discount,
+      hol
+    } = req.body;
 
     const dutyFree = (normPrice, discount, hol) => {
-      const saving = normPrice * discount / 100;
+      const saving = (normPrice * discount) / 100;
       return Math.floor(hol / saving);
     };
     res.status(200).json({
@@ -325,13 +361,15 @@ module.exports = {
   },
 
   Simple_validation_usernameRun(req, res) {
-    const {username} = req.body;
+    const {
+      username
+    } = req.body;
 
-    const validateUsr = (username) => {
+    const validateUsr = username => {
       return /^[0-9a-z_]{4,16}$/.test(username);
     };
     res.status(200).json({
       result: validateUsr(username),
     });
-  }
+  },
 };

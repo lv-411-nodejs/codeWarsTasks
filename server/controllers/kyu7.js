@@ -2,18 +2,21 @@ module.exports = {
 
   seriesSumInfo(req, res) {
     res.status(200)
-        .json({
-          body: 'Sum of the first nth term of Series (JavaScript)',
-        });
+      .json({
+        body: 'Sum of the first nth term of Series (JavaScript)',
+      });
   },
 
   seriesSumRun(req, res) {
-    const {len} = req.body;
+    const {
+      len
+    } = req.body;
 
     const seriesSum = (n) => {
       if (n == 0 || !n) return '0.00';
 
-      let sum = 1; let next = 4;
+      let sum = 1;
+      let next = 4;
 
       for (let i = 1; i < n; i++) {
         sum += 1 / next;
@@ -24,20 +27,23 @@ module.exports = {
     };
 
     res.status(201)
-        .json({
-          result: seriesSum(len),
-        });
+      .json({
+        result: seriesSum(len),
+      });
   },
 
   newAvgInfo(req, res) {
     res.status(200)
-        .json({
-          body: 'Looking for a benefactor',
-        });
+      .json({
+        body: 'Looking for a benefactor',
+      });
   },
 
   newAvgRun(req, res) {
-    const {arr, newavg} = req.body;
+    const {
+      arr,
+      newavg
+    } = req.body;
 
     const newAvg = (arr, newavg) => {
       const totalSum = arr.reduce((total, current) => total + current, 0);
@@ -48,21 +54,24 @@ module.exports = {
     };
 
     res.status(201)
-        .json({
-          result: newAvg(arr, newavg),
-        });
+      .json({
+        result: newAvg(arr, newavg),
+      });
   },
 
   tripleShiftianGetController(req, res) {
     res.status(200)
-        .json({
-          body: 'The Triple Shiftian task',
-          link: 'https://www.codewars.com/kata/triple-shiftian-numbers',
-        });
+      .json({
+        body: 'The Triple Shiftian task',
+        link: 'https://www.codewars.com/kata/triple-shiftian-numbers',
+      });
   },
 
   tripleShiftianPostController(req, res) {
-    const {base, n} = req.body;
+    const {
+      base,
+      n
+    } = req.body;
     const tripleShiftian = (base, n) => {
       if (n < 3) return base[n];
       else {
@@ -77,37 +86,50 @@ module.exports = {
         });
     }
   },
-      
+
   whereIsGetController(req, res) {
     res.status(200).json({
-        info: 'Where is Vasya?',
-        link: 'https://www.codewars.com/kata/where-is-vasya',
-        in: [{"p": 3, "bef": 1, "aft": 1}, {"p": 5, "bef": 2, "aft": 3}],
-        out: [2,3]
+      info: 'Where is Vasya?',
+      link: 'https://www.codewars.com/kata/where-is-vasya',
+      in: [{
+        "p": 3,
+        "bef": 1,
+        "aft": 1
+      }, {
+        "p": 5,
+        "bef": 2,
+        "aft": 3
+      }],
+      out: [2, 3]
     });
   },
   whereIsHePostController(req, res) {
     try {
-      const {p,bef,aft} = req.body;
-      let posNumb=0;
-      for (let i=1; i<=p; i++){
-        if (i-1<=aft && p-i>=bef) {
+      const {
+        p,
+        bef,
+        aft
+      } = req.body;
+      let posNumb = 0;
+      for (let i = 1; i <= p; i++) {
+        if (i - 1 <= aft && p - i >= bef) {
           posNumb++;
         }
       }
       const result = posNumb;
       res.status(200).json({
-          result
+        result
       });
     } catch (e) {
       errorHandler(res, e);
-    }},
+    }
+  },
 
   lockerRunGetController(req, res) {
     res.status(200)
-        .json({
-          body: 'Slamming Lockers',
-        });
+      .json({
+        body: 'Slamming Lockers',
+      });
   },
 
   lockerRunPostController(req, res) {
@@ -121,30 +143,35 @@ module.exports = {
       return open;
     };
     res.status(200)
-        .json({
-          result: lockerRun(lockers),
-        });
+      .json({
+        result: lockerRun(lockers),
+      });
   },
 
   replicateInfo(req, res) {
     res.status(200)
-        .json({
-          body: 'Recursive Replication',
-        });
+      .json({
+        body: 'Recursive Replication',
+      });
   },
 
   replicateRun(req, res) {
-    const {times, number} = req.body;
+    const {
+      times,
+      number
+    } = req.body;
     const replicate = (times, number) => {
       return times > 0 ? [number].concat(replicate(times - 1, number)) : [];
     };
     res.status(200)
       .json({
         result: replicate(times, number)
-    });
+      });
   },
   Easy_Line_Run(req, res) {
-    const {n} = req.body;
+    const {
+      n
+    } = req.body;
     const easyLine = (n) => {
       let sum = 1;
       for (let i = 1; i <= n; i++) {
@@ -161,4 +188,31 @@ module.exports = {
       body: 'Easy Line',
     });
   },
+
+  sequenceSumInfo(req, res) {
+    res.status(200).json({
+      body: 'Sum of a sequence'
+    })
+  },
+
+  sequenceSumRun(req, res) {
+    const {
+      begin,
+      end,
+      step
+    } = req.body
+    const sequenceSum = (begin, end, step) => {
+      if (begin > end) {
+        return 0
+      } else if (begin === end) {
+        return begin
+      } else {
+        return begin + sequenceSum((begin += step), end, step)
+      }
+    }
+    res.status(200).json({
+      result: sequenceSum(begin, end, step)
+    })
+  },
+
 };
