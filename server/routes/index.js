@@ -45,11 +45,20 @@ module.exports = (app) => {
   app.get(`${prefix.k7}/newavg`, kyu7.newAvgInfo);
   app.post(`${prefix.k7}/newavg`, kyu7.newAvgRun);
 
+  app.get(`${prefix.k7}/whereIsHe`, kyu7.whereIsGetController);
+  app.post(`${prefix.k7}/whereIsHe`, kyu7.whereIsHePostController);
+
   app.get(`${prefix.k6}/balance`, kyu6.balanceInfo);
   app.post(`${prefix.k6}/balance`, kyu6.balanceRun);
 
+  app.get(`${prefix.k6}/rainfall`, kyu6.rainfallGetController);
+  app.post(`${prefix.k6}/rainfall`, kyu6.rainfallPostController);
+
   app.get(`${prefix.k5}/smallest`, kyu5.smallestInfo);
   app.post(`${prefix.k5}/smallest`, kyu5.smallestRun);
+
+  app.get(`${prefix.k5}/gap`, kyu5.gapGetController);
+  app.post(`${prefix.k5}/gap`, kyu5.gapPostController);
 
   app.get(`${prefix.k8}/shortlong`, kyu8.solutionInfo);
   app.post(`${prefix.k8}/shortlong`, kyu8.solutionRun);

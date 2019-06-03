@@ -52,4 +52,29 @@ module.exports = {
           result: newAvg(arr, newavg),
         });
   },
+  whereIsGetController(req, res) {
+    res.status(200).json({
+        info: 'Where is Vasya?',
+        link: 'https://www.codewars.com/kata/where-is-vasya',
+        in: [{"p": 3, "bef": 1, "aft": 1}, {"p": 5, "bef": 2, "aft": 3}],
+        out: [2,3]
+    });
+  },
+  whereIsHePostController(req, res) {
+    try {
+      const {p,bef,aft} = req.body;
+      let posNumb=0;
+      for (let i=1; i<=p; i++){
+        if (i-1<=aft && p-i>=bef) {
+          posNumb++;
+        }
+      }
+      const result = posNumb;
+      res.status(200).json({
+          result
+      });
+    } catch (e) {
+      errorHandler(res, e);
+    }
+  }
 };

@@ -143,7 +143,7 @@ module.exports = {
     res.status(200).json({
         info: 'Volume of a Cuboid',
         link: 'https://www.codewars.com/kata/volume-of-a-cuboid',
-        in: [{length: 1, width: 2, height:2}, {length: 6.3, width: 2, height:5}],
+        in: [{"length": 1, "width": 2, "height":2}, {"length": 6.3, "width": 2, "height":5}],
         out: [4, 63]
     });
   },
@@ -151,18 +151,17 @@ module.exports = {
     res.status(200).json({
         info: 'Miles per gallon to kilometers per liter',
         link: 'https://www.codewars.com/kata/miles-per-gallon-to-kilometers-per-liter',
-        in: [{mpg: 10}, {mpg: 20}, {mpg: 30}],
+        in: [{"mpg": 10}, {"mpg": 20}, {"mpg": 30}],
         out: [3.54,7.08,10.62]
     });
   },
   converterPostController(req, res) {
     try {
-      console.log(Object.keys(req.body).length)
       const {mpg} = req.body;
-      const result = (mpg) => +(mpg * 1.609344 / 4.54609188).toFixed(2);
-      res.status(200).send(
-          `${result(mpg)}`
-      );
+      const result = ((mpg) => (mpg * 1.609344 / 4.54609188).toFixed(2))(mpg);
+      res.status(200).json({
+          result
+      });
     } catch (e) {
       errorHandler(res, e);
     }
@@ -170,12 +169,9 @@ module.exports = {
   getVolumeOfCuboidPostController(req, res) {
     try {
       const {length, width, height} = req.body;
-      let getVolumeOfCuboid=function (length, width, height){
-        return length* width * height;
-      };
-      const result=getVolumeOfCuboid(length, width, height)
-      res.status(200).join({
-         result: result
+      const result=((length, width, height)=>length* width * height)(length, width, height)
+      res.status(200).json({
+         result
       });
     } catch (e) {
       errorHandler(res, e);
