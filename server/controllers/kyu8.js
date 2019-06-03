@@ -239,6 +239,7 @@ module.exports = {
   amIWilsonGetController(req, res) {
     res.status(200).json({
       body: 'Wilson primes',
+      link: 'https://www.codewars.com/kata/wilson-primes',
     });
   },
 
@@ -251,24 +252,48 @@ module.exports = {
   
         return (fact(p - 1) + 1) / (p * p) % 1 === 0;
       };
-      res.status(200)
-          .json({
-            result: amIWilson(p),
-          });
+
+      try {
+        const validatorArg = new validator([p]);
+        validatorArg.checkArgumentsTypes(['number']);
+
+        res.status(200)
+        .json({
+          result: amIWilson(p),
+        });
+      }
+      catch(e) {
+        res.status(400).json({
+          error: e.message
+        });
+      }
   },
 
   twoDecimalPlacesGetController(req, res) {
     res.status(200).json({
       body: 'Formatting decimal places',
+      link: 'https://www.codewars.com/kata/formatting-decimal-places-number-0'
     });
   },
 
   twoDecimalPlacesPostController(req, res) {
     const { n } = req.body;
     const twoDecimalPlaces = n => +n.toFixed(2);
-    res.status(200).json({
-      result: twoDecimalPlaces(n),
-    });
+    
+    try {
+      const validatorArg = new validator([n]);
+      validatorArg.checkArgumentsTypes(['number']);
+
+      res.status(200)
+      .json({
+        result: twoDecimalPlaces(n),
+      });
+    }
+    catch(e) {
+      res.status(400).json({
+        error: e.message
+      });
+    }
   },
 
   countPositivesSumNegativesGetController(req, res) {

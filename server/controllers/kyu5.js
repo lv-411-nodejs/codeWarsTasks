@@ -68,11 +68,20 @@ module.exports = {
       return min;
     };
 
-    res.status(200)
-        .json({
-          result: smallest(n),
-        });
+    try {
+      const validatorArg = new validator([n]);
+      validatorArg.checkArgumentsTypes(['number']);
 
+      res.status(200)
+      .json({
+        result: smallest(n),
+      });
+    }
+    catch(e) {
+      res.status(400).json({
+        error: e.message
+      });
+    }
   },
 
   productFibonacciPostController(req, res) {

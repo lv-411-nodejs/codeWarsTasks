@@ -96,10 +96,20 @@ module.exports = {
       return arrBook.map(e => e.join(' ')).join('\r\n');
     }
 
-    res.status(200)
+    try {
+      const validatorArg = new validator([book]);
+      validatorArg.checkArgumentsTypes(['string']);
+
+      res.status(200)
       .json({
         result: balance(book),
       });
+    }
+    catch(e) {
+      res.status(400).json({
+        error: e.message
+      });
+    }
   },
 
   bouncingBallPostController(req, res) {
