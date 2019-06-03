@@ -1,26 +1,29 @@
+const validator = require('../helpers/validator');
+
 module.exports = {
   showAllTasks(req, res) {
     res.status(200)
-        .json({
-          'stas': ['Sum of a sequence'],
-          'maks': ['Slamming Lockers'],
-          'oleh': ['Where is Vasya?'],
-          'oleksiy': ['Looking for a benefactor'],
-          'ostap': ['Easy Line'],
-          'nadiia': ['Recursive Replication'],
-          'bohdan': ['Sum of the first nth term of Series'],
-          'ruslan': ['Triple Shiftian Numbers'],
-        });
-  },
-
-  seriesSumInfo(req, res) {
-    res.status(200)
       .json({
-        body: 'Sum of the first nth term of Series (JavaScript)',
+        'stas': ['Sum of a sequence'],
+        'maks': ['Slamming Lockers'],
+        'oleh': ['Where is Vasya?'],
+        'oleksiy': ['Looking for a benefactor'],
+        'ostap': ['Easy Line'],
+        'nadiia': ['Recursive Replication'],
+        'bohdan': ['Sum of the first nth term of Series'],
+        'ruslan': ['Triple Shiftian Numbers'],
       });
   },
 
-  seriesSumRun(req, res) {
+  seriesSumGetController(req, res) {
+    res.status(200)
+      .json({
+        body: 'Sum of the first nth term of Series (JavaScript)',
+        link: 'https://www.codewars.com/kata/sum-of-the-first-nth-term-of-series',
+      });
+  },
+
+  seriesSumPostController(req, res) {
     const {
       len
     } = req.body;
@@ -39,10 +42,19 @@ module.exports = {
       return sum.toFixed(2).toString();
     };
 
-    res.status(201)
-      .json({
+    try {
+      let v = new validator([len]);
+      v.checkArgumentsTypes(['number']);
+
+      res.status(200).json({
         result: seriesSum(len),
       });
+    }
+    catch (e) {
+      res.status(400).json({
+        error: e.message
+      });
+    }
   },
 
   newAvgGetController(req, res) {
@@ -113,7 +125,7 @@ module.exports = {
       out: [2, 3]
     });
   },
-  
+
   whereIsHePostController(req, res) {
     try {
       const {

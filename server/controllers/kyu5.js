@@ -1,4 +1,6 @@
 const errorHandler = require('../helpers/errorHandlers');
+const validator = require('../helpers/validator');
+
 module.exports = {
   showAllTasks(req, res) {
     res.status(200)
@@ -14,14 +16,15 @@ module.exports = {
         });
   },
 
-  whichXInfo(req, res) {
+  whichXGetController(req, res) {
     res.status(200)
       .json({
         body: 'Which x for that sum?',
+        link: '',
       });
   },
 
-  whichXRun(req, res) {
+  whichXPostController(req, res) {
     const {
       m
     } = req.body;
@@ -30,7 +33,7 @@ module.exports = {
       return m;
     };
 
-    res.status(201)
+    res.status(200)
       .json({
         result: solve(m),
       });

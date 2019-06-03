@@ -1,4 +1,5 @@
 const errorHandler = require('../helpers/errorHandlers');
+const validator = require('../helpers/validator');
 
 module.exports = {
   showAllTasks(req, res) {
@@ -55,13 +56,14 @@ module.exports = {
     });
   },
 
-  divisibleByInfo(req, res) {
+  divisibleByGetController(req, res) {
     res.status(200).json({
       body: 'Find numbers which are divisible by given number (JavaScript)',
+      link: 'https://www.codewars.com/kata/find-numbers-which-are-divisible-by-given-number',
     });
   },
 
-  divisibleByRun(req, res) {
+  divisibleByPostController(req, res) {
     const {
       numbers,
       divisor
@@ -81,26 +83,47 @@ module.exports = {
       return divisible;
     };
 
-    res.status(201).json({
-      result: divisibleBy(numbers, divisor),
-    });
+    try {
+      let v = new validator([numbers, divisor]);
+
+      res.status(200).json({
+        result: divisibleBy(numbers, divisor),
+      });
+    }
+    catch(e) {
+      res.status(400).json({
+        error: e.message
+      });
+    }
   },
 
-  circleAreaInfo(req, res) {
+  circleAreaGetController(req, res) {
     res.status(200).json({
       body: 'Geometry Basics: Circle Area in 2D (JavaScript)',
+      link: 'https://www.codewars.com/kata/geometry-basics-circle-area-in-2d',
     });
   },
 
-  circleAreaRun(req, res) {
+  circleAreaPostController(req, res) {
     const {
       circle
     } = req.body;
+
     const circleArea = circle => circle.radius ** 2 * Math.PI;
 
-    res.status(201).json({
-      result: circleArea(circle),
-    });
+    try {
+      let v = new validator([circle]);
+      v.checkArgumentsTypes(['object']);
+
+      res.status(200).json({
+        result: circleArea(circle),
+      });
+    }
+    catch(e) {
+      res.status(400).json({
+        error: e.message
+      });
+    }
   },
 
   animalGetController(req, res) {

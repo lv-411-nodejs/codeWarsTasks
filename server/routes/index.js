@@ -4,7 +4,6 @@ const kyu6 = require('../controllers/kyu6');
 const kyu5 = require('../controllers/kyu5');
 
 const prefix = require('../helpers/prefix');
-const validator = require('../helpers/validator');
 
 module.exports = (app) => {
   app.get('/api/tasks/8', kyu8.showAllTasks);
@@ -27,20 +26,20 @@ module.exports = (app) => {
   app.get(`${prefix.k5}/artificialRainRun`, kyu5.artificialRainInfo);
   app.post(`${prefix.k5}/artificialRainRun`, kyu5.artificialRainRun);
 
-  app.get(`${prefix.k8}/divisibleby`, kyu8.divisibleByInfo);
-  app.post(`${prefix.k8}/divisibleby`, kyu8.divisibleByRun);
+  app.get(`${prefix.k8}/divisibleby`, kyu8.divisibleByGetController);
+  app.post(`${prefix.k8}/divisibleby`, kyu8.divisibleByPostController);
 
-  app.get(`${prefix.k8}/circlearea`, kyu8.circleAreaInfo);
-  app.post(`${prefix.k8}/circlearea`, kyu8.circleAreaRun);
+  app.get(`${prefix.k8}/circlearea`, kyu8.circleAreaGetController);
+  app.post(`${prefix.k8}/circlearea`, kyu8.circleAreaPostController);
 
-  app.get(`${prefix.k7}/seriessum`, kyu7.seriesSumInfo);
-  app.post(`${prefix.k7}/seriessum`, kyu7.seriesSumRun);
+  app.get(`${prefix.k7}/seriessum`, kyu7.seriesSumGetController);
+  app.post(`${prefix.k7}/seriessum`, kyu7.seriesSumPostController);
 
-  app.get(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesInfo);
-  app.post(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesRun);
+  app.get(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesGetController);
+  app.post(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesPostController);
 
-  app.get(`${prefix.k5}/circlearea`, kyu5.whichXInfo);
-  app.post(`${prefix.k5}/circlearea`, kyu5.whichXRun);
+  app.get(`${prefix.k5}/whichx`, kyu5.whichXGetController);
+  app.post(`${prefix.k5}/whichx`, kyu5.whichXPostController);
 
   app.get(`${prefix.k8}/headlegs`, kyu8.animalGetController);
   app.post(`${prefix.k8}/headlegs`, kyu8.animalPostController);
