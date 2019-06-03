@@ -1,5 +1,6 @@
 const errorHandler = require('../helpers/errorHandlers');
 const Validator = require('../helpers/validator');
+const validator = require('../helpers/validator');
 
 module.exports = {
   showAllTasks(req, res) {
@@ -16,14 +17,15 @@ module.exports = {
       });
   },
 
-  whichXInfo(req, res) {
+  whichXGetController(req, res) {
     res.status(200)
       .json({
         body: 'Which x for that sum?',
+        link: '',
       });
   },
 
-  whichXRun(req, res) {
+  whichXPostController(req, res) {
     const {
       m
     } = req.body;
@@ -32,7 +34,7 @@ module.exports = {
       return m;
     };
 
-    res.status(201)
+    res.status(200)
       .json({
         result: solve(m),
       });
@@ -67,11 +69,20 @@ module.exports = {
       return min;
     };
 
-    res.status(200)
+    try {
+      const validatorArg = new validator([n]);
+      validatorArg.checkArgumentsTypes(['number']);
+
+      res.status(200)
       .json({
         result: smallest(n),
       });
-
+    }
+    catch(e) {
+      res.status(400).json({
+        error: e.message
+      });
+    }
   },
 
   productFibonacciPostController(req, res) {
