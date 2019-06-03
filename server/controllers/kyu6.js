@@ -38,27 +38,27 @@ module.exports = {
 
     const balance = (book) => {
       const arrBook = bookToArray(book);
-      function bookToString(array) {
+      const bookToString = function(array) {
         return array.map((e) => e.join(' ')).join('\r\n');
-      }
+      };
 
-      function bookToArray(book) {
+      const bookToArray = function(book) {
         return book.split('\n')
             .map((e) => e.split(' '))
             .filter((e) => e.toString() !== '');
-      }
+      };
 
-      function numberFormat(str, cur = 2) {
+      const numberFormat = function(str, cur = 2) {
         str = str.replace(/[^\d+.]/g, '');
         str = (+str).toFixed(cur);
         return str;
-      }
-      arrBook[0][0] = numberFormat(arrBook[0][0], 2); // lead to a numeric format with 2 digits after comma
+      };
+      arrBook[0][0] = numberFormat(arrBook[0][0], 2);
       let balance = parseFloat(arrBook[0][0]);
       let sumForAvg = 0;
 
       for (let i = 1; i < arrBook.length; i++) {
-        arrBook[i][1] = arrBook[i][1].replace(/\W/g, ''); // replace everything except letters
+        arrBook[i][1] = arrBook[i][1].replace(/\W/g, '');
         arrBook[i][2] = numberFormat(arrBook[i][2], 2);
         balance -= +arrBook[i][2];
         sumForAvg += +arrBook[i][2];
@@ -66,7 +66,8 @@ module.exports = {
       }
 
       arrBook.push(
-          [`Total expense  ${(+arrBook[0][0] - balance).toFixed(2)}`], [`Average expense  ${(sumForAvg / (arrBook.length - 1)).toFixed(2)}`]
+          [`Total expense  ${(+arrBook[0][0] - balance).toFixed(2)}`],
+          [`Average expense  ${(sumForAvg / (arrBook.length - 1)).toFixed(2)}`]
       );
       arrBook[0][0] = 'Original Balance: ' + arrBook[0][0];
 
@@ -116,4 +117,44 @@ module.exports = {
         });
   },
 
+
+  nbaCupInfo(req, res) {
+    res.status(200)
+        .json({body: 'Ranking NBA teams'});
+  },
+
+  nbaCupRun(req, res) {
+    const {report, teamName} = req.body;
+
+    const nbaCup = (report, teamName) => {
+      let w = 0;
+      let d = 0;
+      let l = 0;
+      let score = 0;
+      let conceded = 0;
+      const reg = new RegExp('\\b' + teamName + '\\b', 'ig');
+      const games = report.split(',').filter((item) => {
+        return item.match(reg);
+      }).map((item) => {
+        return item.trim().split(/\s*(\d+\.?\d*\b)\s*/).slice(0, -1);
+      });
+      if (games.length < 1) {
+        return `${teamName}:This team didn't play!`;
+      }
+      const sortgames = games.map((arr) => {
+        return arr.indexOf(teamName) == 0 ? arr : arr = [arr[2], arr[3], arr[0], arr[1]];
+      });
+      sortgames.forEach((game) => {
+            +game[1] > +game[3] ? w += 1 : (+game[1] < +game[3] ? l += 1 : d += 1);
+            score += +game[1];
+            conceded += +game[3];
+      });
+      return `${teamName}:W=${w};D=${d};L=${l};Scored=${score};Conceded=${conceded};Points=${w*3+d}`;
+    };
+
+    res.status(200)
+        .json({
+          result: nbaCup(report, teamName),
+        });
+  },
 };

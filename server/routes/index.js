@@ -1,50 +1,90 @@
-/* eslint-disable linebreak-style */
 const kyu8 = require('../controllers/kyu8');
 const kyu7 = require('../controllers/kyu7');
 const kyu6 = require('../controllers/kyu6');
 const kyu5 = require('../controllers/kyu5');
+
 const prefix = require('../helpers/prefix');
+
 module.exports = (app) => {
-  app.get('/api/task/kyu8/Pole_Vault_Starting_Marks', kyu8.Pole_Vault_Starting_MarksInfo);
+  app.get('/api/task/kyu8/Pole_Vault_Starting_Marks',
+      kyu8.Pole_Vault_Starting_MarksInfo);
   app.get('/api/task/kyu8/Keep_Hydrated!', kyu8.Keep_HydratedInfo);
-  app.post('/api/task/kyu8/Pole_Vault_Starting_Marks', kyu8.Pole_Vault_Starting_MarksRun);
+  app.post('/api/task/kyu8/Pole_Vault_Starting_Marks',
+      kyu8.Pole_Vault_Starting_MarksRun);
+
   app.get('/api/tasks', kyu8.showAllTasks);
+
   app.get(`${prefix.k8}/divisibleby`, kyu8.divisibleByInfo);
   app.post(`${prefix.k8}/divisibleby`, kyu8.divisibleByRun);
+
   app.get(`${prefix.k8}/circlearea`, kyu8.circleAreaInfo);
   app.post(`${prefix.k8}/circlearea`, kyu8.circleAreaRun);
+
   app.get(`${prefix.k7}/seriessum`, kyu7.seriesSumInfo);
   app.post(`${prefix.k7}/seriessum`, kyu7.seriesSumRun);
+
   app.get(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesInfo);
   app.post(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesRun);
+
   app.get(`${prefix.k5}/circlearea`, kyu5.whichXInfo);
   app.post(`${prefix.k5}/circlearea`, kyu5.whichXRun);
+
   app.get(`${prefix.k8}/headlegs`, kyu8.animalsInfo);
   app.post(`${prefix.k8}/headlegs`, kyu8.animalsRun);
+
   app.get(`${prefix.k8}/amiwilson`, kyu8.amIWilsonInfo);
   app.post(`${prefix.k8}/amiwilson`, kyu8.amIWilsonRun);
+
   app.get(`${prefix.k8}/volume_of_a_cuboid`, kyu8.volume_of_a_cuboidInfo);
   app.post(`${prefix.k8}/volume_of_a_cuboid`, kyu8.volume_of_a_cuboidRun);
-  app.get(`${prefix.k8}/miles_per_gallon_to_kilometers_per_liter`, kyu8.miles_per_gallon_to_kilometers_per_literInfo);
-  app.post(`${prefix.k8}/miles_per_gallon_to_kilometers_per_liter`, kyu8.miles_per_gallon_to_kilometers_per_literRun);
+
+  app.get(`${prefix.k8}/miles_per_gallon_to_kilometers_per_liter`,
+      kyu8.miles_per_gallon_to_kilometers_per_literInfo);
+  app.post(`${prefix.k8}/miles_per_gallon_to_kilometers_per_liter`,
+      kyu8.miles_per_gallon_to_kilometers_per_literRun);
+
   app.get(`${prefix.k8}/twodecimalplaces`, kyu8.twoDecimalPlacesInfo);
   app.post(`${prefix.k8}/twodecimalplaces`, kyu8.twoDecimalPlacesRun);
+
   app.get(`${prefix.k7}/newavg`, kyu7.newAvgInfo);
   app.post(`${prefix.k7}/newavg`, kyu7.newAvgRun);
+
   app.get(`${prefix.k6}/balance`, kyu6.balanceInfo);
   app.post(`${prefix.k6}/balance`, kyu6.balanceRun);
+
   app.get(`${prefix.k5}/smallest`, kyu5.smallestInfo);
   app.post(`${prefix.k5}/smallest`, kyu5.smallestRun);
+
   app.get(`${prefix.k8}/shortlong`, kyu8.solutionInfo);
   app.post(`${prefix.k8}/shortlong`, kyu8.solutionRun);
-  app.get(`${prefix.k8}/countPositivesSumNegatives`, kyu8.countPositivesSumNegativesGetController);
-  app.post(`${prefix.k8}/countPositivesSumNegatives`, kyu8.countPositivesSumNegativesPostController);
-  app.get(`${prefix.k8}/stringToNumber`, kyu8.stringToNumberGetController);
-  app.post(`${prefix.k8}/stringToNumber`, kyu8.stringToNumberPostController);
-  app.get(`${prefix.k7}/lockerRun`, kyu7.lockerRunGetController);
-  app.post(`${prefix.k7}/lockerRun`, kyu7.lockerRunPostController);
-  app.get(`${prefix.k6}/stockList`, kyu6.stockListGetController);
-  app.post(`${prefix.k6}/stockList`, kyu6.stockListPostController);
-  app.get(`${prefix.k5}/perimeter`, kyu5.perimeterGetController);
-  app.post(`${prefix.k5}/perimeter`, kyu5.perimeterPostController   );
+
+  app.get(`${prefix.k8}/squareOrSquareRoot`, kyu8.squareOrSquareRootInfo);
+  app.post(`${prefix.k8}/squareOrSquareRoot`, kyu8.squareOrSquareRootRun);
+
+  app.get(`${prefix.k8}/fixTheMeerkat`, kyu8.fixTheMeerkatInfo);
+  app.post(`${prefix.k8}/fixTheMeerkat`, kyu8.fixTheMeerkatRun);
+
+  app.get(`${prefix.k7}/replicate`, kyu7.replicateInfo);
+  app.post(`${prefix.k7}/replicate`, kyu7.replicateRun);
+
+  app.get(`${prefix.k6}/nbaCup`, kyu6.nbaCupInfo);
+  app.post(`${prefix.k6}/nbaCup`, kyu6.nbaCupRun);
+
+  app.get(`${prefix.k5}/zeros`, kyu5.zerosInfo);
+  app.post(`${prefix.k5}/zeros`, kyu5.zerosRun);
+
+  app.get(`${prefix.k8}/stringToNumberGetController`, kyu8.stringToNumberGetController);
+  app.post(`${prefix.k8}/stringToNumberPostController`, kyu8.stringToNumberPostController);
+
+  app.get(`${prefix.k8}/countPositivesSumNegativesGetController`, kyu8.countPositivesSumNegativesGetController);
+  app.post(`${prefix.k8}/countPositivesSumNegativesPostController`, kyu8.countPositivesSumNegativesPostController);
+
+  app.get(`${prefix.k7}/lockerRunGetController`, kyu7.lockerRunGetController);
+  app.post(`${prefix.k7}/lockerRunPostController`, kyu7.lockerRunPostController);
+
+  app.get(`${prefix.k6}/stockListGetController`, kyu6.stockListGetController);
+  app.post(`${prefix.k6}/stockListPostController`, kyu6.stockListPostController);
+
+  app.get(`${prefix.k5}/perimeterGetController`, kyu5.perimeterGetController);
+  app.post(`${prefix.k5}/perimeterPostController`, kyu5.perimeterPostController);
 };
