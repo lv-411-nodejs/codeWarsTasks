@@ -71,18 +71,66 @@ module.exports = {
         }
         return base[n];
       }
-    };
-
-    res.status(200)
+      res.status(200)
         .json({
           result: tripleShiftian(base, n),
         });
+    }
   },
+      
+  whereIsGetController(req, res) {
+    res.status(200).json({
+        info: 'Where is Vasya?',
+        link: 'https://www.codewars.com/kata/where-is-vasya',
+        in: [{"p": 3, "bef": 1, "aft": 1}, {"p": 5, "bef": 2, "aft": 3}],
+        out: [2,3]
+    });
+  },
+  whereIsHePostController(req, res) {
+    try {
+      const {p,bef,aft} = req.body;
+      let posNumb=0;
+      for (let i=1; i<=p; i++){
+        if (i-1<=aft && p-i>=bef) {
+          posNumb++;
+        }
+      }
+      const result = posNumb;
+      res.status(200).json({
+          result
+      });
+    } catch (e) {
+      errorHandler(res, e);
+    }},
+
+  lockerRunGetController(req, res) {
+    res.status(200)
+        .json({
+          body: 'Slamming Lockers',
+        });
+  },
+
+  lockerRunPostController(req, res) {
+    const lockers = req.body;
+
+    const lockerRun = (lockers) => {
+      const open = [];
+      for (let i = 1; i * i <= lockers; i++) {
+        open.push(i * i);
+      }
+      return open;
+    };
+    res.status(200)
+        .json({
+          result: lockerRun(lockers),
+        });
+  },
+
   replicateInfo(req, res) {
     res.status(200)
-      .json({
-        body: 'Recursive Replication'
-    });
+        .json({
+          body: 'Recursive Replication',
+        });
   },
 
   replicateRun(req, res) {
@@ -94,5 +142,5 @@ module.exports = {
       .json({
         result: replicate(times, number)
     });
-  }
+  },
 };

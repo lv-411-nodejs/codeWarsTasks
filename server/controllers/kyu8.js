@@ -5,34 +5,36 @@ module.exports = {
   showAllTasks(req, res) {
     res.status(200)
         .json({
-          'stas': ['Pole Vault Starting Marks',
-            'Keep Hydrated!'],
-          'maks': ['Count of positives / sum of negatives',
-            'Convert a String to a Number!'],
-          'oleh': ['Volume of a Cuboid',
-            'Miles per gallon to kilometers per liter'],
-          'oleksiy': ['Wilson primes',
-            'Formatting decimal places #0'],
-          'ostap': ['Holiday VIII - Duty Free',
-            'Simple validation of a username with regex'],
-          'nadiia': ['My head is at the wrong end!',
-            'To square(root) or not to square(root)'],
-          'bohdan': ['Find numbers which are divisible by given number',
-            'Geometry Basics: Circle Area in 2D'],
-          'ruslan': ['Heads and Legs',
-            'Short Long Short'],
+          'stas': ['Pole Vault Starting Marks', 'Keep Hydrated!'],
+          'max': ['Count of positives / sum of negatives', 'Convert a String to a Number!'],
+          'oleh': ['Volume of a Cuboid', 'Miles per gallon to kilometers per liter'],
+          'oleksiy': ['Wilson primes', 'Formatting decimal places #0'],
+          'ostap': ['Holiday VIII - Duty Free', 'Simple validation of a username with regex'],
+          'nadiia': ['My head is at the wrong end!', 'To square(root) or not to square(root)'],
+          'bohdan': ['Find numbers which are divisible by given number', 'Geometry Basics: Circle Area in 2D'],
+          'ruslan': ['Heads and Legs', 'Short Long Short'],
         });
   },
 
   Pole_Vault_Starting_MarksInfo(req, res) {
-    res.status(200).json({
-      'info': 'Name of Kata',
-    });
+    res.status(200).send(
+        `<p style="color:red">For a pole vaulter, it is very important to begin the approach run at the best possible starting mark. This is affected by numerous factors and requires fine-tuning in practice. But there is a guideline that will help a beginning vaulter start at approximately the right location for the so-called "three-step approach," based on the vaulter's body height.
+            This guideline was taught to me in feet and inches, but due to the international nature of Codewars, I am creating this kata to use metric units instead.
+            You are given the following two guidelines to begin with: (1) A vaulter with a height of 1.52 meters should start at 9.45 meters on the runway. (2) A vaulter with a height of 1.83 meters should start at 10.67 meters on the runway.
+            You will receive a vaulter's height in meters (which will always lie in a range between a minimum of 1.22 meters and a maximum of 2.13 meters). Your job is to return the best starting mark in meters, rounded to two decimal places.
+            Hint: Based on the two guidelines given above, you will want to account for the change in starting mark per change in body height. This involves a linear relationship. But there is also a constant offset involved. If you can determine the rate of change described above, you should be able to determine that constant offset </p>`
+    );
   },
   Keep_HydratedInfo(req, res) {
-    res.status(200).json({
-      'info': 'Name of Kata',
-    });
+    res.status(200).send(
+        `<p style="color:red">Nathan loves cycling.
+            Because Nathan knows it is important to stay hydrated, he drinks 0.5 litres of water per hour of cycling.
+            You get given the time in hours and you need to return the number of litres Nathan will drink, rounded to the smallest value.</br>
+            For example: </br>            
+            time = 3 ----> litres = 1   </br>         
+            time = 6.7---> litres = 3        </br>    
+            time = 11.8--> litres = 5 </p>`
+    );
   },
   Pole_Vault_Starting_MarksRun(req, res) {
     try {
@@ -112,10 +114,8 @@ module.exports = {
     const animals = (heads, legs) => {
       const cows = (legs - heads * 2) / 2;
       const chickens = heads - cows;
-      return (cows > heads ||
-        (cows ^ 0) !== cows ||
-        chickens > heads ||
-        (chickens ^ 0) !== chickens) ? 'No solutions' : [chickens, cows];
+      if (cows > heads || (cows ^ 0) !== cows || chickens > heads || (chickens ^ 0) !== chickens) return 'No solutions';
+      else return [chickens, cows];
     };
     res.status(201)
         .json({
@@ -140,40 +140,41 @@ module.exports = {
           result: solution(a, b),
         });
   },
-  volume_of_a_cuboidInfo(req, res) {
-    res.status(200).send(
-        'https://www.codewars.com/kata/volume-of-a-cuboid'
-    );
+  getVolumeOfCuboidGetController(req, res) {
+    res.status(200).json({
+        info: 'Volume of a Cuboid',
+        link: 'https://www.codewars.com/kata/volume-of-a-cuboid',
+        in: [{"length": 1, "width": 2, "height":2}, {"length": 6.3, "width": 2, "height":5}],
+        out: [4, 63]
+    });
   },
-  miles_per_gallon_to_kilometers_per_literInfo(req, res) {
-    res.status(200).send(
-        'https://www.codewars.com/kata/miles-per-gallon-to-kilometers-per-liter'
-    );
+  converterGetController(req, res) {
+    res.status(200).json({
+        info: 'Miles per gallon to kilometers per liter',
+        link: 'https://www.codewars.com/kata/miles-per-gallon-to-kilometers-per-liter',
+        in: [{"mpg": 10}, {"mpg": 20}, {"mpg": 30}],
+        out: [3.54,7.08,10.62]
+    });
   },
-  volume_of_a_cuboidRun(req, res) {
+  converterPostController(req, res) {
     try {
       const {mpg} = req.body;
-      const result = (mpg) => +(mpg * 1.609344 / 4.54609188).toFixed(2);
-      res.status(200).send(
-          `${result(mpg)}`
-      );
+      const result = ((mpg) => (mpg * 1.609344 / 4.54609188).toFixed(2))(mpg);
+      res.status(200).json({
+          result
+      });
     } catch (e) {
       errorHandler(res, e);
     }
   },
-  miles_per_gallon_to_kilometers_per_literRun(req, res) {
+  getVolumeOfCuboidPostController(req, res) {
     try {
       const {length, width, height} = req.body;
-
-      const getVolumeOfCuboid = function(length, width, height) {
-        return length * width * height;
-      };
-
-      const result = getVolumeOfCuboid(length, width, height);
-      res.status(200).send(
-          `${result}`
-      );
-    } catch (e) {
+      const result=((length, width, height)=>length* width * height)(length, width, height)
+      res.status(200).json({
+         result
+      })
+    } catch(e) {
       errorHandler(res, e);
     }
   },
@@ -188,9 +189,9 @@ module.exports = {
   amIWilsonRun(req, res) {
     const {p} = req.body;
     const amIWilson = (p) => {
-      const fact = function(x) {
+      function fact(x) {
         return x <= 1 ? 1 : x * fact(x - 1);
-      };
+      }
 
       return (fact(p - 1) + 1) / (p * p) % 1 === 0;
     };
@@ -217,10 +218,58 @@ module.exports = {
         });
   },
 
+  countPositivesSumNegativesGetController(req, res) {
+    res.status(200).json({
+      body: 'Count of positives / sum of negatives',
+    });
+  },
+
+  countPositivesSumNegativesPostController(req, res) {
+    const {input} = req.body;
+    const countPositivesSumNegatives = (input) => {
+      let positive = 0;
+      let negative = 0;
+
+      if (input === [] || input === null || input < 1) {
+        return [];
+      }
+
+      for (let i=0; i<input.length; i++) {
+        if (input[i] > 0) {
+          positive += 1;
+        } else {
+          negative += input[i];
+        }
+      }
+      return [positive, negative];
+    };
+    res.status(200)
+        .json({
+          result: countPositivesSumNegatives(input),
+        });
+  },
+
+  stringToNumberGetController(req, res) {
+    res.status(200).json({
+      body: 'Convert a String to a Number!',
+    });
+  },
+
+  stringToNumberPostController(req, res) {
+    const {n} = req.body;
+    const stringToNumber = (n) => {
+      return Number(n);
+    };
+    res.status(200)
+        .json({
+          result: stringToNumber(n),
+        });
+  },
+
   squareOrSquareRootInfo(req, res) {
     res.status(200)
         .json({
-          body: 'To square(root) or not to square(root)'
+          body: 'To square(root) or not to square(root)',
         });
   },
 
@@ -233,24 +282,24 @@ module.exports = {
       });
     };
     res.status(200)
-      .json({
-        result: squareOrSquareRoot(arr)
-    });
+        .json({
+          result: squareOrSquareRoot(arr),
+        });
   },
 
   fixTheMeerkatInfo(req, res) {
     res.status(200)
-      .json({
-        body: 'My head is at the wrong end!'
-    });
+        .json({
+          body: 'My head is at the wrong end!',
+        });
   },
 
   fixTheMeerkatRun(req, res) {
     const {arr} = req.body;
     const fixTheMeerkat = (arr) => arr.reverse();
     res.status(200)
-      .json({
-        result: fixTheMeerkat(arr)
-    });
-  }
+        .json({
+          result: fixTheMeerkat(arr),
+        });
+  },
 };
