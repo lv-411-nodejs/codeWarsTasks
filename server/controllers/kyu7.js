@@ -143,4 +143,22 @@ module.exports = {
         result: replicate(times, number)
     });
   },
+  Easy_Line_Run(req, res) {
+    const {n} = req.body;
+    const easyLine = (n) => {
+      let sum = 1;
+      for (let i = 1; i <= n; i++) {
+        sum = sum * (n + i) / i;
+      }
+      return Math.round(Math.log(sum));
+    };
+    res.status(200).json({
+      result: easyLine(n),
+    });
+  },
+  Easy_Line_Info(req, res) {
+    res.status(200).json({
+      body: 'Easy Line',
+    });
+  },
 };

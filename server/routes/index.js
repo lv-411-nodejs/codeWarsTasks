@@ -103,4 +103,19 @@ module.exports = (app) => {
 
   app.get(`${prefix.k5}/perimeterGetController`, kyu5.perimeterGetController);
   app.post(`${prefix.k5}/perimeterPostController`, kyu5.perimeterPostController);
+
+  app.get(`${prefix.k8}/dutyfree`, kyu8.Holiday_VIII_Duty_FreeInfo);
+  app.post(`${prefix.k8}/dutyfree`, kyu8.Holiday_VIII_Duty_FreeRun);
+
+  app.get(`${prefix.k8}/validateUsr`, kyu8.Simple_validation_usernameInfo);
+  app.post(`${prefix.k8}/validateUsr`, kyu8.Simple_validation_usernameRun);
+
+  app.get(`${prefix.k5}/movingShift`, kyu5.FirstVariationInfo);
+  app.post(`${prefix.k5}/movingShift`, kyu5.FirstVariationRun);
+
+  app.get(`${prefix.k7}/easyLine`, kyu7.Easy_Line_Info);
+  app.post(`${prefix.k7}/easyLine`, kyu7.Easy_Line_Run);
+
+  app.get(`${prefix.k6}/interp`, kyu6.FloatingPointInfo);
+  app.post(`${prefix.k6}/interp`, kyu6.FloatingPointRun);
 };

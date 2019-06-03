@@ -194,5 +194,48 @@ module.exports = {
         .json({
           result: perimeter(n),
         });
-  }
+  },
+  FirstVariationInfo(req, res) {
+    res.status(200)
+        .json({
+          body: 'First Variation on Caesar Cipher',
+        });
+  },
+  FirstVariationRun(req, res) {
+    const {s, shift} = req.body;
+
+    const movingShift = (s, shift) => {
+      const abcLowerCase = 'abcdefghijklmnopqrstuvwxyz'.split('');
+      const abcUpperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+      arr = s
+          .split('')
+          .map(function(v, i, a) {
+            if (shift >= 26) {
+              shift = shift - 26;
+            }
+            let key = abcLowerCase.indexOf(v.toLowerCase()) + shift;
+            if (key >= 26) {
+              key = key - 26;
+            }
+            if (abcLowerCase.indexOf(v) >= 0) {
+              v = abcLowerCase[key];
+            }
+            if (abcUpperCase.indexOf(v) >= 0) {
+              v = abcUpperCase[key];
+            }
+            shift = shift + 1;
+            return v;
+          })
+          .join('');
+      const splitArr = [];
+      for (let i = 0; i < 5; i++) {
+        splitArr.push(arr.slice(i * Math.ceil(s.length / 5), (i + 1) * Math.ceil(s.length / 5)));
+      }
+      return splitArr;
+    };
+    res.status(200)
+    .json({
+      result: movingShift(s, shift),
+    });
+},
 };

@@ -302,4 +302,36 @@ module.exports = {
           result: fixTheMeerkat(arr),
         });
   },
+  Holiday_VIII_Duty_FreeInfo(req, res) {
+    res.status(200).json({
+      body: 'Holiday VIII - Duty Free',
+    });
+  },
+  Holiday_VIII_Duty_FreeRun(req, res) {
+    const {normPrice, discount, hol} = req.body;
+
+    const dutyFree = (normPrice, discount, hol) => {
+      const saving = normPrice * discount / 100;
+      return Math.floor(hol / saving);
+    };
+    res.status(200).json({
+      result: dutyFree(normPrice, discount, hol),
+    });
+  },
+  Simple_validation_usernameInfo(req, res) {
+    res.status(200).json({
+      body: 'Simple validation of a username with regex',
+    });
+  },
+
+  Simple_validation_usernameRun(req, res) {
+    const {username} = req.body;
+
+    const validateUsr = (username) => {
+      return /^[0-9a-z_]{4,16}$/.test(username);
+    };
+    res.status(200).json({
+      result: validateUsr(username),
+    });
+  }
 };

@@ -260,5 +260,28 @@ module.exports = {
         .json({
           result: nbaCup(report, teamName),
         });
-  }
+  },
+  FloatingPointInfo(req, res) {
+    res.status(200)
+        .json({
+          body: 'Floating-point Approximation',
+        });
+  },
+  FloatingPointRun(req, res) {
+    const {f, l, u, n} = req.body;
+    const interp = (f, l, u, n) => {
+      const arr = [];
+      const d = (u - l) / n;
+      for (let i =0; i < n; i++) {
+        arr.push(Math.floor(f(l)* 100)/100);
+        l = d + l;    
+      }
+      return arr;
+    };
+    
+  res.status(200)
+  .json({
+    result: interp(f, l, u, n),
+  });
+},
 };
