@@ -25,7 +25,6 @@ module.exports = {
 
   amIWilsonRun(req, res) {
     const {p} = req.body;
-    if (isNumber(p)) {
       const amIWilson = (p) => {
         function fact(x) {
           return x <= 1 ? 1 : x * fact(x - 1);
@@ -37,13 +36,6 @@ module.exports = {
           .json({
             result: amIWilson(p),
           });
-    } else {
-      res.status(400)
-          .json({
-            result: 'Please write p as number'
-          })
-    }
-
   },
 
   twoDecimalPlacesInfo(req, res) {
