@@ -1,17 +1,19 @@
 const errorHandler = require('../helpers/errorHandlers');
+const Validator = require('../helpers/validator');
+
 module.exports = {
   showAllTasks(req, res) {
     res.status(200)
-        .json({
-          'stas': ['Floating-point Approximation (I)'],
-          'maks': ['Help the bookseller !'],
-          'oleh': ['Rainfall'],
-          'oleksiy': ['Easy Balance Checking'],
-          'ostap': ['Floating-point Approximation (II)'],
-          'nadiia': ['Ranking NBA teams'],
-          'bohdan': ['Build a pile of Cubes'],
-          'ruslan': ['Bouncing Balls'],
-        });
+      .json({
+        'stas': ['Floating-point Approximation (I)'],
+        'maks': ['Help the bookseller !'],
+        'oleh': ['Rainfall'],
+        'oleksiy': ['Easy Balance Checking'],
+        'ostap': ['Floating-point Approximation (II)'],
+        'nadiia': ['Ranking NBA teams'],
+        'bohdan': ['Build a pile of Cubes'],
+        'ruslan': ['Bouncing Balls'],
+      });
   },
 
   pileOfCubesInfo(req, res) {
@@ -53,65 +55,68 @@ module.exports = {
     const { book } = req.body;
 
     function balance(book) {
-      const numberFormat = function(str, cur = 2) {
-         str = str.replace(/[^\d+.]/g, '');
-         str = (+str).toFixed(cur);
-         return str;
-     }
+      const numberFormat = function (str, cur = 2) {
+        str = str.replace(/[^\d+.]/g, '');
+        str = (+str).toFixed(cur);
+        return str;
+      }
 
-     let arrBook = book.split('\n')
-                       .map(e => e.split(' '))
-                       .filter(e => e.toString() !== '');;
+      let arrBook = book.split('\n')
+        .map(e => e.split(' '))
+        .filter(e => e.toString() !== '');;
 
-     arrBook[0][0] = numberFormat(arrBook[0][0], 2); 
-     let balance = parseFloat(arrBook[0][0]);
-     let sumForAvg = 0;
+      arrBook[0][0] = numberFormat(arrBook[0][0], 2);
+      let balance = parseFloat(arrBook[0][0]);
+      let sumForAvg = 0;
 
-     for (let i = 1; i < arrBook.length; i++) {
-         arrBook[i][1] = arrBook[i][1].replace(/\W/g, ''); 
-         arrBook[i][2] = numberFormat(arrBook[i][2], 2);
-         balance -= +arrBook[i][2];
-         sumForAvg += +arrBook[i][2];
-         arrBook[i].push('Balance ' + balance.toFixed(2));
-     }
+      for (let i = 1; i < arrBook.length; i++) {
+        arrBook[i][1] = arrBook[i][1].replace(/\W/g, '');
+        arrBook[i][2] = numberFormat(arrBook[i][2], 2);
+        balance -= +arrBook[i][2];
+        sumForAvg += +arrBook[i][2];
+        arrBook[i].push('Balance ' + balance.toFixed(2));
+      }
 
-     arrBook.push(
-         [`Total expense  ${(+arrBook[0][0] - balance).toFixed(2)}`], [`Average expense  ${(sumForAvg / (arrBook.length - 1)).toFixed(2)}`]
-     );
-     arrBook[0][0] = 'Original Balance: ' + arrBook[0][0];
+      arrBook.push(
+        [`Total expense  ${(+arrBook[0][0] - balance).toFixed(2)}`], [`Average expense  ${(sumForAvg / (arrBook.length - 1)).toFixed(2)}`]
+      );
+      arrBook[0][0] = 'Original Balance: ' + arrBook[0][0];
 
-     return arrBook.map(e => e.join(' ')).join('\r\n');
+      return arrBook.map(e => e.join(' ')).join('\r\n');
     }
 
     res.status(200)
-        .json({
-          result: balance(book),
-        });
+      .json({
+        result: balance(book),
+      });
   },
 
   bouncingBallPostController(req, res) {
-    const {
-      h,
-      bounce,
-      window
-    } = req.body;
+    try {
+      const { h, bounce, window } = req.body;
+      const errorHandler = new Validator([h, bounce, window]);
+      errorHandler.checkArgumentsTypes(['number', 'number', 'number']);
 
-    const bouncingBall = (h, bounce, window) => {
-      if (h > 0 && bounce > 0 && bounce < 1) {
-        let count = 0;
-        while (h > window) {
-          h *= bounce;
-          count += 2;
+      const bouncingBall = (h, bounce, window) => {
+        if (h > 0 && bounce > 0 && bounce < 1) {
+          let count = 0;
+          while (h > window) {
+            h *= bounce;
+            count += 2;
+          }
+          return count - 1;
         }
-        return count - 1;
-      }
-      return -1;
-    };
-
-    res.status(200)
-      .json({
-        result: bouncingBall(h, bounce, window),
+        return -1;
+      };
+      res.status(200)
+        .json({
+          result: bouncingBall(h, bounce, window),
+        });
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
       });
+    }
   },
 
   bouncingBallGetController(req, res) {
@@ -247,7 +252,7 @@ module.exports = {
         result.push(`(${letter} : ${num})`);
       });
 
-      return result.join ` - `;
+      return result.join` - `;
     };
 
     res.status(200)
@@ -292,7 +297,7 @@ module.exports = {
         score += +game[1];
         conceded += +game[3];
       });
-      return `${teamName}:W=${w};D=${d};L=${l};Scored=${score};Conceded=${conceded};Points=${w*3+d}`;
+      return `${teamName}:W=${w};D=${d};L=${l};Scored=${score};Conceded=${conceded};Points=${w * 3 + d}`;
     };
 
     res.status(200)

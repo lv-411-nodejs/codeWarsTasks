@@ -1,4 +1,5 @@
 const errorHandler = require('../helpers/errorHandlers');
+const Validator = require('../helpers/validator');
 
 module.exports = {
   showAllTasks(req, res) {
@@ -111,20 +112,26 @@ module.exports = {
   },
 
   animalPostController(req, res) {
-    const {
-      heads,
-      legs
-    } = req.body;
-    const animals = (heads, legs) => {
-      const cows = (legs - heads * 2) / 2;
-      const chickens = heads - cows;
-      if (cows > heads || (cows ^ 0) !== cows || chickens > heads || (chickens ^ 0) !== chickens)
-        return 'No solutions';
-      else return [chickens, cows];
-    };
-    res.status(201).json({
-      result: animals(heads, legs),
-    });
+    try {
+      const { heads, legs } = req.body;
+      const errorHandler = new Validator([heads, legs]);
+      errorHandler.checkArgumentsTypes(['number', 'number']);
+      const animals = (heads, legs) => {
+        const cows = (legs - heads * 2) / 2;
+        const chickens = heads - cows;
+        if (cows > heads || (cows ^ 0) !== cows || chickens > heads || (chickens ^ 0) !== chickens)
+          return 'No solutions';
+        else return [chickens, cows];
+      };
+      res.status(201).json({
+        result: animals(heads, legs),
+      });
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
+      });
+    }
+
   },
 
   solutionGetController(req, res) {
@@ -135,15 +142,20 @@ module.exports = {
   },
 
   solutionPostController(req, res) {
-    const {
-      a,
-      b
-    } = req.body;
-    const solution = (a, b) => (a.length > b.length ? b + a + b : a + b + a);
+    try {
+      const { a, b } = req.body;
+      const errorHandler = new Validator([a, b]);
+      errorHandler.checkArgumentsTypes(['string', 'string']);
+      const solution = (a, b) => (a.length > b.length ? b + a + b : a + b + a);
 
-    res.status(201).json({
-      result: solution(a, b),
-    });
+      res.status(201).json({
+        result: solution(a, b),
+      });
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
+      });
+    }
   },
 
   getVolumeOfCuboidGetController(req, res) {
@@ -151,15 +163,15 @@ module.exports = {
       info: 'Volume of a Cuboid',
       link: 'https://www.codewars.com/kata/volume-of-a-cuboid',
       in: [{
-          length: 1,
-          width: 2,
-          height: 2,
-        },
-        {
-          length: 6.3,
-          width: 2,
-          height: 5,
-        },
+        length: 1,
+        width: 2,
+        height: 2,
+      },
+      {
+        length: 6.3,
+        width: 2,
+        height: 5,
+      },
       ],
       out: [4, 63],
     });
@@ -170,14 +182,14 @@ module.exports = {
       info: 'Miles per gallon to kilometers per liter',
       link: 'https://www.codewars.com/kata/miles-per-gallon-to-kilometers-per-liter',
       in: [{
-          mpg: 10,
-        },
-        {
-          mpg: 20,
-        },
-        {
-          mpg: 30,
-        },
+        mpg: 10,
+      },
+      {
+        mpg: 20,
+      },
+      {
+        mpg: 30,
+      },
       ],
       out: [3.54, 7.08, 10.62],
     });
@@ -221,17 +233,17 @@ module.exports = {
 
   amIWilsonPostController(req, res) {
     const { p } = req.body;
-      const amIWilson = (p) => {
-        function fact(x) {
-          return x <= 1 ? 1 : x * fact(x - 1);
-        }
-  
-        return (fact(p - 1) + 1) / (p * p) % 1 === 0;
-      };
-      res.status(200)
-          .json({
-            result: amIWilson(p),
-          });
+    const amIWilson = (p) => {
+      function fact(x) {
+        return x <= 1 ? 1 : x * fact(x - 1);
+      }
+
+      return (fact(p - 1) + 1) / (p * p) % 1 === 0;
+    };
+    res.status(200)
+      .json({
+        result: amIWilson(p),
+      });
   },
 
   twoDecimalPlacesGetController(req, res) {
