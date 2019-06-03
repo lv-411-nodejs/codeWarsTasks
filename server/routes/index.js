@@ -4,6 +4,7 @@ const kyu6 = require('../controllers/kyu6');
 const kyu5 = require('../controllers/kyu5');
 
 const prefix = require('../helpers/prefix');
+const validator = require('../helpers/validator');
 
 module.exports = (app) => {
   app.get('/api/task/kyu8/Pole_Vault_Starting_Marks', kyu8.Pole_Vault_Starting_MarksInfo);
