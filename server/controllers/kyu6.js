@@ -105,6 +105,7 @@ module.exports = {
     res.status(200)
         .json({
           body: 'Bouncing Balls',
+          link: 'https://www.codewars.com/kata/bouncing-balls/',
         });
   },
 };

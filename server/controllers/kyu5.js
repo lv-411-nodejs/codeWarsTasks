@@ -78,6 +78,7 @@ module.exports = {
     res.status(200)
         .json({
           body: 'Product of consecutive Fib numbers',
+          link: 'https://www.codewars.com/kata/product-of-consecutive-fib-numbers/python',
         });
   },
 };

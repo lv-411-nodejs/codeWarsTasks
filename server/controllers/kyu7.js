@@ -56,7 +56,8 @@ module.exports = {
   tripleShiftianGetController(req, res) {
     res.status(200)
         .json({
-          info: 'Looking for a benefactor',
+          body: 'The Triple Shiftian task',
+          link: 'https://www.codewars.com/kata/triple-shiftian-numbers',
         });
   },
 

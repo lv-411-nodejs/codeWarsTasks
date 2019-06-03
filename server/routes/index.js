@@ -62,7 +62,7 @@ module.exports = (app) => {
   app.post(`${prefix.k7}/shiftian`, kyu7.tripleShiftianPostController);
 
   app.get(`${prefix.k6}/bouncing`, kyu6.bouncingBallGetController);
-  app.post(`${prefix.k6}/bouncing`, kyu6.solutionPostController);
+  app.post(`${prefix.k6}/bouncing`, kyu6.bouncingBallPostController);
 
   app.get(`${prefix.k5}/fibonacci`, kyu5.productFibonacciGetController);
   app.post(`${prefix.k5}/fibonacci`, kyu5.productFibonacciPostController);

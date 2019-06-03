@@ -103,6 +103,7 @@ module.exports = {
     res.status(200)
         .json({
           body: 'Heads and Legs',
+          link: 'https://www.codewars.com/kata/heads-and-legs',
         });
   },
 
@@ -126,6 +127,7 @@ module.exports = {
     res.status(200)
         .json({
           body: 'Short Long Short',
+          link: 'https://www.codewars.com/kata/short-long-short',
         });
   },
 
