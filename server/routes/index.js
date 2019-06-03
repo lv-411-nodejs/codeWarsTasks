@@ -66,4 +66,20 @@ module.exports = (app) => {
 
   app.get(`${prefix.k5}/fibonacci`, kyu5.productFibonacciGetController);
   app.post(`${prefix.k5}/fibonacci`, kyu5.productFibonacciPostController);
+
+
+  app.get(`${prefix.k8}/squareOrSquareRoot`, kyu8.squareOrSquareRootInfo);
+  app.post(`${prefix.k8}/squareOrSquareRoot`, kyu8.squareOrSquareRootRun);
+
+  app.get(`${prefix.k8}/fixTheMeerkat`, kyu8.fixTheMeerkatInfo);
+  app.post(`${prefix.k8}/fixTheMeerkat`, kyu8.fixTheMeerkatRun);
+
+  app.get(`${prefix.k7}/replicate`, kyu7.replicateInfo);
+  app.post(`${prefix.k7}/replicate`, kyu7.replicateRun);
+
+  app.get(`${prefix.k6}/nbaCup`, kyu6.nbaCupInfo);
+  app.post(`${prefix.k6}/nbaCup`, kyu6.nbaCupRun);
+
+  app.get(`${prefix.k5}/zeros`, kyu5.zerosInfo);
+  app.post(`${prefix.k5}/zeros`, kyu5.zerosRun);
 };

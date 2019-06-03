@@ -81,4 +81,28 @@ module.exports = {
           link: 'https://www.codewars.com/kata/product-of-consecutive-fib-numbers/python',
         });
   },
+  zerosInfo(req, res) {
+    res.status(200)
+      .json({
+        body: 'Number of trailing zeros of N!'
+    });
+  },
+
+  zerosRun(req, res) {
+    const {n} = req.body;
+    const zeros = (n) => {
+      let i = 1;
+      let result = 0;
+      while (n / Math.pow(5, i) > 1) {
+        result += Math.floor(n / Math.pow(5, i));
+        i++;
+      }
+      return result;
+    };
+
+    res.status(200)
+      .json({
+        result: zeros(n),
+    });
+  }
 };
