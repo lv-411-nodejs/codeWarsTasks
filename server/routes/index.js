@@ -6,9 +6,11 @@ const kyu5 = require('../controllers/kyu5');
 const prefix = require('../helpers/prefix');
 
 module.exports = (app) => {
-  app.get('/api/task/kyu8/Pole_Vault_Starting_Marks', kyu8.Pole_Vault_Starting_MarksInfo);
+  app.get('/api/task/kyu8/Pole_Vault_Starting_Marks',
+      kyu8.Pole_Vault_Starting_MarksInfo);
   app.get('/api/task/kyu8/Keep_Hydrated!', kyu8.Keep_HydratedInfo);
-  app.post('/api/task/kyu8/Pole_Vault_Starting_Marks', kyu8.Pole_Vault_Starting_MarksRun);
+  app.post('/api/task/kyu8/Pole_Vault_Starting_Marks',
+      kyu8.Pole_Vault_Starting_MarksRun);
 
   app.get('/api/tasks', kyu8.showAllTasks);
 
@@ -62,4 +64,19 @@ module.exports = (app) => {
 
   app.get(`${prefix.k8}/shortlong`, kyu8.solutionInfo);
   app.post(`${prefix.k8}/shortlong`, kyu8.solutionRun);
+
+  app.get(`${prefix.k8}/squareOrSquareRoot`, kyu8.squareOrSquareRootInfo);
+  app.post(`${prefix.k8}/squareOrSquareRoot`, kyu8.squareOrSquareRootRun);
+
+  app.get(`${prefix.k8}/fixTheMeerkat`, kyu8.fixTheMeerkatInfo);
+  app.post(`${prefix.k8}/fixTheMeerkat`, kyu8.fixTheMeerkatRun);
+
+  app.get(`${prefix.k7}/replicate`, kyu7.replicateInfo);
+  app.post(`${prefix.k7}/replicate`, kyu7.replicateRun);
+
+  app.get(`${prefix.k6}/nbaCup`, kyu6.nbaCupInfo);
+  app.post(`${prefix.k6}/nbaCup`, kyu6.nbaCupRun);
+
+  app.get(`${prefix.k5}/zeros`, kyu5.zerosInfo);
+  app.post(`${prefix.k5}/zeros`, kyu5.zerosRun);
 };

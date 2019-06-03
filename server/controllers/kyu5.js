@@ -39,9 +39,10 @@ module.exports = {
       for (let i = 0, length = row.length; i < length; i++) {
         for (let j = 0; j < length; j++) {
           test = row.slice(0, i).concat(row.slice(i + 1));
-
-          if (Number(test.slice(0, j).concat(row[i], test.slice(j)).join('')) < min[0]) {
-            min = [Number(test.slice(0, j).concat(row[i], test.slice(j)).join('')), i, j];
+          const check = Number(test.slice(0, j).concat(row[i], test.slice(j))
+              .join('')) < min[0];
+          if (check) {
+            min = [check, i, j];
           }
         }
       }
@@ -54,6 +55,7 @@ module.exports = {
           result: smallest(n),
         });
   },
+
   gapGetController(req, res) {
     res.status(200).json({
         info: 'Gap in Primes',
@@ -109,6 +111,31 @@ module.exports = {
       });
     } catch (e) {
       errorHandler(res, e);
-    }
+    }},
+
+  zerosInfo(req, res) {
+    res.status(200)
+      .json({
+        body: 'Number of trailing zeros of N!'
+    });
+  },
+
+  zerosRun(req, res) {
+    const {n} = req.body;
+    const zeros = (n) => {
+      let i = 1;
+      let result = 0;
+      while (n / Math.pow(5, i) > 1) {
+        result += Math.floor(n / Math.pow(5, i));
+        i++;
+      }
+      return result;
+    };
+
+    res.status(200)
+      .json({
+        result: zeros(n),
+    });
+
   }
 };
