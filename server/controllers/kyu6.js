@@ -231,9 +231,10 @@ module.exports = {
 
   stockListGetController(req, res) {
     res.status(200)
-      .json({
-        body: 'Help the bookseller !',
-      });
+        .json({
+          body: 'Help the bookseller !',
+          link: 'https://www.codewars.com/kata/help-the-bookseller',
+        });
   },
 
   stockListPostController(req, res) {

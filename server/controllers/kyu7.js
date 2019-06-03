@@ -150,9 +150,10 @@ module.exports = {
 
   lockerRunGetController(req, res) {
     res.status(200)
-      .json({
-        body: 'Slamming Lockers',
-      });
+        .json({
+          body: 'Slamming Lockers',
+          link: 'https://www.codewars.com/kata/slamming-lockers',
+        });
   },
 
   lockerRunPostController(req, res) {
@@ -166,9 +167,9 @@ module.exports = {
       return open;
     };
     res.status(200)
-      .json({
-        result: lockerRun(lockers),
-      });
+        .json({
+          result: lockerRun(lockers),
+        });
   },
 
   replicateInfo(req, res) {

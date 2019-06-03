@@ -227,9 +227,10 @@ module.exports = {
 
   perimeterGetController(req, res) {
     res.status(200)
-      .json({
-        body: 'Perimeter of squares in a rectangle',
-      });
+        .json({
+          body: 'Perimeter of squares in a rectangle',
+          link: 'https://www.codewars.com/kata/perimeter-of-squares-in-a-rectangle',
+        });
   },
 
   perimeterPostController(req, res) {
@@ -252,9 +253,9 @@ module.exports = {
     };
 
     res.status(200)
-      .json({
-        result: perimeter(n),
-      });
+        .json({
+          result: perimeter(n),
+        });
   },
 
   FirstVariationInfo(req, res) {

@@ -274,14 +274,13 @@ module.exports = {
   countPositivesSumNegativesGetController(req, res) {
     res.status(200).json({
       body: 'Count of positives / sum of negatives',
+      link: 'https://www.codewars.com/kata/count-of-positives-slash-sum-of-negatives',
     });
   },
 
   countPositivesSumNegativesPostController(req, res) {
-    const {
-      input
-    } = req.body;
-    const countPositivesSumNegatives = input => {
+    const input = req.body;
+    const countPositivesSumNegatives = (input) => {
       let positive = 0;
       let negative = 0;
 
@@ -306,14 +305,13 @@ module.exports = {
   stringToNumberGetController(req, res) {
     res.status(200).json({
       body: 'Convert a String to a Number!',
+      link: 'https://www.codewars.com/kata/convert-a-string-to-a-number',
     });
   },
 
   stringToNumberPostController(req, res) {
-    const {
-      n
-    } = req.body;
-    const stringToNumber = n => {
+    const n = req.body;
+    const stringToNumber = (n) => {
       return Number(n);
     };
     res.status(200).json({
