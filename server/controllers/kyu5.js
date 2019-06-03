@@ -1,19 +1,20 @@
 const errorHandler = require('../helpers/errorHandlers');
+const Validator = require('../helpers/validator');
 const validator = require('../helpers/validator');
 
 module.exports = {
   showAllTasks(req, res) {
     res.status(200)
-        .json({
-          'stas': ['Artificial Rain'],
-          'maks': ['Perimeter of squares in a rectangle'],
-          'oleh': ['Gap in Primes'],
-          'oleksiy': ['Find the smallest'],
-          'ostap': ['First Variation on Caesar Cipher'],
-          'nadiia': ['Number of trailing zeros of N!'],
-          'bohdan': ['Which x for that sum?'],
-          'ruslan': ['Product of consecutive Fib numbers'],
-        });
+      .json({
+        'stas': ['Artificial Rain'],
+        'maks': ['Perimeter of squares in a rectangle'],
+        'oleh': ['Gap in Primes'],
+        'oleksiy': ['Find the smallest'],
+        'ostap': ['First Variation on Caesar Cipher'],
+        'nadiia': ['Number of trailing zeros of N!'],
+        'bohdan': ['Which x for that sum?'],
+        'ruslan': ['Product of consecutive Fib numbers'],
+      });
   },
 
   whichXGetController(req, res) {
@@ -68,35 +69,50 @@ module.exports = {
       return min;
     };
 
-    res.status(200)
-        .json({
-          result: smallest(n),
-        });
+    try {
+      const validatorArg = new validator([n]);
+      validatorArg.checkArgumentsTypes(['number']);
 
+      res.status(200)
+      .json({
+        result: smallest(n),
+      });
+    }
+    catch(e) {
+      res.status(400).json({
+        error: e.message
+      });
+    }
   },
 
   productFibonacciPostController(req, res) {
-    const {
-      prod
-    } = req.body;
+    try {
+      const { prod } = req.body;
+      const errorHandler = new Validator([prod]);
+      errorHandler.checkArgumentsTypes(['number']);
 
-    const productFibonacci = (prod) => {
-      let a = 0;
-      let b = 1;
-      let c = 1;
-      while ((a * b) !== prod) {
-        if (a * b > prod) return [a, b, false];
-        c = a + b;
-        a = b;
-        b = c;
-      }
-      return [a, b, true];
-    };
+      const productFibonacci = (prod) => {
+        let a = 0;
+        let b = 1;
+        let c = 1;
+        while ((a * b) !== prod) {
+          if (a * b > prod) return [a, b, false];
+          c = a + b;
+          a = b;
+          b = c;
+        }
+        return [a, b, true];
+      };
 
-    res.status(200)
-      .json({
-        result: productFibonacci(prod),
+      res.status(200)
+        .json({
+          result: productFibonacci(prod),
+        });
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
       });
+    }
   },
 
   productFibonacciGetController(req, res) {
@@ -112,30 +128,30 @@ module.exports = {
       info: 'Gap in Primes',
       link: 'https://www.codewars.com/kata/gap-in-primes',
       in: [{
-          "g": 2,
-          "m": 100,
-          "n": 110
-        },
-        {
-          "g": 4,
-          "m": 100,
-          "n": 110
-        },
-        {
-          "g": 6,
-          "m": 100,
-          "n": 110
-        },
-        {
-          "g": 8,
-          "m": 300,
-          "n": 400
-        },
-        {
-          "g": 10,
-          "m": 300,
-          "n": 400
-        }
+        "g": 2,
+        "m": 100,
+        "n": 110
+      },
+      {
+        "g": 4,
+        "m": 100,
+        "n": 110
+      },
+      {
+        "g": 6,
+        "m": 100,
+        "n": 110
+      },
+      {
+        "g": 8,
+        "m": 300,
+        "n": 400
+      },
+      {
+        "g": 10,
+        "m": 300,
+        "n": 400
+      }
       ],
       out: [
         [101, 103],
@@ -312,7 +328,7 @@ module.exports = {
         body: 'Artificial Rain'
       });
   },
-  
+
   artificialRainRun(req, res) {
     const {
       garden

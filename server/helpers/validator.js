@@ -1,53 +1,52 @@
 function Validator(args) {
-
-    let errors = [];
+    const errors = [];
     this._args = args;
 
     this.errors = () => errors;
     this.setError = msg => errors.push(msg);
 
     this.add = (param, errorMsg, callback) => {
-        let res = callback(this._args[this._args.indexOf(param)]);
-        if(res == false) {
+        const res = callback(this._args[this._args.indexOf(param)]);
+        if (res == false) {
             this.setError(errorMsg);
 
-            throw new Error( errors );
-        }        
+            throw new Error(errors);
+        }
     };
 
     this.hasErrors = () => !!errors.length;
 
     args.map((element) => {
-        if(element === undefined)
+        if (element === undefined)
             errors.push(`some args - undefined, please send correct argument in post`);
-    })
+    });
 
-    if(this.hasErrors())
+    if (this.hasErrors())
         throw new Error(`fill in all args :(`);
 }
 
-Validator.prototype.typeOf = function(value){
-    var checkedValue = typeof value
-        if(checkedValue === 'object'){
-        if(value){
-            if(Array.isArray(value)){
+Validator.prototype.typeOf = function (value) {
+    let checkedValue = typeof value;
+    if (checkedValue === 'object') {
+        if (value) {
+            if (Array.isArray(value)) {
                 checkedValue = 'array';
             }
-        }else{
+        } else {
             checkedValue = 'null';
         }
     }
-    return checkedValue
+    return checkedValue;
 };
 
-Validator.prototype.checkArgumentsTypes = function(typeList){
-    let argList = this._args;
-    if(argList.length < typeList.length)
-        throw new Error(`You fill in less then needed ${ typeList.length + 1 }, Read a summary of your task pleas, ***`);
+Validator.prototype.checkArgumentsTypes = function (typeList) {
+    const argList = this._args;
+    if (argList.length < typeList.length)
+        throw new Error(`You fill in less then needed ${typeList.length + 1}, Read a summary of your task please, ***`);
 
-    for(var i = 0; i < typeList.length; i++){
-        if(this.typeOf(argList[i]) !== typeList[i]){
-            throw new Error(`Wrong type of ${i+1} argument: expecting ${typeList[i]}, found ${this.typeOf(argList[i])}`);
+    for (let i = 0; i < typeList.length; i++) {
+        if (this.typeOf(argList[i]) !== typeList[i]) {
+            throw new Error(`Wrong type of ${i + 1} argument: expecting ${typeList[i]}, found ${this.typeOf(argList[i])}`);
         }
     }
     return argList;
