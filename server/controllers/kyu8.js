@@ -25,17 +25,25 @@ module.exports = {
 
   amIWilsonRun(req, res) {
     const {p} = req.body;
-    const amIWilson = (p) => {
-      function fact(x) {
-        return x <= 1 ? 1 : x * fact(x - 1);
-      }
+    if (isNumber(p)) {
+      const amIWilson = (p) => {
+        function fact(x) {
+          return x <= 1 ? 1 : x * fact(x - 1);
+        }
+  
+        return (fact(p - 1) + 1) / (p * p) % 1 === 0;
+      };
+      res.status(200)
+          .json({
+            result: amIWilson(p),
+          });
+    } else {
+      res.status(400)
+          .json({
+            result: 'Please write p as number'
+          })
+    }
 
-      return (fact(p - 1) + 1) / (p * p) % 1 === 0;
-    };
-    res.status(200)
-        .json({
-          result: amIWilson(p),
-        });
   },
 
   twoDecimalPlacesInfo(req, res) {
