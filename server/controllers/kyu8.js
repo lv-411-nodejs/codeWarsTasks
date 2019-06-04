@@ -215,9 +215,9 @@ module.exports = {
 
   converterPostController(req, res) {
     try {
-      const {
-        mpg,
-      } = req.body;
+      const {mpg} = (req.body);
+      const convertValidator=new Validator([mpg]);
+      convertValidator.checkArgumentsTypes(['number']);      
       const result = ((mpg) => ((mpg * 1.609344) / 4.54609188).toFixed(2))(mpg);
       res.status(200).json({
         result,
@@ -234,6 +234,8 @@ module.exports = {
         width,
         height,
       } = req.body;
+      const convertValidator=new Validator([length,width,height]);
+      convertValidator.checkArgumentsTypes(['number','number','number']); 
       const result = ((length, width, height) => length * width * height)(length, width, height);
       res.status(200).json({
         result,
