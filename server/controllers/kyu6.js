@@ -5,24 +5,24 @@ const validator = require('../helpers/validator');
 module.exports = {
   showAllTasks(req, res) {
     res.status(200)
-        .json({
-          'stas': ['Floating-point Approximation (I)'],
-          'maks': ['Help the bookseller !'],
-          'oleh': ['Rainfall'],
-          'oleksiy': ['Easy Balance Checking'],
-          'ostap': ['Floating-point Approximation (II)'],
-          'nadiia': ['Ranking NBA teams'],
-          'bohdan': ['Build a pile of Cubes'],
-          'ruslan': ['Bouncing Balls'],
-        });
+      .json({
+        'stas': ['Floating-point Approximation (I)'],
+        'maks': ['Help the bookseller !'],
+        'oleh': ['Rainfall'],
+        'oleksiy': ['Easy Balance Checking'],
+        'ostap': ['Floating-point Approximation (II)'],
+        'nadiia': ['Ranking NBA teams'],
+        'bohdan': ['Build a pile of Cubes'],
+        'ruslan': ['Bouncing Balls'],
+      });
   },
 
   pileOfCubesGetController(req, res) {
     res.status(200)
-        .json({
-          body: 'Build a pile of Cubes (JavaScript)',
-          link: 'https://www.codewars.com/kata/build-a-pile-of-cubes',
-        });
+      .json({
+        body: 'Build a pile of Cubes (JavaScript)',
+        link: 'https://www.codewars.com/kata/build-a-pile-of-cubes',
+      });
   },
 
   pileOfCubesPostController(req, res) {
@@ -45,9 +45,9 @@ module.exports = {
       v.checkArgumentsTypes(['number']);
 
       res.status(200)
-          .json({
-            result: findNb(m),
-          });
+        .json({
+          result: findNb(m),
+        });
     } catch (e) {
       res.status(400).json({
         error: e.message,
@@ -57,24 +57,26 @@ module.exports = {
 
   balanceGetController(req, res) {
     res.status(200)
-        .json({
-          body: 'Easy Balance Checking',
-        });
+      .json({
+        body: 'Easy Balance Checking',
+      });
   },
 
   balancePostController(req, res) {
-    const {book} = req.body;
+    const {
+      book
+    } = req.body;
 
     function balance(book) {
-      const numberFormat = function(str, cur = 2) {
+      const numberFormat = function (str, cur = 2) {
         str = str.replace(/[^\d+.]/g, '');
         str = (+str).toFixed(cur);
         return str;
       };
 
       const arrBook = book.split('\n')
-          .map((e) => e.split(' '))
-          .filter((e) => e.toString() !== ''); ;
+        .map((e) => e.split(' '))
+        .filter((e) => e.toString() !== '');;
 
       arrBook[0][0] = numberFormat(arrBook[0][0], 2);
       let balance = parseFloat(arrBook[0][0]);
@@ -89,7 +91,7 @@ module.exports = {
       }
 
       arrBook.push(
-          [`Total expense  ${(+arrBook[0][0] - balance).toFixed(2)}`], [`Average expense  ${(sumForAvg / (arrBook.length - 1)).toFixed(2)}`]
+        [`Total expense  ${(+arrBook[0][0] - balance).toFixed(2)}`], [`Average expense  ${(sumForAvg / (arrBook.length - 1)).toFixed(2)}`]
       );
       arrBook[0][0] = 'Original Balance: ' + arrBook[0][0];
 
@@ -101,9 +103,9 @@ module.exports = {
       validatorArg.checkArgumentsTypes(['string']);
 
       res.status(200)
-          .json({
-            result: balance(book),
-          });
+        .json({
+          result: balance(book),
+        });
     } catch (e) {
       res.status(400).json({
         error: e.message,
@@ -113,7 +115,11 @@ module.exports = {
 
   bouncingBallPostController(req, res) {
     try {
-      const {h, bounce, window} = req.body;
+      const {
+        h,
+        bounce,
+        window
+      } = req.body;
       const errorHandler = new Validator([h, bounce, window]);
       errorHandler.checkArgumentsTypes(['number', 'number', 'number']);
 
@@ -129,9 +135,9 @@ module.exports = {
         return -1;
       };
       res.status(200)
-          .json({
-            result: bouncingBall(h, bounce, window),
-          });
+        .json({
+          result: bouncingBall(h, bounce, window),
+        });
     } catch (error) {
       res.status(400).json({
         error: error.message,
@@ -141,10 +147,10 @@ module.exports = {
 
   bouncingBallGetController(req, res) {
     res.status(200)
-        .json({
-          body: 'Bouncing Balls',
-          link: 'https://www.codewars.com/kata/bouncing-balls/',
-        });
+      .json({
+        body: 'Bouncing Balls',
+        link: 'https://www.codewars.com/kata/bouncing-balls/',
+      });
   },
 
   rainfallGetController(req, res) {
@@ -192,7 +198,7 @@ module.exports = {
         avgFall: 0,
         varianceFall: 0,
       };
-      const mean = (function(town, data) {
+      const mean = (function (town, data) {
         const regTown = new RegExp('' + town + '\\W', 'gi');
         const searchTown = data.search(regTown);
         if (searchTown == -1) {
@@ -211,7 +217,7 @@ module.exports = {
         }
       })(town, data);
 
-      const variance = (function(town, data) {
+      const variance = (function (town, data) {
         const regTown = new RegExp('' + town + '\\W', 'gi');
         const searchTown = data.search(regTown);
         if (searchTown == -1) {
@@ -243,10 +249,10 @@ module.exports = {
 
   stockListGetController(req, res) {
     res.status(200)
-        .json({
-          body: 'Help the bookseller !',
-          link: 'https://www.codewars.com/kata/help-the-bookseller',
-        });
+      .json({
+        body: 'Help the bookseller !',
+        link: 'https://www.codewars.com/kata/help-the-bookseller',
+      });
   },
 
   stockListPostController(req, res) {
@@ -273,21 +279,21 @@ module.exports = {
         result.push(`(${letter} : ${num})`);
       });
 
-      return result.join` - `;
+      return result.join ` - `;
     };
 
     res.status(200)
-        .json({
-          result: stockList(listOfArt, listOfCat),
-        });
+      .json({
+        result: stockList(listOfArt, listOfCat),
+      });
   },
 
   nbaCupGetController(req, res) {
     res.status(200)
-        .json({
-          body: 'Ranking NBA teams',
-          link: 'https://www.codewars.com/kata/ranking-nba-teams',
-        });
+      .json({
+        body: 'Ranking NBA teams',
+        link: 'https://www.codewars.com/kata/ranking-nba-teams',
+      });
   },
 
   nbaCupPostController(req, res) {
@@ -326,22 +332,22 @@ module.exports = {
       validate.checkArgumentsTypes(['string', 'string']);
 
       res.status(200)
-          .json({
-            result: nbaCup(report, teamName),
-          });
+        .json({
+          result: nbaCup(report, teamName),
+        });
     } catch (error) {
       res.status(400)
-          .json({
-            error: error.message,
-          });
+        .json({
+          error: error.message,
+        });
     }
   },
 
   FloatingPointInfo(req, res) {
     res.status(200)
-        .json({
-          body: 'Floating-point Approximation',
-        });
+      .json({
+        body: 'Floating-point Approximation',
+      });
   },
 
   FloatingPointRun(req, res) {
@@ -362,29 +368,38 @@ module.exports = {
     };
 
     res.status(200)
-        .json({
-          result: interp(f, l, u, n),
-        });
+      .json({
+        result: interp(f, l, u, n),
+      });
   },
 
-  approximationPointInfo(req, res) {
+  approximationPointGetController(req, res) {
     res.status(200)
-        .json({
-          body: 'Floating-point Approximation (I)',
-        });
+      .json({
+        body: 'Floating-point Approximation (I)',
+        link: 'https://www.codewars.com/kata/floating-point-approximation-i',
+      });
   },
 
-  approximationPointRun(req, res) {
-    const {
-      value,
-    } = req.body;
-    const approximationPoint = (value) => {
-      return value / (1 + Math.sqrt(1 + value));
-    };
-    res.status(200)
-        .json({
-          result: approximationPoint(value),
-        });
-  },
+  approximationPointPostController(req, res) {
+    try {
+      const {value} = req.body;
+      const errorHandler = new Validator([value]);
+      errorHandler.checkArgumentsTypes(['number']);
 
+      const approximationPoint = (value) => {
+        return value / (1 + Math.sqrt(1 + value));
+      };
+
+      res.status(200)
+          .json({
+            result: approximationPoint(value),
+          });
+
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
+      });
+    }
+  }
 };

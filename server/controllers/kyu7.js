@@ -232,30 +232,37 @@ module.exports = {
     });
   },
 
-  sequenceSumInfo(req, res) {
+  sequenceSumGetController(req, res) {
     res.status(200).json({
       body: 'Sum of a sequence',
+      link: 'https://www.codewars.com/kata/sum-of-a-sequence',
     });
   },
 
-  sequenceSumRun(req, res) {
-    const {
-      begin,
-      end,
-      step,
-    } = req.body;
-    const sequenceSum = (begin, end, step) => {
-      if (begin > end) {
-        return 0;
-      } else if (begin === end) {
-        return begin;
-      } else {
-        return begin + sequenceSum((begin += step), end, step);
-      }
-    };
-    res.status(200).json({
-      result: sequenceSum(begin, end, step),
-    });
+  sequenceSumPostController(req, res) {
+    try {
+      const {begin, end, step} = req.body;
+      const errorHandler = new Validator([begin, end, step]);
+      errorHandler.checkArgumentsTypes(['number', 'number', 'number']);
+
+      const sequenceSum = (begin, end, step) => {
+        if (begin > end) {
+          return 0
+        } else if (begin === end) {
+          return begin
+        } else {
+          return begin + sequenceSum((begin += step), end, step)
+        }
+      };
+      res.status(200)
+          .json({
+            result: sequenceSum(begin, end, step),
+          });
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
+      });
+    }
   },
 
 };

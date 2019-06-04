@@ -5,50 +5,61 @@ const validator = require('../helpers/validator');
 module.exports = {
   showAllTasks(req, res) {
     res.status(200)
-        .json({
-          'stas': ['Artificial Rain'],
-          'maks': ['Perimeter of squares in a rectangle'],
-          'oleh': ['Gap in Primes'],
-          'oleksiy': ['Find the smallest'],
-          'ostap': ['First Variation on Caesar Cipher'],
-          'nadiia': ['Number of trailing zeros of N!'],
-          'bohdan': ['Which x for that sum?'],
-          'ruslan': ['Product of consecutive Fib numbers'],
-        });
+      .json({
+        'stas': ['Artificial Rain'],
+        'maks': ['Perimeter of squares in a rectangle'],
+        'oleh': ['Gap in Primes'],
+        'oleksiy': ['Find the smallest'],
+        'ostap': ['First Variation on Caesar Cipher'],
+        'nadiia': ['Number of trailing zeros of N!'],
+        'bohdan': ['Which x for that sum?'],
+        'ruslan': ['Product of consecutive Fib numbers'],
+      });
   },
 
-  whichXGetController(req, res) {
+  weightForWeightGetController(req, res) {
     res.status(200)
-        .json({
-          body: 'Which x for that sum?',
-          link: '',
-        });
+      .json({
+        body: 'Weight for weight',
+        link: 'https://www.codewars.com/kata/weight-for-weight',
+      });
   },
 
-  whichXPostController(req, res) {
-    const {
-      m,
-    } = req.body;
+  weightForWeightPostController(req, res) {
+    const {str} = req.body;
 
-    const solve = (m) => {
-      return m;
-    };
+    const orderWeight = (strng) => {
+      return strng
+        .split(' ')
+        .map(num => {
+          const weight = num.split('').reduce((a, b) => Number(a) + Number(b), 0)
+          return { num, weight }
+        })
+        .sort(
+          (a, b) =>
+            a.weight === b.weight ? a.num.localeCompare(b.num) : a.weight - b.weight
+        )
+        .map(({ num }) => num)
+        .join(' ')
+    }
 
     res.status(200)
-        .json({
-          result: solve(m),
-        });
+      .json({
+        result: orderWeight(str),
+      });
   },
 
   smallestGetController(req, res) {
     res.status(200)
-        .json({
-          body: 'Find the smallest',
-        });
+      .json({
+        body: 'Find the smallest',
+      });
   },
 
   smallestPostController(req, res) {
-    const {n} = req.body;
+    const {
+      n
+    } = req.body;
 
     const smallest = (n) => {
       const row = String(n).split('');
@@ -59,7 +70,7 @@ module.exports = {
         for (let j = 0; j < length; j++) {
           test = row.slice(0, i).concat(row.slice(i + 1));
           const check = Number(test.slice(0, j).concat(row[i], test.slice(j))
-              .join('')) < min[0];
+            .join('')) < min[0];
           if (check) {
             min = [check, i, j];
           }
@@ -74,9 +85,9 @@ module.exports = {
       validatorArg.checkArgumentsTypes(['number']);
 
       res.status(200)
-          .json({
-            result: smallest(n),
-          });
+        .json({
+          result: smallest(n),
+        });
     } catch (e) {
       res.status(400).json({
         error: e.message,
@@ -86,7 +97,9 @@ module.exports = {
 
   productFibonacciPostController(req, res) {
     try {
-      const {prod} = req.body;
+      const {
+        prod
+      } = req.body;
       const errorHandler = new Validator([prod]);
       errorHandler.checkArgumentsTypes(['number']);
 
@@ -104,9 +117,9 @@ module.exports = {
       };
 
       res.status(200)
-          .json({
-            result: productFibonacci(prod),
-          });
+        .json({
+          result: productFibonacci(prod),
+        });
     } catch (error) {
       res.status(400).json({
         error: error.message,
@@ -116,10 +129,10 @@ module.exports = {
 
   productFibonacciGetController(req, res) {
     res.status(200)
-        .json({
-          body: 'Product of consecutive Fib numbers',
-          link: 'https://www.codewars.com/kata/product-of-consecutive-fib-numbers/python',
-        });
+      .json({
+        body: 'Product of consecutive Fib numbers',
+        link: 'https://www.codewars.com/kata/product-of-consecutive-fib-numbers/python',
+      });
   },
 
   gapGetController(req, res) {
@@ -127,30 +140,30 @@ module.exports = {
       info: 'Gap in Primes',
       link: 'https://www.codewars.com/kata/gap-in-primes',
       in: [{
-        'g': 2,
-        'm': 100,
-        'n': 110,
-      },
-      {
-        'g': 4,
-        'm': 100,
-        'n': 110,
-      },
-      {
-        'g': 6,
-        'm': 100,
-        'n': 110,
-      },
-      {
-        'g': 8,
-        'm': 300,
-        'n': 400,
-      },
-      {
-        'g': 10,
-        'm': 300,
-        'n': 400,
-      },
+          'g': 2,
+          'm': 100,
+          'n': 110,
+        },
+        {
+          'g': 4,
+          'm': 100,
+          'n': 110,
+        },
+        {
+          'g': 6,
+          'm': 100,
+          'n': 110,
+        },
+        {
+          'g': 8,
+          'm': 300,
+          'n': 400,
+        },
+        {
+          'g': 10,
+          'm': 300,
+          'n': 400,
+        },
       ],
       out: [
         [101, 103],
@@ -215,14 +228,16 @@ module.exports = {
 
   zerosGetController(req, res) {
     res.status(200)
-        .json({
-          body: 'Number of trailing zeros of N!',
-          link: 'https://www.codewars.com/kata/number-of-trailing-zeros-of-n',
-        });
+      .json({
+        body: 'Number of trailing zeros of N!',
+        link: 'https://www.codewars.com/kata/number-of-trailing-zeros-of-n',
+      });
   },
 
   zerosPostController(req, res) {
-    const {n} = req.body;
+    const {
+      n
+    } = req.body;
     const zeros = (n) => {
       let i = 1;
       let result = 0;
@@ -237,23 +252,23 @@ module.exports = {
       validate.checkArgumentsTypes(['number']);
 
       res.status(200)
-          .json({
-            result: zeros(n),
-          });
+        .json({
+          result: zeros(n),
+        });
     } catch (error) {
       res.status(400)
-          .json({
-            error: error.message,
-          });
+        .json({
+          error: error.message,
+        });
     }
   },
 
   perimeterGetController(req, res) {
     res.status(200)
-        .json({
-          body: 'Perimeter of squares in a rectangle',
-          link: 'https://www.codewars.com/kata/perimeter-of-squares-in-a-rectangle',
-        });
+      .json({
+        body: 'Perimeter of squares in a rectangle',
+        link: 'https://www.codewars.com/kata/perimeter-of-squares-in-a-rectangle',
+      });
   },
 
   perimeterPostController(req, res) {
@@ -276,16 +291,16 @@ module.exports = {
     };
 
     res.status(200)
-        .json({
-          result: perimeter(n),
-        });
+      .json({
+        result: perimeter(n),
+      });
   },
 
   FirstVariationInfo(req, res) {
     res.status(200)
-        .json({
-          body: 'First Variation on Caesar Cipher',
-        });
+      .json({
+        body: 'First Variation on Caesar Cipher',
+      });
   },
 
   FirstVariationRun(req, res) {
@@ -298,25 +313,25 @@ module.exports = {
       const abcLowerCase = 'abcdefghijklmnopqrstuvwxyz'.split('');
       const abcUpperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
       arr = s
-          .split('')
-          .map(function(v, i, a) {
-            if (shift >= 26) {
-              shift = shift - 26;
-            }
-            let key = abcLowerCase.indexOf(v.toLowerCase()) + shift;
-            if (key >= 26) {
-              key = key - 26;
-            }
-            if (abcLowerCase.indexOf(v) >= 0) {
-              v = abcLowerCase[key];
-            }
-            if (abcUpperCase.indexOf(v) >= 0) {
-              v = abcUpperCase[key];
-            }
-            shift = shift + 1;
-            return v;
-          })
-          .join('');
+        .split('')
+        .map(function (v, i, a) {
+          if (shift >= 26) {
+            shift = shift - 26;
+          }
+          let key = abcLowerCase.indexOf(v.toLowerCase()) + shift;
+          if (key >= 26) {
+            key = key - 26;
+          }
+          if (abcLowerCase.indexOf(v) >= 0) {
+            v = abcLowerCase[key];
+          }
+          if (abcUpperCase.indexOf(v) >= 0) {
+            v = abcUpperCase[key];
+          }
+          shift = shift + 1;
+          return v;
+        })
+        .join('');
       const splitArr = [];
       for (let i = 0; i < 5; i++) {
         splitArr.push(arr.slice(i * Math.ceil(s.length / 5), (i + 1) * Math.ceil(s.length / 5)));
@@ -324,19 +339,20 @@ module.exports = {
       return splitArr;
     };
     res.status(200)
-        .json({
-          result: movingShift(s, shift),
-        });
+      .json({
+        result: movingShift(s, shift),
+      });
   },
 
-  artificialRainInfo(req, res) {
+  artificialRainGetController(req, res) {
     res.status(200)
-        .json({
-          body: 'Artificial Rain',
-        });
+      .json({
+        body: 'Artificial Rain',
+        link: 'https://www.codewars.com/kata/artificial-rain',
+      });
   },
 
-  artificialRainRun(req, res) {
+  artificialRainPostController(req, res) {
     const {
       garden,
     } = req.body;
@@ -382,10 +398,21 @@ module.exports = {
       }
       return Math.max(...answers);
     };
-    res.status(200)
+
+    try {
+      const validate = new validator([garden]);
+      validate.artificialRain(['array']);
+
+      res.status(200)
         .json({
           result: artificialRain(garden),
         });
+    } catch (error) {
+      res.status(400)
+        .json({
+          error: error.message,
+        });
+    }
   },
-
 };
+
