@@ -179,25 +179,36 @@ module.exports = {
         });
   },
 
-  replicateInfo(req, res) {
+  replicateGetController(req, res) {
     res.status(200)
-      .json({
-        body: 'Recursive Replication',
-      });
+        .json({
+          body: 'Recursive Replication',
+          link: 'https://www.codewars.com/kata/recursive-replication',
+        });
   },
 
-  replicateRun(req, res) {
+  replicatePostController(req, res) {
     const {
       times,
-      number
+      number,
     } = req.body;
     const replicate = (times, number) => {
       return times > 0 ? [number].concat(replicate(times - 1, number)) : [];
     };
-    res.status(200)
-      .json({
-        result: replicate(times, number)
-      });
+    try {
+      const validate = new validator([times, number]);
+      validate.checkArgumentsTypes(['number', 'number']);
+
+      res.status(200)
+          .json({
+            result: replicate(times, number),
+          });
+    } catch (error) {
+      res.status(400)
+          .json({
+            error: error.message,
+          });
+    }
   },
 
   Easy_Line_Run(req, res) {

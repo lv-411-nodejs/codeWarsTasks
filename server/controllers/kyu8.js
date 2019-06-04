@@ -356,42 +356,60 @@ module.exports = {
     });
   },
 
-  squareOrSquareRootInfo(req, res) {
+  squareOrSquareRootGetController(req, res) {
     res.status(200).json({
       body: 'To square(root) or not to square(root)',
+      link: 'https://www.codewars.com/kata/to-square-root-or-not-to-square-root',
     });
   },
 
-  squareOrSquareRootRun(req, res) {
-    const {
-      arr
-    } = req.body;
-    console.log(arr);
-    const squareOrSquareRoot = arr => {
-      return arr.map(el => {
+  squareOrSquareRootPostController(req, res) {
+    const {arr} = req.body;
+    const squareOrSquareRoot = (arr) => {
+      return arr.map((el) => {
         return Number.isInteger(Math.sqrt(el)) ? Math.sqrt(el) : Math.pow(el, 2);
       });
     };
-    res.status(200).json({
-      result: squareOrSquareRoot(arr),
-    });
+    try {
+      const validate = new validator([arr]);
+      validate.checkArgumentsTypes(['array']);
+
+      res.status(200).json({
+        result: squareOrSquareRoot(arr),
+      });
+    } catch (error) {
+      res.status(400)
+          .json({
+            error: error.message,
+          });
+    }
   },
 
-  fixTheMeerkatInfo(req, res) {
+  fixTheMeerkatGetController(req, res) {
     res.status(200).json({
       body: 'My head is at the wrong end!',
+      link: 'https://www.codewars.com/kata/my-head-is-at-the-wrong-end',
     });
   },
 
-  fixTheMeerkatRun(req, res) {
-    const {
-      arr
-    } = req.body;
-    const fixTheMeerkat = arr => arr.reverse();
-    res.status(200).json({
-      result: fixTheMeerkat(arr),
-    });
+  fixTheMeerkatPostController(req, res) {
+    const {arr} = req.body;
+    const fixTheMeerkat = (arr) => arr.reverse();
+    try {
+      const validate = new validator([arr]);
+      validate.checkArgumentsTypes(['array']);
+
+      res.status(200).json({
+        result: fixTheMeerkat(arr),
+      });
+    } catch (error) {
+      res.status(400)
+          .json({
+            error: error.message,
+          });
+    }
   },
+  
   Holiday_VIII_Duty_FreeInfo(req, res) {
     res.status(200).json({
       body: 'Holiday VIII - Duty Free',

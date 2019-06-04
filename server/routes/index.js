@@ -86,20 +86,20 @@ module.exports = (app) => {
   app.get(`${prefix.k5}/gap`, kyu5.gapGetController);
   app.post(`${prefix.k5}/gap`, kyu5.gapPostController);
 
-  app.get(`${prefix.k8}/squareOrSquareRoot`, kyu8.squareOrSquareRootInfo);
-  app.post(`${prefix.k8}/squareOrSquareRoot`, kyu8.squareOrSquareRootRun);
+  app.get(`${prefix.k8}/squareOrSquareRoot`, kyu8.squareOrSquareRootGetController);
+  app.post(`${prefix.k8}/squareOrSquareRoot`, kyu8.squareOrSquareRootPostController);
 
-  app.get(`${prefix.k8}/fixTheMeerkat`, kyu8.fixTheMeerkatInfo);
-  app.post(`${prefix.k8}/fixTheMeerkat`, kyu8.fixTheMeerkatRun);
+  app.get(`${prefix.k8}/fixTheMeerkat`, kyu8.fixTheMeerkatGetController);
+  app.post(`${prefix.k8}/fixTheMeerkat`, kyu8.fixTheMeerkatPostController);
 
-  app.get(`${prefix.k7}/replicate`, kyu7.replicateInfo);
-  app.post(`${prefix.k7}/replicate`, kyu7.replicateRun);
+  app.get(`${prefix.k7}/replicate`, kyu7.replicateGetController);
+  app.post(`${prefix.k7}/replicate`, kyu7.replicatePostController);
 
-  app.get(`${prefix.k6}/nbaCup`, kyu6.nbaCupInfo);
-  app.post(`${prefix.k6}/nbaCup`, kyu6.nbaCupRun);
+  app.get(`${prefix.k6}/nbaCup`, kyu6.nbaCupGetController);
+  app.post(`${prefix.k6}/nbaCup`, kyu6.nbaCupPostController);
 
-  app.get(`${prefix.k5}/zeros`, kyu5.zerosInfo);
-  app.post(`${prefix.k5}/zeros`, kyu5.zerosRun);
+  app.get(`${prefix.k5}/zeros`, kyu5.zerosGetController);
+  app.post(`${prefix.k5}/zeros`, kyu5.zerosPostController);
 
   app.get(`${prefix.k8}/stringToNumberGetController`, kyu8.stringToNumberGetController);
   app.post(`${prefix.k8}/stringToNumberPostController`, kyu8.stringToNumberPostController);

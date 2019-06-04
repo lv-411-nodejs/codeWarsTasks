@@ -284,17 +284,18 @@ module.exports = {
       });
   },
 
-  nbaCupInfo(req, res) {
+  nbaCupGetController(req, res) {
     res.status(200)
-      .json({
-        body: 'Ranking NBA teams'
-      });
+        .json({
+          body: 'Ranking NBA teams',
+          link: 'https://www.codewars.com/kata/ranking-nba-teams',
+        });
   },
 
-  nbaCupRun(req, res) {
+  nbaCupPostController(req, res) {
     const {
       report,
-      teamName
+      teamName,
     } = req.body;
 
     const nbaCup = (report, teamName) => {
@@ -322,11 +323,20 @@ module.exports = {
       });
       return `${teamName}:W=${w};D=${d};L=${l};Scored=${score};Conceded=${conceded};Points=${w * 3 + d}`;
     };
+    try {
+      const validate = new validator([report, teamName]);
+      validate.checkArgumentsTypes(['string', 'string']);
 
-    res.status(200)
-      .json({
-        result: nbaCup(report, teamName),
-      });
+      res.status(200)
+          .json({
+            result: nbaCup(report, teamName),
+          });
+    } catch (error) {
+      res.status(400)
+          .json({
+            error: error.message,
+          });
+    }
   },
 
   FloatingPointInfo(req, res) {

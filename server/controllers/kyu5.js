@@ -214,17 +214,16 @@ module.exports = {
     }
   },
 
-  zerosInfo(req, res) {
+  zerosGetController(req, res) {
     res.status(200)
-      .json({
-        body: 'Number of trailing zeros of N!',
-      });
+        .json({
+          body: 'Number of trailing zeros of N!',
+          link: 'https://www.codewars.com/kata/number-of-trailing-zeros-of-n',
+        });
   },
 
-  zerosRun(req, res) {
-    const {
-      n
-    } = req.body;
+  zerosPostController(req, res) {
+    const {n} = req.body;
     const zeros = (n) => {
       let i = 1;
       let result = 0;
@@ -234,11 +233,20 @@ module.exports = {
       }
       return result;
     };
+    try {
+      const validate = new validator([n]);
+      validate.checkArgumentsTypes(['number']);
 
-    res.status(200)
-      .json({
-        result: zeros(n),
-      });
+      res.status(200)
+          .json({
+            result: zeros(n),
+          });
+    } catch (error) {
+      res.status(400)
+          .json({
+            error: error.message,
+          });
+    }
   },
 
   perimeterGetController(req, res) {
