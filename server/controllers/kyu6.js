@@ -59,6 +59,7 @@ module.exports = {
     res.status(200)
       .json({
         body: 'Easy Balance Checking',
+        link: 'https://www.codewars.com/kata/easy-balance-checking',
       });
   },
 

@@ -53,6 +53,7 @@ module.exports = {
     res.status(200)
       .json({
         body: 'Find the smallest',
+        link: 'https://www.codewars.com/kata/find-the-smallest',
       });
   },
 

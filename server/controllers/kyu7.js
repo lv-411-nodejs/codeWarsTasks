@@ -62,6 +62,7 @@ module.exports = {
     res.status(200)
         .json({
           body: 'Looking for a benefactor',
+          link: 'https://www.codewars.com/kata/looking-for-a-benefactor'
         });
   },
 
