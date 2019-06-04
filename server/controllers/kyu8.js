@@ -16,44 +16,60 @@ module.exports = {
     });
   },
 
-  Pole_Vault_Starting_MarksInfo(req, res) {
+  startingMarkGetController(req, res) {
     res.status(200).json({
       info: 'Pole Vault Starting Marks',
+      link: 'https://www.codewars.com/kata/pole-vault-starting-marks',
     });
   },
 
-  Keep_HydratedInfo(req, res) {
+  litresGetController(req, res) {
     res.status(200).json({
       info: 'Keep Hydrated!',
+      link: 'https://www.codewars.com/kata/keep-hydrated-1',
     });
   },
 
-  Pole_Vault_Starting_MarksRun(req, res) {
+  startingMarkPostController(req, res) {
     try {
-      const {
-        num,
-      } = req.body;
-      if (typeof num !== 'number') {
-        throw new Error('please enter a number!');
-      }
-      const diff = (10.67 - 9.45) / (1.83 - 1.52);
-      const result = Math.round((10.67 + diff * num - diff * 1.83) * 100) / 100;
-      res.status(200).send(`<h1>${result}</h1> `);
-    } catch (e) {
-      errorHandler(res, e);
+      const {num} = req.body;
+      const errorHandler = new Validator([num]);
+      errorHandler.checkArgumentsTypes(['number']);
+
+      const startingMark = (num) => {
+        const diff = (10.67 - 9.45) / (1.83 - 1.52);
+        const result = Math.round((10.67 + diff * num - diff * 1.83) * 100) / 100;
+        return result;
+      };
+      res.status(200)
+          .json({
+            result: startingMark(num),
+          });
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
+      });
     }
   },
 
-  Keep_HydratedRun(req, res) {
-    const {
-      time,
-    } = req.body;
-    const litres = (time) => {
-      return Math.floor(time * 0.5);
-    };
-    res.status(201).json({
-      result: litres(time),
-    });
+  litresPostController(req, res) {
+    try {
+      const {time} = req.body;
+      const errorHandler = new Validator([time]);
+      errorHandler.checkArgumentsTypes(['number']);
+
+      const litres = (time) => {
+        return Math.floor(time * 0.5)
+      };
+      res.status(200)
+          .json({
+            result: litres(time),
+          });
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
+      });
+    }
   },
 
   divisibleByGetController(req, res) {
