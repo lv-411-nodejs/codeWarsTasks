@@ -11,20 +11,20 @@ module.exports = (app) => {
   app.get('/api/tasks/6', kyu6.showAllTasks);
   app.get('/api/tasks/5', kyu5.showAllTasks);
 
-  app.get('/api/task/kyu8/Pole_Vault_Starting_Marks', kyu8.Pole_Vault_Starting_MarksInfo);
-  app.post('/api/task/kyu8/Pole_Vault_Starting_Marks', kyu8.Pole_Vault_Starting_MarksRun);
+  app.get(`${prefix.k8}/startingMark`, kyu8.startingMarkGetController);
+  app.post(`${prefix.k8}/startingMark`, kyu8.startingMarkPostController);
 
-  app.get('/api/task/kyu8/litres', kyu8.Keep_HydratedInfo);
-  app.post('/api/task/kyu8/litres', kyu8.Keep_HydratedRun);
+  app.get(`${prefix.k8}/litres`, kyu8.litresGetController);
+  app.post(`${prefix.k8}/kyu8/litres`, kyu8.litresPostController);
 
-  app.get(`${prefix.k7}/sequenceSum`, kyu7.sequenceSumInfo);
-  app.post(`${prefix.k7}/sequenceSum`, kyu7.sequenceSumRun);
+  app.get(`${prefix.k7}/sequenceSum`, kyu7.sequenceSumGetController);
+  app.post(`${prefix.k7}/sequenceSum`, kyu7.sequenceSumPostController);
 
-  app.get(`${prefix.k6}/approximationPoint`, kyu6.approximationPointInfo);
-  app.post(`${prefix.k6}/approximationPoint`, kyu6.approximationPointRun);
+  app.get(`${prefix.k6}/approximationPoint`, kyu6.approximationPointGetController);
+  app.post(`${prefix.k6}/approximationPoint`, kyu6.approximationPointPostController);
 
-  app.get(`${prefix.k5}/artificialRainRun`, kyu5.artificialRainInfo);
-  app.post(`${prefix.k5}/artificialRainRun`, kyu5.artificialRainRun);
+  app.get(`${prefix.k5}/artificialRain`, kyu5.artificialRainGetController);
+  app.post(`${prefix.k5}/artificialRain`, kyu5.artificialRainPostController);
 
   app.get(`${prefix.k8}/divisibleby`, kyu8.divisibleByGetController);
   app.post(`${prefix.k8}/divisibleby`, kyu8.divisibleByPostController);
@@ -38,8 +38,8 @@ module.exports = (app) => {
   app.get(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesGetController);
   app.post(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesPostController);
 
-  app.get(`${prefix.k5}/whichx`, kyu5.whichXGetController);
-  app.post(`${prefix.k5}/whichx`, kyu5.whichXPostController);
+  app.get(`${prefix.k5}/weight`, kyu5.weightForWeightGetController);
+  app.post(`${prefix.k5}/weight`, kyu5.weightForWeightPostController);
 
   app.get(`${prefix.k8}/headlegs`, kyu8.animalGetController);
   app.post(`${prefix.k8}/headlegs`, kyu8.animalPostController);
@@ -86,20 +86,20 @@ module.exports = (app) => {
   app.get(`${prefix.k5}/gap`, kyu5.gapGetController);
   app.post(`${prefix.k5}/gap`, kyu5.gapPostController);
 
-  app.get(`${prefix.k8}/squareOrSquareRoot`, kyu8.squareOrSquareRootInfo);
-  app.post(`${prefix.k8}/squareOrSquareRoot`, kyu8.squareOrSquareRootRun);
+  app.get(`${prefix.k8}/squareOrSquareRoot`, kyu8.squareOrSquareRootGetController);
+  app.post(`${prefix.k8}/squareOrSquareRoot`, kyu8.squareOrSquareRootPostController);
 
-  app.get(`${prefix.k8}/fixTheMeerkat`, kyu8.fixTheMeerkatInfo);
-  app.post(`${prefix.k8}/fixTheMeerkat`, kyu8.fixTheMeerkatRun);
+  app.get(`${prefix.k8}/fixTheMeerkat`, kyu8.fixTheMeerkatGetController);
+  app.post(`${prefix.k8}/fixTheMeerkat`, kyu8.fixTheMeerkatPostController);
 
-  app.get(`${prefix.k7}/replicate`, kyu7.replicateInfo);
-  app.post(`${prefix.k7}/replicate`, kyu7.replicateRun);
+  app.get(`${prefix.k7}/replicate`, kyu7.replicateGetController);
+  app.post(`${prefix.k7}/replicate`, kyu7.replicatePostController);
 
-  app.get(`${prefix.k6}/nbaCup`, kyu6.nbaCupInfo);
-  app.post(`${prefix.k6}/nbaCup`, kyu6.nbaCupRun);
+  app.get(`${prefix.k6}/nbaCup`, kyu6.nbaCupGetController);
+  app.post(`${prefix.k6}/nbaCup`, kyu6.nbaCupPostController);
 
-  app.get(`${prefix.k5}/zeros`, kyu5.zerosInfo);
-  app.post(`${prefix.k5}/zeros`, kyu5.zerosRun);
+  app.get(`${prefix.k5}/zeros`, kyu5.zerosGetController);
+  app.post(`${prefix.k5}/zeros`, kyu5.zerosPostController);
 
   app.get(`${prefix.k8}/stringToNumberGetController`, kyu8.stringToNumberGetController);
   app.post(`${prefix.k8}/stringToNumberPostController`, kyu8.stringToNumberPostController);

@@ -4,7 +4,6 @@ const validator = require('../helpers/validator');
 
 module.exports = {
   showAllTasks(req, res) {
-
     res.status(200).json({
       stas: ['Pole Vault Starting Marks', 'Keep Hydrated!'],
       max: ['Count of positives / sum of negatives', 'Convert a String to a Number!'],
@@ -17,44 +16,60 @@ module.exports = {
     });
   },
 
-  Pole_Vault_Starting_MarksInfo(req, res) {
+  startingMarkGetController(req, res) {
     res.status(200).json({
       info: 'Pole Vault Starting Marks',
+      link: 'https://www.codewars.com/kata/pole-vault-starting-marks',
     });
   },
 
-  Keep_HydratedInfo(req, res) {
+  litresGetController(req, res) {
     res.status(200).json({
       info: 'Keep Hydrated!',
+      link: 'https://www.codewars.com/kata/keep-hydrated-1',
     });
   },
 
-  Pole_Vault_Starting_MarksRun(req, res) {
+  startingMarkPostController(req, res) {
     try {
-      const {
-        num
-      } = req.body;
-      if (typeof num !== 'number') {
-        throw new Error('please enter a number!');
-      }
-      const diff = (10.67 - 9.45) / (1.83 - 1.52);
-      const result = Math.round((10.67 + diff * num - diff * 1.83) * 100) / 100;
-      res.status(200).send(`<h1>${result}</h1> `);
-    } catch (e) {
-      errorHandler(res, e);
+      const {num} = req.body;
+      const errorHandler = new Validator([num]);
+      errorHandler.checkArgumentsTypes(['number']);
+
+      const startingMark = (num) => {
+        const diff = (10.67 - 9.45) / (1.83 - 1.52);
+        const result = Math.round((10.67 + diff * num - diff * 1.83) * 100) / 100;
+        return result;
+      };
+      res.status(200)
+          .json({
+            result: startingMark(num),
+          });
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
+      });
     }
   },
 
-  Keep_HydratedRun(req, res) {
-    const {
-      time
-    } = req.body;
-    const litres = time => {
-      return Math.floor(time * 0.5);
-    };
-    res.status(201).json({
-      result: litres(time),
-    });
+  litresPostController(req, res) {
+    try {
+      const {time} = req.body;
+      const errorHandler = new Validator([time]);
+      errorHandler.checkArgumentsTypes(['number']);
+
+      const litres = (time) => {
+        return Math.floor(time * 0.5)
+      };
+      res.status(200)
+          .json({
+            result: litres(time),
+          });
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
+      });
+    }
   },
 
   divisibleByGetController(req, res) {
@@ -67,7 +82,7 @@ module.exports = {
   divisibleByPostController(req, res) {
     const {
       numbers,
-      divisor
+      divisor,
     } = req.body;
 
     const divisibleBy = (numbers, divisor) => {
@@ -75,7 +90,7 @@ module.exports = {
       divisor = divisor || 1;
 
       const divisible = [];
-      numbers.map(value => {
+      numbers.map((value) => {
         if (value % divisor === 0) {
           divisible.push(value);
         }
@@ -85,15 +100,14 @@ module.exports = {
     };
 
     try {
-      let v = new validator([numbers, divisor]);
+      const v = new validator([numbers, divisor]);
 
       res.status(200).json({
         result: divisibleBy(numbers, divisor),
       });
-    }
-    catch(e) {
+    } catch (e) {
       res.status(400).json({
-        error: e.message
+        error: e.message,
       });
     }
   },
@@ -107,22 +121,21 @@ module.exports = {
 
   circleAreaPostController(req, res) {
     const {
-      circle
+      circle,
     } = req.body;
 
-    const circleArea = circle => circle.radius ** 2 * Math.PI;
+    const circleArea = (circle) => circle.radius ** 2 * Math.PI;
 
     try {
-      let v = new validator([circle]);
+      const v = new validator([circle]);
       v.checkArgumentsTypes(['object']);
 
       res.status(200).json({
         result: circleArea(circle),
       });
-    }
-    catch(e) {
+    } catch (e) {
       res.status(400).json({
-        error: e.message
+        error: e.message,
       });
     }
   },
@@ -135,17 +148,17 @@ module.exports = {
   },
 
   animalPostController(req, res) {
+    const {heads, legs} = req.body;
+    const errorHandler = new Validator([heads, legs]);
+    errorHandler.checkArgumentsTypes(['number', 'number']);
+    const animals = (heads, legs) => {
+      const cows = (legs - heads * 2) / 2;
+      const chickens = heads - cows;
+      if (cows > heads || (cows ^ 0) !== cows || chickens > heads || (chickens ^ 0) !== chickens) {
+        return 'No solutions';
+      } else return [chickens, cows];
+    };
     try {
-      const { heads, legs } = req.body;
-      const errorHandler = new Validator([heads, legs]);
-      errorHandler.checkArgumentsTypes(['number', 'number']);
-      const animals = (heads, legs) => {
-        const cows = (legs - heads * 2) / 2;
-        const chickens = heads - cows;
-        if (cows > heads || (cows ^ 0) !== cows || chickens > heads || (chickens ^ 0) !== chickens)
-          return 'No solutions';
-        else return [chickens, cows];
-      };
       res.status(201).json({
         result: animals(heads, legs),
       });
@@ -154,7 +167,6 @@ module.exports = {
         error: error.message,
       });
     }
-
   },
 
   solutionGetController(req, res) {
@@ -165,12 +177,11 @@ module.exports = {
   },
 
   solutionPostController(req, res) {
+    const {a, b} = req.body;
+    const errorHandler = new Validator([a, b]);
+    errorHandler.checkArgumentsTypes(['string', 'string']);
+    const solution = (a, b) => (a.length > b.length ? b + a + b : a + b + a);
     try {
-      const { a, b } = req.body;
-      const errorHandler = new Validator([a, b]);
-      errorHandler.checkArgumentsTypes(['string', 'string']);
-      const solution = (a, b) => (a.length > b.length ? b + a + b : a + b + a);
-
       res.status(201).json({
         result: solution(a, b),
       });
@@ -220,10 +231,10 @@ module.exports = {
 
   converterPostController(req, res) {
     try {
-      const {
-        mpg
-      } = req.body;
-      const result = (mpg => ((mpg * 1.609344) / 4.54609188).toFixed(2))(mpg);
+      const {mpg} = (req.body);
+      const convertValidator=new Validator([mpg]);
+      convertValidator.checkArgumentsTypes(['number']);      
+      const result = ((mpg) => ((mpg * 1.609344) / 4.54609188).toFixed(2))(mpg);
       res.status(200).json({
         result,
       });
@@ -237,8 +248,10 @@ module.exports = {
       const {
         length,
         width,
-        height
+        height,
       } = req.body;
+      const convertValidator=new Validator([length,width,height]);
+      convertValidator.checkArgumentsTypes(['number','number','number']); 
       const result = ((length, width, height) => length * width * height)(length, width, height);
       res.status(200).json({
         result,
@@ -256,54 +269,50 @@ module.exports = {
   },
 
   amIWilsonPostController(req, res) {
-    const { p } = req.body;
-      const amIWilson = (p) => {
-        function fact(x) {
-          return x <= 1 ? 1 : x * fact(x - 1);
-        }
-  
-        return (fact(p - 1) + 1) / (p * p) % 1 === 0;
-      };
-
-      try {
-        const validatorArg = new validator([p]);
-        validatorArg.checkArgumentsTypes(['number']);
-
-        res.status(200)
-        .json({
-          result: amIWilson(p),
-        });
+    const {p} = req.body;
+    const amIWilson = (p) => {
+      function fact(x) {
+        return x <= 1 ? 1 : x * fact(x - 1);
       }
-      catch(e) {
-        res.status(400).json({
-          error: e.message
-        });
-      }
+
+      return (fact(p - 1) + 1) / (p * p) % 1 === 0;
+    };
+    try {
+      const validatorArg = new validator([p]);
+      validatorArg.checkArgumentsTypes(['number']);
+
+      res.status(200)
+          .json({
+            result: amIWilson(p),
+          });
+    } catch (e) {
+      res.status(400).json({
+        error: e.message,
+      });
+    }
   },
 
   twoDecimalPlacesGetController(req, res) {
     res.status(200).json({
       body: 'Formatting decimal places',
-      link: 'https://www.codewars.com/kata/formatting-decimal-places-number-0'
+      link: 'https://www.codewars.com/kata/formatting-decimal-places-number-0',
     });
   },
 
   twoDecimalPlacesPostController(req, res) {
-    const { n } = req.body;
-    const twoDecimalPlaces = n => +n.toFixed(2);
-    
+    const {n} = req.body;
+    const twoDecimalPlaces = (n) => +n.toFixed(2);
     try {
       const validatorArg = new validator([n]);
       validatorArg.checkArgumentsTypes(['number']);
 
       res.status(200)
-      .json({
-        result: twoDecimalPlaces(n),
-      });
-    }
-    catch(e) {
+          .json({
+            result: twoDecimalPlaces(n),
+          });
+    } catch (e) {
       res.status(400).json({
-        error: e.message
+        error: e.message,
       });
     }
   },
@@ -311,14 +320,13 @@ module.exports = {
   countPositivesSumNegativesGetController(req, res) {
     res.status(200).json({
       body: 'Count of positives / sum of negatives',
+      link: 'https://www.codewars.com/kata/count-of-positives-slash-sum-of-negatives',
     });
   },
 
   countPositivesSumNegativesPostController(req, res) {
-    const {
-      input
-    } = req.body;
-    const countPositivesSumNegatives = input => {
+    const input = req.body;
+    const countPositivesSumNegatives = (input) => {
       let positive = 0;
       let negative = 0;
 
@@ -343,14 +351,13 @@ module.exports = {
   stringToNumberGetController(req, res) {
     res.status(200).json({
       body: 'Convert a String to a Number!',
+      link: 'https://www.codewars.com/kata/convert-a-string-to-a-number',
     });
   },
 
   stringToNumberPostController(req, res) {
-    const {
-      n
-    } = req.body;
-    const stringToNumber = n => {
+    const n = req.body;
+    const stringToNumber = (n) => {
       return Number(n);
     };
     res.status(200).json({
@@ -358,42 +365,60 @@ module.exports = {
     });
   },
 
-  squareOrSquareRootInfo(req, res) {
+  squareOrSquareRootGetController(req, res) {
     res.status(200).json({
       body: 'To square(root) or not to square(root)',
+      link: 'https://www.codewars.com/kata/to-square-root-or-not-to-square-root',
     });
   },
 
-  squareOrSquareRootRun(req, res) {
-    const {
-      arr
-    } = req.body;
-    console.log(arr);
-    const squareOrSquareRoot = arr => {
-      return arr.map(el => {
+  squareOrSquareRootPostController(req, res) {
+    const {arr} = req.body;
+    const squareOrSquareRoot = (arr) => {
+      return arr.map((el) => {
         return Number.isInteger(Math.sqrt(el)) ? Math.sqrt(el) : Math.pow(el, 2);
       });
     };
-    res.status(200).json({
-      result: squareOrSquareRoot(arr),
-    });
+    try {
+      const validate = new validator([arr]);
+      validate.checkArgumentsTypes(['array']);
+
+      res.status(200).json({
+        result: squareOrSquareRoot(arr),
+      });
+    } catch (error) {
+      res.status(400)
+          .json({
+            error: error.message,
+          });
+    }
   },
 
-  fixTheMeerkatInfo(req, res) {
+  fixTheMeerkatGetController(req, res) {
     res.status(200).json({
       body: 'My head is at the wrong end!',
+      link: 'https://www.codewars.com/kata/my-head-is-at-the-wrong-end',
     });
   },
 
-  fixTheMeerkatRun(req, res) {
-    const {
-      arr
-    } = req.body;
-    const fixTheMeerkat = arr => arr.reverse();
-    res.status(200).json({
-      result: fixTheMeerkat(arr),
-    });
+  fixTheMeerkatPostController(req, res) {
+    const {arr} = req.body;
+    const fixTheMeerkat = (arr) => arr.reverse();
+    try {
+      const validate = new validator([arr]);
+      validate.checkArgumentsTypes(['array']);
+
+      res.status(200).json({
+        result: fixTheMeerkat(arr),
+      });
+    } catch (error) {
+      res.status(400)
+          .json({
+            error: error.message,
+          });
+    }
   },
+
   Holiday_VIII_Duty_FreeInfo(req, res) {
     res.status(200).json({
       body: 'Holiday VIII - Duty Free',
@@ -403,7 +428,7 @@ module.exports = {
     const {
       normPrice,
       discount,
-      hol
+      hol,
     } = req.body;
 
     const dutyFree = (normPrice, discount, hol) => {
@@ -422,10 +447,10 @@ module.exports = {
 
   Simple_validation_usernameRun(req, res) {
     const {
-      username
+      username,
     } = req.body;
 
-    const validateUsr = username => {
+    const validateUsr = (username) => {
       return /^[0-9a-z_]{4,16}$/.test(username);
     };
     res.status(200).json({

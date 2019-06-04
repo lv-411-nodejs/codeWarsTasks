@@ -1,6 +1,6 @@
 const errorHandler = require('../helpers/errorHandlers');
-const Validator = require('../helpers/validator');
 const validator = require('../helpers/validator');
+const Validator = require('../helpers/validator');
 
 module.exports = {
   showAllTasks(req, res) {
@@ -17,26 +17,35 @@ module.exports = {
       });
   },
 
-  whichXGetController(req, res) {
+  weightForWeightGetController(req, res) {
     res.status(200)
       .json({
-        body: 'Which x for that sum?',
-        link: '',
+        body: 'Weight for weight',
+        link: 'https://www.codewars.com/kata/weight-for-weight',
       });
   },
 
-  whichXPostController(req, res) {
-    const {
-      m
-    } = req.body;
+  weightForWeightPostController(req, res) {
+    const { str } = req.body;
 
-    const solve = (m) => {
-      return m;
-    };
+    const orderWeight = (strng) => {
+      return strng
+        .split(' ')
+        .map(num => {
+          const weight = num.split('').reduce((a, b) => Number(a) + Number(b), 0)
+          return { num, weight }
+        })
+        .sort(
+          (a, b) =>
+            a.weight === b.weight ? a.num.localeCompare(b.num) : a.weight - b.weight
+        )
+        .map(({ num }) => num)
+        .join(' ')
+    }
 
     res.status(200)
       .json({
-        result: solve(m),
+        result: orderWeight(str),
       });
   },
 
@@ -48,7 +57,9 @@ module.exports = {
   },
 
   smallestPostController(req, res) {
-    const { n } = req.body;
+    const {
+      n
+    } = req.body;
 
     const smallest = (n) => {
       const row = String(n).split('');
@@ -74,36 +85,36 @@ module.exports = {
       validatorArg.checkArgumentsTypes(['number']);
 
       res.status(200)
-      .json({
-        result: smallest(n),
-      });
-    }
-    catch(e) {
+        .json({
+          result: smallest(n),
+        });
+    } catch (e) {
       res.status(400).json({
-        error: e.message
+        error: e.message,
       });
     }
   },
 
   productFibonacciPostController(req, res) {
+    const {
+      prod
+    } = req.body;
+    const errorHandler = new Validator([prod]);
+    errorHandler.checkArgumentsTypes(['number']);
+
+    const productFibonacci = (prod) => {
+      let a = 0;
+      let b = 1;
+      let c = 1;
+      while ((a * b) !== prod) {
+        if (a * b > prod) return [a, b, false];
+        c = a + b;
+        a = b;
+        b = c;
+      }
+      return [a, b, true];
+    };
     try {
-      const { prod } = req.body;
-      const errorHandler = new Validator([prod]);
-      errorHandler.checkArgumentsTypes(['number']);
-
-      const productFibonacci = (prod) => {
-        let a = 0;
-        let b = 1;
-        let c = 1;
-        while ((a * b) !== prod) {
-          if (a * b > prod) return [a, b, false];
-          c = a + b;
-          a = b;
-          b = c;
-        }
-        return [a, b, true];
-      };
-
       res.status(200)
         .json({
           result: productFibonacci(prod),
@@ -128,36 +139,36 @@ module.exports = {
       info: 'Gap in Primes',
       link: 'https://www.codewars.com/kata/gap-in-primes',
       in: [{
-        "g": 2,
-        "m": 100,
-        "n": 110
+        'g': 2,
+        'm': 100,
+        'n': 110,
       },
       {
-        "g": 4,
-        "m": 100,
-        "n": 110
+        'g': 4,
+        'm': 100,
+        'n': 110,
       },
       {
-        "g": 6,
-        "m": 100,
-        "n": 110
+        'g': 6,
+        'm': 100,
+        'n': 110,
       },
       {
-        "g": 8,
-        "m": 300,
-        "n": 400
+        'g': 8,
+        'm': 300,
+        'n': 400,
       },
       {
-        "g": 10,
-        "m": 300,
-        "n": 400
-      }
+        'g': 10,
+        'm': 300,
+        'n': 400,
+      },
       ],
       out: [
         [101, 103],
         [103, 107], null, [359, 367],
-        [337, 347]
-      ]
+        [337, 347],
+      ],
     });
   },
 
@@ -166,23 +177,23 @@ module.exports = {
       const {
         g,
         m,
-        n
+        n,
       } = req.body;
 
       function gap(g, m, n) {
-        let unswer = [];
-        let primeNumbers = [];
+        const unswer = [];
+        const primeNumbers = [];
         primeNumbers.length = n + 1;
-        primeNumbers.fill(0, 0, n + 1)
+        primeNumbers.fill(0, 0, n + 1);
         for (let i = 2; i * i < n + 1; i++) {
           if (primeNumbers[i] == 0) {
             for (let k = i * i; k < n + 1; k += i) {
-              primeNumbers[k] = 1
+              primeNumbers[k] = 1;
             }
           }
         }
-        let interimGap = 0,
-          interimNumber = m;
+        const interimGap = 0;
+        const interimNumber = m;
         while (m <= n + 1 - g) {
           if ((primeNumbers[m] == 0) && (primeNumbers[m + g] == 0)) {
             let isPrimeBetween = false;
@@ -197,7 +208,7 @@ module.exports = {
               return unswer;
               break;
             } else {
-              m++
+              m++;
             }
           } else {
             m++;
@@ -207,44 +218,55 @@ module.exports = {
       }
       const result = gap(g, m, n);
       res.status(200).json({
-        result
+        result,
       });
     } catch (e) {
       errorHandler(res, e);
     }
   },
 
-  zerosInfo(req, res) {
+  zerosGetController(req, res) {
     res.status(200)
       .json({
         body: 'Number of trailing zeros of N!',
+        link: 'https://www.codewars.com/kata/number-of-trailing-zeros-of-n',
       });
   },
 
-  zerosRun(req, res) {
+  zerosPostController(req, res) {
     const {
       n
     } = req.body;
     const zeros = (n) => {
       let i = 1;
       let result = 0;
-      while (n / Math.pow(5, i) > 1) {
+      while (n / Math.pow(5, i) >= 1) {
         result += Math.floor(n / Math.pow(5, i));
         i++;
       }
       return result;
     };
+    try {
+      const validate = new validator([n]);
+      validate.checkArgumentsTypes(['number']);
 
-    res.status(200)
-      .json({
-        result: zeros(n),
-      });
+      res.status(200)
+        .json({
+          result: zeros(n),
+        });
+    } catch (error) {
+      res.status(400)
+        .json({
+          error: error.message,
+        });
+    }
   },
 
   perimeterGetController(req, res) {
     res.status(200)
       .json({
         body: 'Perimeter of squares in a rectangle',
+        link: 'https://www.codewars.com/kata/perimeter-of-squares-in-a-rectangle',
       });
   },
 
@@ -283,7 +305,7 @@ module.exports = {
   FirstVariationRun(req, res) {
     const {
       s,
-      shift
+      shift,
     } = req.body;
 
     const movingShift = (s, shift) => {
@@ -321,16 +343,17 @@ module.exports = {
       });
   },
 
-  artificialRainInfo(req, res) {
+  artificialRainGetController(req, res) {
     res.status(200)
       .json({
-        body: 'Artificial Rain'
+        body: 'Artificial Rain',
+        link: 'https://www.codewars.com/kata/artificial-rain',
       });
   },
 
-  artificialRainRun(req, res) {
+  artificialRainPostController(req, res) {
     const {
-      garden
+      garden,
     } = req.body;
     const artificialRain = (garden) => {
       const answers = [];
@@ -339,7 +362,7 @@ module.exports = {
           let sum = 0;
           for (let i = position; i >= 0; i--) {
             if (garden[i - 1] <= garden[i]) {
-              sum++
+              sum++;
             } else {
               break;
             }
@@ -348,13 +371,13 @@ module.exports = {
         } else {
           return 0;
         }
-      }
+      };
       const checkRight = (position) => {
         if (position > 0) {
           let sum = 0;
           for (let i = position, max = garden.length; i < max; i++) {
             if (garden[i + 1] <= garden[i]) {
-              sum++
+              sum++;
             } else {
               break;
             }
@@ -363,21 +386,32 @@ module.exports = {
         } else {
           return 0;
         }
-      }
+      };
       const checkPosition = (position) => {
         const leftSum = checkLeft(position);
-        const rightSum = checkRight(position)
+        const rightSum = checkRight(position);
         answers.push(1 + leftSum + rightSum);
-      }
+      };
       for (let i = 0, max = garden.length; i < max; i++) {
         checkPosition(i);
       }
-      return Math.max(...answers)
+      return Math.max(...answers);
     };
-    res.status(200)
-      .json({
-        result: artificialRain(garden),
-      });
-  },
 
+    try {
+      const validate = new validator([garden]);
+      validate.artificialRain(['array']);
+
+      res.status(200)
+        .json({
+          result: artificialRain(garden),
+        });
+    } catch (error) {
+      res.status(400)
+        .json({
+          error: error.message,
+        });
+    }
+  },
 };
+
