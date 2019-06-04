@@ -1,3 +1,5 @@
+const errorHandler = require('../helpers/errorHandlers');
+const Validator = require('../helpers/validator');
 const validator = require('../helpers/validator');
 
 module.exports = {
@@ -89,23 +91,28 @@ module.exports = {
   },
 
   tripleShiftianPostController(req, res) {
-    const {
-      base,
-      n,
-    } = req.body;
-    const tripleShiftian = (base, n) => {
-      if (n < 3) return base[n];
-      else {
-        for (let i = 3; i <= n; i++) {
-          base.push(4 * base[i - 1] - 5 * base[i - 2] + 3 * base[i - 3]);
+    try {
+      const {base, n} = req.body;
+      const errorHandler = new Validator([base, n]);
+      errorHandler.checkArgumentsTypes(['array', 'number']);
+      const tripleShiftian = (base, n) => {
+        if (n < 3) return base[n];
+        else {
+          for (let i = 3; i <= n; i++) {
+            base.push(4 * base[i - 1] - 5 * base[i - 2] + 3 * base[i - 3]);
+          }
+          return base[n];
         }
-        return base[n];
-      }
+      };
       res.status(200)
           .json({
             result: tripleShiftian(base, n),
           });
-    };
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
+      });
+    }
   },
 
   whereIsGetController(req, res) {
@@ -151,6 +158,7 @@ module.exports = {
     res.status(200)
         .json({
           body: 'Slamming Lockers',
+          link: 'https://www.codewars.com/kata/slamming-lockers',
         });
   },
 
@@ -170,14 +178,15 @@ module.exports = {
         });
   },
 
-  replicateInfo(req, res) {
+  replicateGetController(req, res) {
     res.status(200)
         .json({
           body: 'Recursive Replication',
+          link: 'https://www.codewars.com/kata/recursive-replication',
         });
   },
 
-  replicateRun(req, res) {
+  replicatePostController(req, res) {
     const {
       times,
       number,
@@ -185,10 +194,20 @@ module.exports = {
     const replicate = (times, number) => {
       return times > 0 ? [number].concat(replicate(times - 1, number)) : [];
     };
-    res.status(200)
-        .json({
-          result: replicate(times, number),
-        });
+    try {
+      const validate = new validator([times, number]);
+      validate.checkArgumentsTypes(['number', 'number']);
+
+      res.status(200)
+          .json({
+            result: replicate(times, number),
+          });
+    } catch (error) {
+      res.status(400)
+          .json({
+            error: error.message,
+          });
+    }
   },
 
   Easy_Line_Run(req, res) {

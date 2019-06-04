@@ -9,8 +9,7 @@ function Validator(args) {
     const res = callback(this._args[this._args.indexOf(param)]);
     if (res == false) {
       this.setError(errorMsg);
-
-      throw new Error( errors );
+      throw new Error(errors);
     }
   };
 
@@ -43,13 +42,9 @@ Validator.prototype.typeOf = function(value) {
 
 Validator.prototype.checkArgumentsTypes = function(typeList) {
   const argList = this._args;
-  if (argList.length < typeList.length) {
-    throw new Error(`You fill in less then needed ${ typeList.length + 1 }, Read a summary of your task pleas, ***`);
-  }
-
   for (let i = 0; i < typeList.length; i++) {
     if (this.typeOf(argList[i]) !== typeList[i]) {
-      throw new Error(`Wrong type of ${i+1} argument: expecting ${typeList[i]}, found ${this.typeOf(argList[i])}`);
+      throw new Error(`Wrong type of ${i + 1} argument: expecting ${typeList[i]}, found ${this.typeOf(argList[i])}`);
     }
   }
   return argList;

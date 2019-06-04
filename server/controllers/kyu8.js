@@ -1,4 +1,5 @@
 const errorHandler = require('../helpers/errorHandlers');
+const Validator = require('../helpers/validator');
 const validator = require('../helpers/validator');
 
 module.exports = {
@@ -131,20 +132,25 @@ module.exports = {
   },
 
   animalPostController(req, res) {
-    const {
-      heads,
-      legs,
-    } = req.body;
-    const animals = (heads, legs) => {
-      const cows = (legs - heads * 2) / 2;
-      const chickens = heads - cows;
-      if (cows > heads || (cows ^ 0) !== cows || chickens > heads || (chickens ^ 0) !== chickens) {
-        return 'No solutions';
-      } else return [chickens, cows];
-    };
-    res.status(201).json({
-      result: animals(heads, legs),
-    });
+    try {
+      const {heads, legs} = req.body;
+      const errorHandler = new Validator([heads, legs]);
+      errorHandler.checkArgumentsTypes(['number', 'number']);
+      const animals = (heads, legs) => {
+        const cows = (legs - heads * 2) / 2;
+        const chickens = heads - cows;
+        if (cows > heads || (cows ^ 0) !== cows || chickens > heads || (chickens ^ 0) !== chickens) {
+          return 'No solutions';
+        } else return [chickens, cows];
+      };
+      res.status(201).json({
+        result: animals(heads, legs),
+      });
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
+      });
+    }
   },
 
   solutionGetController(req, res) {
@@ -155,15 +161,19 @@ module.exports = {
   },
 
   solutionPostController(req, res) {
-    const {
-      a,
-      b,
-    } = req.body;
-    const solution = (a, b) => (a.length > b.length ? b + a + b : a + b + a);
-
-    res.status(201).json({
-      result: solution(a, b),
-    });
+    try {
+      const {a, b} = req.body;
+      const errorHandler = new Validator([a, b]);
+      errorHandler.checkArgumentsTypes(['string', 'string']);
+      const solution = (a, b) => (a.length > b.length ? b + a + b : a + b + a);
+      res.status(201).json({
+        result: solution(a, b),
+      });
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
+      });
+    }
   },
 
   getVolumeOfCuboidGetController(req, res) {
@@ -236,6 +246,7 @@ module.exports = {
   amIWilsonGetController(req, res) {
     res.status(200).json({
       body: 'Wilson primes',
+      link: 'https://www.codewars.com/kata/wilson-primes',
     });
   },
 
@@ -248,36 +259,55 @@ module.exports = {
 
       return (fact(p - 1) + 1) / (p * p) % 1 === 0;
     };
-    res.status(200)
-        .json({
-          result: amIWilson(p),
-        });
+    try {
+      const validatorArg = new validator([p]);
+      validatorArg.checkArgumentsTypes(['number']);
+
+      res.status(200)
+          .json({
+            result: amIWilson(p),
+          });
+    } catch (e) {
+      res.status(400).json({
+        error: e.message,
+      });
+    }
   },
 
   twoDecimalPlacesGetController(req, res) {
     res.status(200).json({
       body: 'Formatting decimal places',
+      link: 'https://www.codewars.com/kata/formatting-decimal-places-number-0',
     });
   },
 
   twoDecimalPlacesPostController(req, res) {
     const {n} = req.body;
     const twoDecimalPlaces = (n) => +n.toFixed(2);
-    res.status(200).json({
-      result: twoDecimalPlaces(n),
-    });
+    try {
+      const validatorArg = new validator([n]);
+      validatorArg.checkArgumentsTypes(['number']);
+
+      res.status(200)
+          .json({
+            result: twoDecimalPlaces(n),
+          });
+    } catch (e) {
+      res.status(400).json({
+        error: e.message,
+      });
+    }
   },
 
   countPositivesSumNegativesGetController(req, res) {
     res.status(200).json({
       body: 'Count of positives / sum of negatives',
+      link: 'https://www.codewars.com/kata/count-of-positives-slash-sum-of-negatives',
     });
   },
 
   countPositivesSumNegativesPostController(req, res) {
-    const {
-      input,
-    } = req.body;
+    const input = req.body;
     const countPositivesSumNegatives = (input) => {
       let positive = 0;
       let negative = 0;
@@ -303,13 +333,12 @@ module.exports = {
   stringToNumberGetController(req, res) {
     res.status(200).json({
       body: 'Convert a String to a Number!',
+      link: 'https://www.codewars.com/kata/convert-a-string-to-a-number',
     });
   },
 
   stringToNumberPostController(req, res) {
-    const {
-      n,
-    } = req.body;
+    const n = req.body;
     const stringToNumber = (n) => {
       return Number(n);
     };
@@ -318,42 +347,60 @@ module.exports = {
     });
   },
 
-  squareOrSquareRootInfo(req, res) {
+  squareOrSquareRootGetController(req, res) {
     res.status(200).json({
       body: 'To square(root) or not to square(root)',
+      link: 'https://www.codewars.com/kata/to-square-root-or-not-to-square-root',
     });
   },
 
-  squareOrSquareRootRun(req, res) {
-    const {
-      arr,
-    } = req.body;
-    console.log(arr);
+  squareOrSquareRootPostController(req, res) {
+    const {arr} = req.body;
     const squareOrSquareRoot = (arr) => {
       return arr.map((el) => {
         return Number.isInteger(Math.sqrt(el)) ? Math.sqrt(el) : Math.pow(el, 2);
       });
     };
-    res.status(200).json({
-      result: squareOrSquareRoot(arr),
-    });
+    try {
+      const validate = new validator([arr]);
+      validate.checkArgumentsTypes(['array']);
+
+      res.status(200).json({
+        result: squareOrSquareRoot(arr),
+      });
+    } catch (error) {
+      res.status(400)
+          .json({
+            error: error.message,
+          });
+    }
   },
 
-  fixTheMeerkatInfo(req, res) {
+  fixTheMeerkatGetController(req, res) {
     res.status(200).json({
       body: 'My head is at the wrong end!',
+      link: 'https://www.codewars.com/kata/my-head-is-at-the-wrong-end',
     });
   },
 
-  fixTheMeerkatRun(req, res) {
-    const {
-      arr,
-    } = req.body;
+  fixTheMeerkatPostController(req, res) {
+    const {arr} = req.body;
     const fixTheMeerkat = (arr) => arr.reverse();
-    res.status(200).json({
-      result: fixTheMeerkat(arr),
-    });
+    try {
+      const validate = new validator([arr]);
+      validate.checkArgumentsTypes(['array']);
+
+      res.status(200).json({
+        result: fixTheMeerkat(arr),
+      });
+    } catch (error) {
+      res.status(400)
+          .json({
+            error: error.message,
+          });
+    }
   },
+
   Holiday_VIII_Duty_FreeInfo(req, res) {
     res.status(200).json({
       body: 'Holiday VIII - Duty Free',

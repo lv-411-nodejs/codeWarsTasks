@@ -1,4 +1,5 @@
 const errorHandler = require('../helpers/errorHandlers');
+const Validator = require('../helpers/validator');
 const validator = require('../helpers/validator');
 
 module.exports = {
@@ -68,34 +69,49 @@ module.exports = {
       return min;
     };
 
-    res.status(200)
-        .json({
-          result: smallest(n),
-        });
+    try {
+      const validatorArg = new validator([n]);
+      validatorArg.checkArgumentsTypes(['number']);
+
+      res.status(200)
+          .json({
+            result: smallest(n),
+          });
+    } catch (e) {
+      res.status(400).json({
+        error: e.message,
+      });
+    }
   },
 
   productFibonacciPostController(req, res) {
-    const {
-      prod,
-    } = req.body;
+    try {
+      const {prod} = req.body;
+      const errorHandler = new Validator([prod]);
+      errorHandler.checkArgumentsTypes(['number']);
 
-    const productFibonacci = (prod) => {
-      let a = 0;
-      let b = 1;
-      let c = 1;
-      while ((a * b) !== prod) {
-        if (a * b > prod) return [a, b, false];
-        c = a + b;
-        a = b;
-        b = c;
-      }
-      return [a, b, true];
-    };
+      const productFibonacci = (prod) => {
+        let a = 0;
+        let b = 1;
+        let c = 1;
+        while ((a * b) !== prod) {
+          if (a * b > prod) return [a, b, false];
+          c = a + b;
+          a = b;
+          b = c;
+        }
+        return [a, b, true];
+      };
 
-    res.status(200)
-        .json({
-          result: productFibonacci(prod),
-        });
+      res.status(200)
+          .json({
+            result: productFibonacci(prod),
+          });
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
+      });
+    }
   },
 
   productFibonacciGetController(req, res) {
@@ -197,17 +213,16 @@ module.exports = {
     }
   },
 
-  zerosInfo(req, res) {
+  zerosGetController(req, res) {
     res.status(200)
         .json({
           body: 'Number of trailing zeros of N!',
+          link: 'https://www.codewars.com/kata/number-of-trailing-zeros-of-n',
         });
   },
 
-  zerosRun(req, res) {
-    const {
-      n,
-    } = req.body;
+  zerosPostController(req, res) {
+    const {n} = req.body;
     const zeros = (n) => {
       let i = 1;
       let result = 0;
@@ -217,17 +232,27 @@ module.exports = {
       }
       return result;
     };
+    try {
+      const validate = new validator([n]);
+      validate.checkArgumentsTypes(['number']);
 
-    res.status(200)
-        .json({
-          result: zeros(n),
-        });
+      res.status(200)
+          .json({
+            result: zeros(n),
+          });
+    } catch (error) {
+      res.status(400)
+          .json({
+            error: error.message,
+          });
+    }
   },
 
   perimeterGetController(req, res) {
     res.status(200)
         .json({
           body: 'Perimeter of squares in a rectangle',
+          link: 'https://www.codewars.com/kata/perimeter-of-squares-in-a-rectangle',
         });
   },
 

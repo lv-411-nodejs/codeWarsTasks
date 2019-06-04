@@ -1,4 +1,5 @@
 const errorHandler = require('../helpers/errorHandlers');
+const Validator = require('../helpers/validator');
 const validator = require('../helpers/validator');
 
 module.exports = {
@@ -95,35 +96,47 @@ module.exports = {
       return arrBook.map((e) => e.join(' ')).join('\r\n');
     }
 
-    res.status(200)
-        .json({
-          result: balance(book),
-        });
+    try {
+      const validatorArg = new validator([book]);
+      validatorArg.checkArgumentsTypes(['string']);
+
+      res.status(200)
+          .json({
+            result: balance(book),
+          });
+    } catch (e) {
+      res.status(400).json({
+        error: e.message,
+      });
+    }
   },
 
   bouncingBallPostController(req, res) {
-    const {
-      h,
-      bounce,
-      window,
-    } = req.body;
+    try {
+      const {h, bounce, window} = req.body;
+      const errorHandler = new Validator([h, bounce, window]);
+      errorHandler.checkArgumentsTypes(['number', 'number', 'number']);
 
-    const bouncingBall = (h, bounce, window) => {
-      if (h > 0 && bounce > 0 && bounce < 1) {
-        let count = 0;
-        while (h > window) {
-          h *= bounce;
-          count += 2;
+      const bouncingBall = (h, bounce, window) => {
+        if (h > 0 && bounce > 0 && bounce < 1) {
+          let count = 0;
+          while (h > window) {
+            h *= bounce;
+            count += 2;
+          }
+          return count - 1;
         }
-        return count - 1;
-      }
-      return -1;
-    };
-
-    res.status(200)
-        .json({
-          result: bouncingBall(h, bounce, window),
-        });
+        return -1;
+      };
+      res.status(200)
+          .json({
+            result: bouncingBall(h, bounce, window),
+          });
+    } catch (error) {
+      res.status(400).json({
+        error: error.message,
+      });
+    }
   },
 
   bouncingBallGetController(req, res) {
@@ -232,6 +245,7 @@ module.exports = {
     res.status(200)
         .json({
           body: 'Help the bookseller !',
+          link: 'https://www.codewars.com/kata/help-the-bookseller',
         });
   },
 
@@ -268,14 +282,15 @@ module.exports = {
         });
   },
 
-  nbaCupInfo(req, res) {
+  nbaCupGetController(req, res) {
     res.status(200)
         .json({
           body: 'Ranking NBA teams',
+          link: 'https://www.codewars.com/kata/ranking-nba-teams',
         });
   },
 
-  nbaCupRun(req, res) {
+  nbaCupPostController(req, res) {
     const {
       report,
       teamName,
@@ -306,11 +321,20 @@ module.exports = {
       });
       return `${teamName}:W=${w};D=${d};L=${l};Scored=${score};Conceded=${conceded};Points=${w * 3 + d}`;
     };
+    try {
+      const validate = new validator([report, teamName]);
+      validate.checkArgumentsTypes(['string', 'string']);
 
-    res.status(200)
-        .json({
-          result: nbaCup(report, teamName),
-        });
+      res.status(200)
+          .json({
+            result: nbaCup(report, teamName),
+          });
+    } catch (error) {
+      res.status(400)
+          .json({
+            error: error.message,
+          });
+    }
   },
 
   FloatingPointInfo(req, res) {
