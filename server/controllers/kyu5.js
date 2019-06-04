@@ -241,7 +241,7 @@ module.exports = {
     const zeros = (n) => {
       let i = 1;
       let result = 0;
-      while (n / Math.pow(5, i) > 1) {
+      while (n / Math.pow(5, i) >= 1) {
         result += Math.floor(n / Math.pow(5, i));
         i++;
       }
