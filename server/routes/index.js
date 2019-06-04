@@ -38,8 +38,8 @@ module.exports = (app) => {
   app.get(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesGetController);
   app.post(`${prefix.k6}/pileofcubes`, kyu6.pileOfCubesPostController);
 
-  app.get(`${prefix.k5}/whichx`, kyu5.whichXGetController);
-  app.post(`${prefix.k5}/whichx`, kyu5.whichXPostController);
+  app.get(`${prefix.k5}/weight`, kyu5.weightForWeightGetController);
+  app.post(`${prefix.k5}/weight`, kyu5.weightForWeightPostController);
 
   app.get(`${prefix.k8}/headlegs`, kyu8.animalGetController);
   app.post(`${prefix.k8}/headlegs`, kyu8.animalPostController);

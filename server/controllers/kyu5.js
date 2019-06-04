@@ -17,26 +17,35 @@ module.exports = {
       });
   },
 
-  whichXGetController(req, res) {
+  weightForWeightGetController(req, res) {
     res.status(200)
       .json({
-        body: 'Which x for that sum?',
-        link: '',
+        body: 'Weight for weight',
+        link: 'https://www.codewars.com/kata/weight-for-weight',
       });
   },
 
-  whichXPostController(req, res) {
-    const {
-      m,
-    } = req.body;
+  weightForWeightPostController(req, res) {
+    const {str} = req.body;
 
-    const solve = (m) => {
-      return m;
-    };
+    const orderWeight = (strng) => {
+      return strng
+        .split(' ')
+        .map(num => {
+          const weight = num.split('').reduce((a, b) => Number(a) + Number(b), 0)
+          return { num, weight }
+        })
+        .sort(
+          (a, b) =>
+            a.weight === b.weight ? a.num.localeCompare(b.num) : a.weight - b.weight
+        )
+        .map(({ num }) => num)
+        .join(' ')
+    }
 
     res.status(200)
       .json({
-        result: solve(m),
+        result: orderWeight(str),
       });
   },
 
