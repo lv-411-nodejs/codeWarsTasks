@@ -5,29 +5,29 @@ const validator = require('../helpers/validator');
 module.exports = {
   showAllTasks(req, res) {
     res.status(200)
-      .json({
-        'stas': ['Sum of a sequence'],
-        'maks': ['Slamming Lockers'],
-        'oleh': ['Where is Vasya?'],
-        'oleksiy': ['Looking for a benefactor'],
-        'ostap': ['Easy Line'],
-        'nadiia': ['Recursive Replication'],
-        'bohdan': ['Sum of the first nth term of Series'],
-        'ruslan': ['Triple Shiftian Numbers'],
-      });
+        .json({
+          'stas': ['Sum of a sequence'],
+          'maks': ['Slamming Lockers'],
+          'oleh': ['Where is Vasya?'],
+          'oleksiy': ['Looking for a benefactor'],
+          'ostap': ['Easy Line'],
+          'nadiia': ['Recursive Replication'],
+          'bohdan': ['Sum of the first nth term of Series'],
+          'ruslan': ['Triple Shiftian Numbers'],
+        });
   },
 
   seriesSumGetController(req, res) {
     res.status(200)
-      .json({
-        body: 'Sum of the first nth term of Series (JavaScript)',
-        link: 'https://www.codewars.com/kata/sum-of-the-first-nth-term-of-series',
-      });
+        .json({
+          body: 'Sum of the first nth term of Series (JavaScript)',
+          link: 'https://www.codewars.com/kata/sum-of-the-first-nth-term-of-series',
+        });
   },
 
   seriesSumPostController(req, res) {
     const {
-      len
+      len,
     } = req.body;
 
     const seriesSum = (n) => {
@@ -45,29 +45,28 @@ module.exports = {
     };
 
     try {
-      let v = new validator([len]);
+      const v = new validator([len]);
       v.checkArgumentsTypes(['number']);
 
       res.status(200).json({
         result: seriesSum(len),
       });
-    }
-    catch (e) {
+    } catch (e) {
       res.status(400).json({
-        error: e.message
+        error: e.message,
       });
     }
   },
 
   newAvgGetController(req, res) {
     res.status(200)
-      .json({
-        body: 'Looking for a benefactor',
-      });
+        .json({
+          body: 'Looking for a benefactor',
+        });
   },
 
   newAvgPostController(req, res) {
-    const { arr, newavg } = req.body;
+    const {arr, newavg} = req.body;
 
     const newAvg = (arr, newavg) => {
       const totalSum = arr.reduce((total, current) => total + current, 0);
@@ -78,22 +77,22 @@ module.exports = {
     };
 
     res.status(200)
-      .json({
-        result: newAvg(arr, newavg),
-      });
+        .json({
+          result: newAvg(arr, newavg),
+        });
   },
 
   tripleShiftianGetController(req, res) {
     res.status(200)
-      .json({
-        body: 'The Triple Shiftian task',
-        link: 'https://www.codewars.com/kata/triple-shiftian-numbers',
-      });
+        .json({
+          body: 'The Triple Shiftian task',
+          link: 'https://www.codewars.com/kata/triple-shiftian-numbers',
+        });
   },
 
   tripleShiftianPostController(req, res) {
     try {
-      const { base, n } = req.body;
+      const {base, n} = req.body;
       const errorHandler = new Validator([base, n]);
       errorHandler.checkArgumentsTypes(['array', 'number']);
       const tripleShiftian = (base, n) => {
@@ -106,9 +105,9 @@ module.exports = {
         }
       };
       res.status(200)
-        .json({
-          result: tripleShiftian(base, n),
-        });
+          .json({
+            result: tripleShiftian(base, n),
+          });
     } catch (error) {
       res.status(400).json({
         error: error.message,
@@ -121,15 +120,15 @@ module.exports = {
       info: 'Where is Vasya?',
       link: 'https://www.codewars.com/kata/where-is-vasya',
       in: [{
-        "p": 3,
-        "bef": 1,
-        "aft": 1
+        'p': 3,
+        'bef': 1,
+        'aft': 1,
       }, {
-        "p": 5,
-        "bef": 2,
-        "aft": 3
+        'p': 5,
+        'bef': 2,
+        'aft': 3,
       }],
-      out: [2, 3]
+      out: [2, 3],
     });
   },
 
@@ -138,7 +137,7 @@ module.exports = {
       const {
         p,
         bef,
-        aft
+        aft,
       } = req.body;
       let posNumb = 0;
       for (let i = 1; i <= p; i++) {
@@ -148,7 +147,7 @@ module.exports = {
       }
       const result = posNumb;
       res.status(200).json({
-        result
+        result,
       });
     } catch (e) {
       errorHandler(res, e);
@@ -213,7 +212,7 @@ module.exports = {
 
   Easy_Line_Run(req, res) {
     const {
-      n
+      n,
     } = req.body;
     const easyLine = (n) => {
       let sum = 1;
@@ -235,28 +234,28 @@ module.exports = {
 
   sequenceSumInfo(req, res) {
     res.status(200).json({
-      body: 'Sum of a sequence'
-    })
+      body: 'Sum of a sequence',
+    });
   },
 
   sequenceSumRun(req, res) {
     const {
       begin,
       end,
-      step
-    } = req.body
+      step,
+    } = req.body;
     const sequenceSum = (begin, end, step) => {
       if (begin > end) {
-        return 0
+        return 0;
       } else if (begin === end) {
-        return begin
+        return begin;
       } else {
-        return begin + sequenceSum((begin += step), end, step)
+        return begin + sequenceSum((begin += step), end, step);
       }
-    }
+    };
     res.status(200).json({
-      result: sequenceSum(begin, end, step)
-    })
+      result: sequenceSum(begin, end, step),
+    });
   },
 
 };
